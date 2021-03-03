@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup --config",
+    "test": "echo \"No test specified\"",
     "publish-to-npm": "npm publish --access public"
   },
   "repository": {
