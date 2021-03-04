@@ -1,9 +1,11 @@
+import http from "http";
+import imageSize from "image-size";
+import { ISizeCalculationResult } from "image-size/dist/types/interface";
 import markdownIt from "markdown-it";
 import Token from "markdown-it/lib/token";
-import imageSize from "image-size";
 
 export function markdownItImageSize(md: markdownIt): void {
-  md.renderer.rules.image = function (tokens, index, /*options, env, self*/) {
+  md.renderer.rules.image = async (tokens, index, options, env, self) => {
     const token = tokens[index];
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs[srcIndex][1];
@@ -11,11 +13,13 @@ export function markdownItImageSize(md: markdownIt): void {
 
     const otherAttributes = generateAttributes(md, token);
 
+    const isExternalImage =
+      imageUrl.startsWith("http://") || imageUrl.startsWith("https://");
     const isLocalAbsoluteUrl = imageUrl.startsWith("/");
 
-    const { width, height } = getImageDimensions(
-      `${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`,
-    );
+    const { width, height } = isExternalImage
+      ? await getImageDimensionsFromExternalImage(imageUrl)
+      : getImageDimensions(`${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`);
     const dimensionsAttributes =
       width && height ? ` width="${width}" height="${height}"` : "";
 
@@ -42,9 +46,10 @@ function generateAttributes(md: markdownIt, token: Token): string {
     .join(" ");
 }
 
-function getImageDimensions(
-  imageUrl: string,
-): { width: number; height: number } {
+function getImageDimensions(imageUrl: string): {
+  width: number;
+  height: number;
+} {
   try {
     const { width, height } = imageSize(imageUrl);
 
@@ -57,4 +62,26 @@ function getImageDimensions(
 
     return { width: undefined, height: undefined };
   }
+}
+
+async function getImageDimensionsFromExternalImage(
+  imageUrl: string,
+): Promise<{ width: number; height: number }> {
+  const options = new URL(imageUrl);
+
+  const { width, height } = await new Promise<ISizeCalculationResult>(resolve =>
+    http.get(options, function (response) {
+      const chunks = [];
+      response
+        .on("data", function (chunk) {
+          chunks.push(chunk);
+        })
+        .on("end", function () {
+          const buffer = Buffer.concat(chunks);
+          resolve(imageSize(buffer));
+        });
+    }),
+  );
+
+  return { width, height };
 }
