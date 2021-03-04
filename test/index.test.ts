@@ -31,3 +31,4 @@ describe(markdownItImageSize.name, () => {
 
     expect(actual).toEqual(expected);
   });
+});
