@@ -2,26 +2,24 @@ import markdownIt from "markdown-it";
 import Token from "markdown-it/lib/token";
 import imageSize from "image-size";
 
-const html = String.raw;
-
 export function markdownItImageSize(md: markdownIt) {
   md.renderer.rules.image = function (tokens, index, options, env, self) {
     const token = tokens[index];
     const srcIndex = token.attrIndex("src");
-    const url = token.attrs[srcIndex][1];
+    const imageUrl = token.attrs[srcIndex][1];
     const caption = md.utils.escapeHtml(token.content);
 
     const otherAttributes = generateAttributes(md, token);
 
-    const { width, height } = getImageDimensions(url);
+    const isLocalAbsoluteUrl = imageUrl.startsWith("/");
 
-    return html`<img
-      src="${url}"
-      alt="${caption}"
-      width="${width}"
-      height="${height}"
-      ${otherAttributes}
-    />`;
+    const { width, height } = getImageDimensions(
+      `${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`,
+    );
+    const dimensionsAttributes =
+      width && height ? ` width="${width}" height="${height}"` : "";
+
+    return `<img src="${imageUrl}" alt="${caption}"${dimensionsAttributes} ${otherAttributes} />`;
   };
 }
 
