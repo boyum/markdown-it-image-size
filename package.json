@@ -6,6 +6,8 @@
   "scripts": {
     "build": "rollup --config",
     "test": "jest",
+    "lint": "eslint . --config .eslintrc.json",
+    "lint:fix": "npm run lint -- --fix",
     "publish-to-npm": "np"
   },
   "repository": {
@@ -47,6 +49,7 @@
   },
   "dependencies": {
     "@types/node-fetch": "^2.5.8",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
     "image-size": "^0.9.4",
     "node-fetch": "^2.6.1"
   }
