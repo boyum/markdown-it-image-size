@@ -28,20 +28,12 @@ function generateAttributes(md: markdownIt, token: Token) {
   const escape = ["title"];
 
   return token.attrs
-    .map(entry => {
-      const [key, value] = entry;
-
-      const ignoreAttribute = ignore.includes(key);
-      if (ignoreAttribute) {
-        return;
-      }
-
-      let finalValue = value;
-
+    .filter(([key]) => !ignore.includes(key))
+    .map(([key, value]) => {
       const escapeAttributeValue = escape.includes(key);
-      if (escapeAttributeValue) {
-        finalValue = md.utils.escapeHtml(value);
-      }
+      const finalValue = escapeAttributeValue
+        ? md.utils.escapeHtml(value)
+        : value;
 
       return `${key}="${finalValue}"`;
     })
