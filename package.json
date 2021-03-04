@@ -13,8 +13,13 @@
     "url": "git+https://github.com/boyum/markdown-it-image-size.git"
   },
   "types": "dist/markdown-it-image-size.d.ts",
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "markdown-it"
+  ],
+  "author": {
+    "name": "Sindre Bøyum",
+    "url": "https://sindre.is/"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/boyum/markdown-it-image-size/issues"
