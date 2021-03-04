@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup --config",
     "test": "echo \"No test specified\"",
-    "publish-to-npm": "npm publish --access public"
+    "publish-to-npm": "np"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "@types/markdown-it": "^12.0.1",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
+    "np": "^7.4.0",
     "rollup": "^2.40.0",
     "rollup-plugin-dts": "^2.0.1",
     "tslib": "^2.1.0",
