@@ -17,7 +17,7 @@ describe(markdownItImageSize.name, () => {
     expect(actual).toBe(expected);
   });
 
-  it("should render local images with attributes for width and height, and title",  () => {
+  it("should render local images with attributes for width and height, and title", () => {
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
     const imageUrl = "/test/test-assets/image1.jpg";
