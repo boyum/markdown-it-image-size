@@ -51,7 +51,16 @@ function generateAttributes(md: markdownIt, token: Token) {
 function getImageDimensions(
   imageUrl: string,
 ): { width: number; height: number } {
-  const { width, height } = imageSize(imageUrl);
+  try {
+    const { width, height } = imageSize(imageUrl);
 
-  return { width, height };
+    return { width, height };
+  } catch (error) {
+    console.error(
+      `markdown-it-image-size: Could not get dimensions of image with url ${imageUrl}`,
+      error,
+    );
+
+    return { width: undefined, height: undefined };
+  }
 }
