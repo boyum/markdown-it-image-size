@@ -1,5 +1,7 @@
 # markdown-it-image-size
 
+![](https://img.shields.io/npm/v/markdown-it-image-size/latest) ![](https://img.shields.io/github/workflow/status/boyum/markdown-it-image-size/Node.js%20CI)
+
 Adds `width` and `height` attributes to `img` tags rendered by markdown-it.
 
 ## Why
