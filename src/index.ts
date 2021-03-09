@@ -5,7 +5,7 @@ import markdownIt from "markdown-it";
 import Token from "markdown-it/lib/token";
 
 export function markdownItImageSize(md: markdownIt) {
-  md.renderer.rules.image = async (tokens, index, options, env, self) => {
+  md.renderer.rules.image = async (tokens, index, /*options, env, self*/) => {
     const token = tokens[index];
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs[srcIndex][1];
@@ -29,7 +29,7 @@ export function markdownItImageSize(md: markdownIt) {
   };
 }
 
-function generateAttributes(md: markdownIt, token: Token) {
+function generateAttributes(md: markdownIt, token: Token): string {
   const ignore = ["src", "alt"];
   const escape = ["title"];
 

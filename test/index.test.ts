@@ -1,4 +1,5 @@
 import { markdownItImageSize } from "../src";
+// eslint-disable-next-line
 const MarkdownIt = require("markdown-it");
 
 describe(markdownItImageSize.name, () => {
