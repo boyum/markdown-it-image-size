@@ -14,7 +14,12 @@ export default [
   },
   {
     input: "src/index.ts",
-    output: [{ file: "dist/markdown-it-image-size.d.ts", format: "es" }],
+    output: [
+      {
+        file: "dist/markdown-it-image-size.d.ts",
+        format: "es",
+      },
+    ],
     plugins: [dts()],
   },
 ];
