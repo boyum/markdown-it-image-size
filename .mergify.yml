@@ -1,7 +1,9 @@
 pull_request_rules:
-  - name: Automatic merge on approval
+  - name: Automatic merge for depfu pull requests
     conditions:
-      - "#approved-reviews-by>=1"
+      - author=depfu[bot]
+      - base=main
+      - title~=\(patch\)$
     actions:
       merge:
         method: merge
