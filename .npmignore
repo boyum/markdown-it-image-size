@@ -2,5 +2,6 @@
 .eslintrc.json
 .gitignore
 .prettierrc.json
+.mergify.yml
 rollup.config.js
 tsconfig.json
