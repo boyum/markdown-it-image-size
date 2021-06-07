@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/npm/v/markdown-it-image-size/latest) ![](https://img.shields.io/github/workflow/status/boyum/markdown-it-image-size/Node.js%20CI)
 
-Adds `width` and `height` attributes to `img` tags rendered by markdown-it.
+Automatically adds `width` and `height` attributes to `img` tags rendered by markdown-it. This only works with internal images for now.
 
 ## How to use
 
