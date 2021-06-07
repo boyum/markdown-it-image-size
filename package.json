@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-image-size",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Adds width and height to image tags rendered by markdown-it",
   "main": "dist/index.js",
   "scripts": {
@@ -16,7 +16,8 @@
   },
   "types": "dist/markdown-it-image-size.d.ts",
   "keywords": [
-    "markdown-it"
+    "markdown-it",
+    "markdown-it-plugin"
   ],
   "author": {
     "name": "Sindre Bøyum",
