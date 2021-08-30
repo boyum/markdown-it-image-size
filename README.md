@@ -1,6 +1,6 @@
 # markdown-it-image-size
 
-![](https://img.shields.io/npm/v/markdown-it-image-size/latest) ![](https://img.shields.io/github/workflow/status/boyum/markdown-it-image-size/Node.js%20CI)
+![npm version](https://img.shields.io/npm/v/markdown-it-image-size/latest) ![build status](https://img.shields.io/github/workflow/status/boyum/markdown-it-image-size/Node.js%20CI) [![codecov](https://codecov.io/gh/boyum/markdown-it-image-size/branch/main/graph/badge.svg?token=1WRZO1Y43U)](https://codecov.io/gh/boyum/markdown-it-image-size)
 
 Automatically adds `width` and `height` attributes to `img` tags rendered by markdown-it. This only works with internal images for now.
 
