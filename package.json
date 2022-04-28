@@ -39,7 +39,7 @@
     "@typescript-eslint/parser": "^5.21.0",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
-    "jest": "^27.5.1",
+    "jest": "^28.0.2",
     "markdown-it": "^12.3.2",
     "np": "^7.6.1",
     "rollup": "^2.70.2",
