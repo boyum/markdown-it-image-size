@@ -42,7 +42,7 @@
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "jest": "^27.5.1",
-    "markdown-it": "^13.0.0",
+    "markdown-it": "^13.0.1",
     "np": "^7.6.1",
     "rollup": "^2.71.1",
     "rollup-plugin-dts": "^4.2.1",
