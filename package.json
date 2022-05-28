@@ -44,7 +44,7 @@
     "jest": "^28.1.0",
     "markdown-it": "^13.0.1",
     "np": "^7.6.1",
-    "rollup": "^2.74.1",
+    "rollup": "^2.75.0",
     "rollup-plugin-dts": "^4.2.2",
     "ts-jest": "^28.0.3",
     "tslib": "^2.4.0",
