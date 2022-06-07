@@ -11,7 +11,9 @@
     "test": "jest",
     "lint": "eslint . --config .eslintrc.json",
     "lint:fix": "npm run lint -- --fix",
-    "publish-to-npm": "np"
+    "publish-to-npm": "np",
+    "format:check": "prettier . --check",
+    "format:fic": "prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -44,6 +46,8 @@
     "jest": "^28.1.0",
     "markdown-it": "^13.0.1",
     "np": "^7.6.1",
+    "prettier": "^2.6.2",
+    "prettier-config": "github:boyum/prettier-config",
     "rollup": "^2.75.5",
     "rollup-plugin-dts": "^4.2.2",
     "ts-jest": "^28.0.3",
@@ -56,5 +60,6 @@
   "dependencies": {
     "image-size": "^1.0.1",
     "sync-fetch": "^0.4.1"
-  }
+  },
+  "prettier": "prettier-config"
 }
