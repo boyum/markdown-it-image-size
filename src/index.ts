@@ -1,11 +1,11 @@
-import http from "http";
 import imageSize from "image-size";
-import { ISizeCalculationResult } from "image-size/dist/types/interface";
 import markdownIt from "markdown-it";
 import Token from "markdown-it/lib/token";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fetch = require("sync-fetch");
 
 export function markdownItImageSize(md: markdownIt): void {
-  md.renderer.rules.image = async (tokens, index, options, env, self) => {
+  md.renderer.rules.image = (tokens, index) => {
     const token = tokens[index];
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs[srcIndex][1];
@@ -18,7 +18,7 @@ export function markdownItImageSize(md: markdownIt): void {
     const isLocalAbsoluteUrl = imageUrl.startsWith("/");
 
     const { width, height } = isExternalImage
-      ? await getImageDimensionsFromExternalImage(imageUrl)
+      ? getImageDimensionsFromExternalImage(imageUrl)
       : getImageDimensions(`${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`);
     const dimensionsAttributes =
       width && height ? ` width="${width}" height="${height}"` : "";
@@ -64,24 +64,13 @@ function getImageDimensions(imageUrl: string): {
   }
 }
 
-async function getImageDimensionsFromExternalImage(
-  imageUrl: string,
-): Promise<{ width: number; height: number }> {
-  const options = new URL(imageUrl);
-
-  const { width, height } = await new Promise<ISizeCalculationResult>(resolve =>
-    http.get(options, function (response) {
-      const chunks = [];
-      response
-        .on("data", function (chunk) {
-          chunks.push(chunk);
-        })
-        .on("end", function () {
-          const buffer = Buffer.concat(chunks);
-          resolve(imageSize(buffer));
-        });
-    }),
-  );
+function getImageDimensionsFromExternalImage(imageUrl: string): {
+  width: number;
+  height: number;
+} {
+  const response = fetch(imageUrl);
+  const buffer = response.buffer();
+  const { width, height } = imageSize(buffer);
 
   return { width, height };
 }
