@@ -55,6 +55,6 @@
   },
   "dependencies": {
     "image-size": "^1.0.1",
-    "node-fetch": "^3.2.5"
+    "sync-fetch": "^0.4.1"
   }
 }
