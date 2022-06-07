@@ -13,7 +13,7 @@
     "lint:fix": "npm run lint -- --fix",
     "publish-to-npm": "np",
     "format:check": "prettier . --check",
-    "format:fic": "prettier . --write"
+    "format:fix": "prettier . --write"
   },
   "repository": {
     "type": "git",
