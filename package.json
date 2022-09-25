@@ -58,6 +58,6 @@
   },
   "dependencies": {
     "image-size": "^1.0.2",
-    "sync-fetch": "^0.4.1"
+    "sync-fetch": "^0.4.2"
   }
 }
