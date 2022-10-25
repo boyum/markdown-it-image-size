@@ -12,7 +12,7 @@ describe(markdownItImageSize.name, () => {
     const imageWidth = 4032;
     const imageHeight = 3024;
 
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}" /></p>\n`;
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
@@ -27,7 +27,7 @@ describe(markdownItImageSize.name, () => {
     const imageWidth = 4032;
     const imageHeight = 3024;
 
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}" title="title" /></p>\n`;
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}" title="title"></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
@@ -43,7 +43,7 @@ describe(markdownItImageSize.name, () => {
     const imageWidth = 2167;
     const imageHeight = 1625;
 
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}" /></p>\n`;
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
