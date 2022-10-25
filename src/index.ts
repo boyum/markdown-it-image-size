@@ -23,9 +23,7 @@ export function markdownItImageSize(md: markdownIt): void {
     const dimensionsAttributes =
       width && height ? ` width="${width}" height="${height}"` : "";
 
-    return `<img src="${imageUrl}" alt="${caption}"${dimensionsAttributes} ${
-      otherAttributes ? otherAttributes + " " : ""
-    }/>`;
+    return `<img src="${imageUrl}" alt="${caption}"${dimensionsAttributes} ${otherAttributes}>`;
   };
 }
 
