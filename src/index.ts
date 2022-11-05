@@ -14,7 +14,10 @@ export function markdownItImageSize(md: markdownIt): void {
     const otherAttributes = generateAttributes(md, token);
 
     const isExternalImage =
-      imageUrl.startsWith("http://") || imageUrl.startsWith("https://");
+      imageUrl.startsWith("http://") ||
+      imageUrl.startsWith("https://") ||
+      imageUrl.startsWith("//");
+
     const isLocalAbsoluteUrl = imageUrl.startsWith("/");
 
     const { width, height } = isExternalImage
@@ -68,7 +71,9 @@ function getImageDimensionsFromExternalImage(imageUrl: string): {
   width: number;
   height: number;
 } {
-  const response = fetch(imageUrl);
+  const isMissingProtocol = imageUrl.startsWith("//");
+
+  const response = fetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
   const buffer = response.buffer();
   const { width, height } = imageSize(buffer);
 
