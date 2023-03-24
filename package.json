@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-image-size",
-  "version": "13.1.1",
+  "version": "13.2.0-1",
   "description": "Adds width and height to image tags rendered by markdown-it",
   "main": "dist/index.js",
   "files": [
