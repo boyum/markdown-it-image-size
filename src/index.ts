@@ -5,7 +5,7 @@ import Token from "markdown-it/lib/token";
 const fetch = require("sync-fetch");
 
 export function markdownItImageSize(md: markdownIt): void {
-  md.renderer.rules.image = (tokens, index) => {
+  md.renderer.rules.image = (tokens, index, options, env) => {
     const token = tokens[index];
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs[srcIndex][1];
@@ -22,7 +22,8 @@ export function markdownItImageSize(md: markdownIt): void {
 
     const { width, height } = isExternalImage
       ? getImageDimensionsFromExternalImage(imageUrl)
-      : getImageDimensions(`${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`);
+      : getImageDimensions(`${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`, env);
+
     const dimensionsAttributes =
       width && height ? ` width="${width}" height="${height}"` : "";
 
@@ -49,7 +50,25 @@ function generateAttributes(md: markdownIt, token: Token): string {
     .join(" ");
 }
 
-function getImageDimensions(imageUrl: string): {
+const customPluginDefaults = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getAbsPathFromEnv: (env: any): string | undefined => {
+    const markdownPath: string = env?.page?.inputPath; // 11ty
+
+    if (markdownPath) {
+      return markdownPath
+        .substring(0, markdownPath.lastIndexOf("/"))
+        .replace(/\/\.\//g, "/");
+    }
+
+    return undefined;
+  },
+};
+
+function getImageDimensions(
+  imageUrl: string,
+  env?: unknown | undefined,
+): {
   width: number;
   height: number;
 } {
@@ -58,8 +77,15 @@ function getImageDimensions(imageUrl: string): {
 
     return { width, height };
   } catch (error) {
+    const isRelativePath = !imageUrl.startsWith("/");
+    const inputPath = customPluginDefaults.getAbsPathFromEnv(env);
+
+    if (isRelativePath && inputPath) {
+      return getImageDimensions(`${inputPath}/${imageUrl}`);
+    }
+
     console.error(
-      `markdown-it-image-size: Could not get dimensions of image with url ${imageUrl}`,
+      `markdown-it-image-size: Could not get dimensions of image with url ${imageUrl}.\n\n`,
       error,
     );
 
