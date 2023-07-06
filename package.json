@@ -61,5 +61,8 @@
     "image-size": "^1.0.2",
     "sync-fetch": "^0.5.2"
   },
-  "prettier": "prettier-config"
+  "prettier": "prettier-config",
+  "engines": {
+    "node": ">= 16"
+  }
 }
