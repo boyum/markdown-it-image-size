@@ -12,17 +12,8 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run lint
       - run: npm run format:check
@@ -32,7 +23,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [16.x, 18.x, 20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -45,6 +36,6 @@ jobs:
       - run: npm run build --if-present
       - run: npm test -- --coverage=true
       - name: Codecov
-        uses: codecov/codecov-action@v4 # https://github.com/codecov/codecov-action
+        uses: codecov/codecov-action@v3 # https://github.com/codecov/codecov-action
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
