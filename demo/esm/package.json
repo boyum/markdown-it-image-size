@@ -1,0 +1,14 @@
+{
+  "name": "esm",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "markdown-it": "^13.0.2",
+    "markdown-it-image-size": "*",
+    "vite": "^5.0.6"
+  }
+}
