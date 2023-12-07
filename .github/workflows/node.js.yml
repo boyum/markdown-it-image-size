@@ -4,8 +4,8 @@ on:
   - pull_request
 
 jobs:
-  build:
-    name: Build
+  build-and-test:
+    name: Build and test
 
     runs-on: ubuntu-latest
 
@@ -28,28 +28,7 @@ jobs:
       - name: Build
         run: npm run build --if-present
 
-  test:
-    name: Test
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x]
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Test
+      - name: Test build output
         run: npm test -- --coverage=true
 
       - name: Codecov
