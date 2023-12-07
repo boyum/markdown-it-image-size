@@ -36,6 +36,9 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Typecheck build output
+        run: npm run typecheck
+
   lint:
     name: Lint
 
@@ -65,18 +68,3 @@ jobs:
 
       - name: Format
         run: npm run format:check
-
-  typecheck:
-    name: Typecheck
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Typecheck
-        run: npm run typecheck
