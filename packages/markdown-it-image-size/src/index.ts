@@ -34,21 +34,28 @@ export function markdownItImageSize(md: markdownIt): void {
   };
 }
 
-function generateAttributes(md: markdownIt, token: Token): string {
+/**
+ * Generate attributes for the image tag.
+ * This will exclude the `src` and `alt` attributes and only include `title`, if available.
+ * The attribute values will be escaped.
+ * 
+ * @returns An empty string if no `title` is available, or `title="..."` if available.
+ */
+function generateAttributes(
+  md: markdownIt,
+  token: Token,
+): "" | `title=${string}` {
   const ignore = ["src", "alt"];
-  const escape = ["title"];
 
   return token.attrs
     .filter(([key]) => !ignore.includes(key))
     .map(([key, value]) => {
-      const escapeAttributeValue = escape.includes(key);
-      const finalValue = escapeAttributeValue
-        ? md.utils.escapeHtml(value)
-        : value;
+      // Escape title attributes
+      const escapedValue = md.utils.escapeHtml(value);
 
-      return `${key}="${finalValue}"`;
+      return `${key}="${escapedValue}"`;
     })
-    .join(" ");
+    .join(" ") as "" | `title=${string}`;
 }
 
 const customPluginDefaults = {
