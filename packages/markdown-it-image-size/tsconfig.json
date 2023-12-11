@@ -9,6 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
+    "skipLibCheck": true,
     "lib": [
       "DOM",
       "ES6",
