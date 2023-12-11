@@ -1,7 +1,5 @@
+import MarkdownIt from "markdown-it";
 import { markdownItImageSize } from "../src";
-
-// eslint-disable-next-line
-const MarkdownIt = require("markdown-it");
 
 describe(markdownItImageSize.name, () => {
   it("should render local images with attributes for width and height", () => {
@@ -30,6 +28,27 @@ describe(markdownItImageSize.name, () => {
 
     const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}" title="title"></p>\n`;
     const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+  });
+
+  it("should use 11ty inputPath to resolve relative paths if available", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const inputPath = "./test/test-assets/posts/1/1.md";
+
+    const imageUrl = "./post-image.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown, {
+      page: {
+        inputPath,
+      },
+    });
 
     expect(actual).toBe(expected);
   });

@@ -10,6 +10,7 @@
     "resolveJsonModule": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
     "lib": [
       "DOM",
       "ES6",

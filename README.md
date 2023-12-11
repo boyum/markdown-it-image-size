@@ -14,8 +14,8 @@ const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize);
 ```
 
-⚠️ It's crucial that `markdown-it-image-size` is imported with `require` and not with `import`, also when using TypeScript.
-Otherwise it won't work.
+> [!IMPORTANT]  
+> Using Vite? Import `markdown-it-image-size` with `require` and not with `import`.
 
 ## Why
 

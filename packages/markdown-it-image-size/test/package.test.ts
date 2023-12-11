@@ -1,7 +1,5 @@
+import MarkdownIt from "markdown-it";
 import { markdownItImageSize } from "..";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const MarkdownIt = require("markdown-it");
 
 describe(markdownItImageSize.name, () => {
   it("should render local images with attributes for width and height", () => {
