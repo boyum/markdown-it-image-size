@@ -1,6 +1,7 @@
 import imageSize from "image-size";
 import markdownIt from "markdown-it";
 import Token from "markdown-it/lib/token";
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const fetch = require("sync-fetch");
 

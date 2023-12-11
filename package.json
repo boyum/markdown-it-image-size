@@ -1,69 +1,30 @@
 {
-  "name": "markdown-it-image-size",
-  "version": "13.3.3",
-  "description": "Adds width and height to image tags rendered by markdown-it",
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "rollup --config",
-    "typecheck": "tsc --noEmit",
-    "test": "jest",
-    "lint:check": "eslint . --config .eslintrc.json",
-    "lint:fix": "npm run lint -- --fix",
-    "publish-to-npm": "np",
-    "format:check": "prettier . --check",
-    "format:fix": "prettier . --write"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/boyum/markdown-it-image-size.git"
-  },
-  "types": "dist/markdown-it-image-size.d.ts",
-  "keywords": [
-    "markdown-it",
-    "markdown-it-plugin"
-  ],
+  "name": "markdown-it-image-size-root",
+  "private": true,
+  "license": "Apache-2.0",
   "author": {
     "name": "Sindre Bøyum",
-    "url": "https://sindre.is/"
+    "url": "https://sinre.dev"
   },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/boyum/markdown-it-image-size/issues"
-  },
-  "homepage": "https://github.com/boyum/markdown-it-image-size#readme",
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.5",
-    "@types/jest": "^29.5.11",
-    "@types/markdown-it": "^13.0.7",
-    "@typescript-eslint/eslint-plugin": "^6.13.2",
-    "@typescript-eslint/parser": "^6.13.2",
-    "eslint": "^8.55.0",
-    "eslint-config-prettier": "^9.1.0",
-    "jest": "^29.7.0",
-    "markdown-it": "^13.0.2",
-    "np": "^9.1.0",
-    "prettier": "^3.1.0",
-    "prettier-config": "github:boyum/prettier-config",
-    "rollup": "^4.6.1",
-    "rollup-plugin-dts": "^6.1.0",
-    "ts-jest": "^29.1.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.3.3"
-  },
-  "peerDependencies": {
-    "markdown-it": ">=10 <14"
-  },
-  "dependencies": {
-    "image-size": "^1.0.2",
-    "sync-fetch": "^0.5.2"
+  "workspaces": [
+    "packages/*",
+    "demo/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "format:check": "npm run prettier -- --check",
+    "format:fix": "npm run prettier -- --write",
+    "lint:check": "turbo run lint:check",
+    "lint:fix": "turbo run lint:fix",
+    "prettier": "prettier .",
+    "test": "turbo run test",
+    "test:ci": "turbo run test:ci",
+    "typecheck": "turbo run typecheck"
   },
   "prettier": "prettier-config",
-  "engines": {
-    "node": ">= 16"
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "prettier-config": "github:boyum/prettier-config",
+    "turbo": "^1.11.0"
   }
 }

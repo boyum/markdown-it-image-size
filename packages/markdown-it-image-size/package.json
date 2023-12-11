@@ -1,0 +1,67 @@
+{
+  "name": "markdown-it-image-size",
+  "version": "13.3.3",
+  "description": "Adds width and height to image tags rendered by markdown-it",
+  "keywords": [
+    "markdown-it",
+    "markdown-it-plugin"
+  ],
+  "homepage": "https://github.com/boyum/markdown-it-image-size#readme",
+  "bugs": {
+    "url": "https://github.com/boyum/markdown-it-image-size/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boyum/markdown-it-image-size.git"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Sindre Bøyum",
+    "url": "https://sindre.is/"
+  },
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/markdown-it-image-size.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup --config",
+    "lint:check": "eslint . --config .eslintrc.json",
+    "lint:fix": "npm run lint -- --fix",
+    "publish-to-npm": "np",
+    "test": "jest",
+    "test:ci": "jest --ci --coverage",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "image-size": "^1.0.2",
+    "sync-fetch": "^0.5.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/jest": "^29.5.11",
+    "@types/markdown-it": "^13.0.7",
+    "@types/sync-fetch": "^0.4.3",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "jest": "^29.7.0",
+    "markdown-it": "^13.0.2",
+    "np": "^9.1.0",
+    "rollup": "^4.6.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "ts-jest": "^29.1.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "markdown-it": ">=10 <14"
+  },
+  "engines": {
+    "node": ">= 16"
+  }
+}
