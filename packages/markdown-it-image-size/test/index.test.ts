@@ -1,7 +1,5 @@
+import MarkdownIt from "markdown-it";
 import { markdownItImageSize } from "../src";
-
-// eslint-disable-next-line
-const MarkdownIt = require("markdown-it");
 
 describe(markdownItImageSize.name, () => {
   it("should render local images with attributes for width and height", () => {
@@ -34,6 +32,27 @@ describe(markdownItImageSize.name, () => {
     expect(actual).toBe(expected);
   });
 
+  it("should use 11ty inputPath to resolve relative paths if available", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const inputPath = "./test/test-assets/posts/1/1.md";
+
+    const imageUrl = "./post-image.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown, {
+      page: {
+        inputPath,
+      },
+    });
+
+    expect(actual).toBe(expected);
+  });
+
   it("should render external images with attributes for width and height", () => {
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
@@ -61,6 +80,54 @@ describe(markdownItImageSize.name, () => {
     const imageHeight = 1625;
 
     const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+  });
+
+  it("should return undefined for width and height if image can't be found", () => {
+    const consoleError = console.error;
+    console.error = () => {};
+
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "unknown.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const expected = `<p><img src="${imageUrl}" alt=""></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+
+    console.error = consoleError;
+  });
+
+  it("should log out an error if the image could not be found", () => {
+    const consoleError = console.error;
+    console.error = jest.fn();
+
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "unknown.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    markdownRenderer.render(markdown);
+
+    expect(console.error).toHaveBeenCalled();
+
+    console.error = consoleError;
+  });
+
+  it("should escape title attributes", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "/test/test-assets/image1.jpg";
+    const markdown = `![](${imageUrl} "<title>")`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}" title="&lt;title&gt;"></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);

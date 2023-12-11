@@ -6,7 +6,8 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/index.cts", "prerender.ts"]
 }
