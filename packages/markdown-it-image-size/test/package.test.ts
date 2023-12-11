@@ -1,4 +1,5 @@
 import MarkdownIt from "markdown-it";
+import { describe, expect, it } from "vitest";
 import { markdownItImageSize } from "..";
 
 describe(markdownItImageSize.name, () => {

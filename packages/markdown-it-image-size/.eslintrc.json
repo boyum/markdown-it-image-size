@@ -6,7 +6,6 @@
     "eslint-config-prettier"
   ],
   "rules": {
-    "semi": 2,
     "no-unused-vars": 0,
     "no-console": [
       1,
@@ -28,5 +27,5 @@
     "es6": true,
     "browser": true
   },
-  "ignorePatterns": ["dist/**/*", "jest.config.js"]
+  "ignorePatterns": ["dist/**/*"]
 }
