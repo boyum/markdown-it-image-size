@@ -38,7 +38,7 @@ export function markdownItImageSize(md: markdownIt): void {
  * Generate attributes for the image tag.
  * This will exclude the `src` and `alt` attributes and only include `title`, if available.
  * The attribute values will be escaped.
- * 
+ *
  * @returns An empty string if no `title` is available, or `title="..."` if available.
  */
 function generateAttributes(
