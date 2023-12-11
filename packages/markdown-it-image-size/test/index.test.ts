@@ -1,4 +1,5 @@
 import MarkdownIt from "markdown-it";
+import { describe, expect, it, vi } from "vitest";
 import { markdownItImageSize } from "../src";
 
 describe(markdownItImageSize.name, () => {
@@ -104,7 +105,7 @@ describe(markdownItImageSize.name, () => {
 
   it("should log out an error if the image could not be found", () => {
     const consoleError = console.error;
-    console.error = jest.fn();
+    console.error = vi.fn();
 
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
