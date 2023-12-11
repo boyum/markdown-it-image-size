@@ -1,4 +1,6 @@
-module.exports = {
+import { type Config } from "jest";
+
+export default {
   roots: ["<rootDir>"],
   testMatch: [
     "**/__tests__/**/*.+(ts|tsx|js)",
@@ -7,4 +9,4 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
-};
+} satisfies Config;
