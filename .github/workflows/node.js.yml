@@ -29,7 +29,7 @@ jobs:
         run: npm run build --if-present
 
       - name: Test build output
-        run: npm test -- --coverage=true
+        run: npm run test:ci
 
       - name: Codecov
         uses: codecov/codecov-action@v3 # https://github.com/codecov/codecov-action

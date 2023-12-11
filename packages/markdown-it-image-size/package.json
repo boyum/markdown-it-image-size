@@ -31,6 +31,7 @@
     "lint:fix": "npm run lint -- --fix",
     "publish-to-npm": "np",
     "test": "jest",
+    "test:ci": "jest --ci --coverage",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
