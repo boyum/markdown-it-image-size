@@ -18,6 +18,7 @@
     "lint:fix": "turbo run lint:fix",
     "prettier": "prettier .",
     "test": "turbo run test",
+    "test:ci": "turbo run test:ci",
     "typecheck": "turbo run typecheck"
   },
   "prettier": "prettier-config",
