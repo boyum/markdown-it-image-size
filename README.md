@@ -2,7 +2,7 @@
 
 ![npm version](https://img.shields.io/npm/v/markdown-it-image-size/latest) [![codecov](https://codecov.io/gh/boyum/markdown-it-image-size/branch/main/graph/badge.svg?token=1WRZO1Y43U)](https://codecov.io/gh/boyum/markdown-it-image-size)
 
-Automatically adds `width` and `height` attributes to `img` tags rendered by markdown-it.
+Automatically adds `width` and `height` attributes to `img` tags rendered by [markdown-it](https://github.com/markdown-it/markdown-it/).
 
 ## How to use
 
