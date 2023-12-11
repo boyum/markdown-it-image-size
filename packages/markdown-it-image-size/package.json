@@ -50,16 +50,16 @@
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
-    "markdown-it": "^13.0.2",
-    "np": "^9.1.0",
-    "rollup": "^4.6.1",
+    "markdown-it": "^14.0.0",
+    "np": "^9.2.0",
+    "rollup": "^4.8.0",
     "rollup-plugin-dts": "^6.1.0",
     "ts-jest": "^29.1.1",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "markdown-it": ">=10 <14"
+    "markdown-it": ">= 10 < 15"
   },
   "engines": {
     "node": ">= 16"
