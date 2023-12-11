@@ -1,5 +1,17 @@
 # Changelog
 
+## [14.0.1](https://github.com/boyum/markdown-it-image-size/compare/v14.0.0...v14.0.1) (2023-12-11)
+
+
+### Tests
+
+* increase coverage ([#424](https://github.com/boyum/markdown-it-image-size/issues/424)) ([77c1a42](https://github.com/boyum/markdown-it-image-size/commit/77c1a42f9969c4866a4e61d623ce8fbb62f91d77))
+
+
+### Build System
+
+* use tsup, add more tests ([#423](https://github.com/boyum/markdown-it-image-size/issues/423)) ([efb7693](https://github.com/boyum/markdown-it-image-size/commit/efb7693b99f7426192d3bae1b29506afae7b26fe))
+
 ## [14.0.0](https://github.com/boyum/markdown-it-image-size/compare/v13.3.3...v14.0.0) (2023-12-11)
 
 ### Build System
