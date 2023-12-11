@@ -1,5 +1,6 @@
 import MarkdownIt from "markdown-it";
-import { markdownItImageSize } from "markdown-it-image-size";
+
+const markdownItImageSize = require("markdown-it-image-size");
 
 const md = MarkdownIt({
   html: true,
