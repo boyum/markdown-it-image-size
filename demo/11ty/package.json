@@ -1,10 +1,10 @@
 {
   "name": "11ty",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "build": "eleventy"
   },
-  "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
     "markdown-it": "^13.0.1",

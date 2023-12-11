@@ -1,4 +1,5 @@
 import { markdownItImageSize } from "..";
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MarkdownIt = require("markdown-it");
 

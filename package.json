@@ -1,29 +1,29 @@
 {
   "name": "markdown-it-image-size-root",
   "private": true,
-  "devDependencies": {
-    "prettier": "^3.1.0",
-    "prettier-config": "github:boyum/prettier-config",
-    "turbo": "^1.11.0"
-  },
-  "scripts": {
-    "prettier": "prettier .",
-    "format:fix": "npm run prettier -- --write",
-    "format:check": "npm run prettier -- --check",
-    "lint:check": "turbo run lint:check",
-    "lint:fix": "turbo run lint:fix",
-    "test": "turbo run test",
-    "build": "turbo run build",
-    "typecheck": "turbo run typecheck"
-  },
+  "license": "Apache-2.0",
   "author": {
     "name": "Sindre Bøyum",
     "url": "https://sinre.dev"
   },
-  "prettier": "prettier-config",
-  "license": "Apache-2.0",
   "workspaces": [
     "packages/*",
     "demo/*"
-  ]
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "format:check": "npm run prettier -- --check",
+    "format:fix": "npm run prettier -- --write",
+    "lint:check": "turbo run lint:check",
+    "lint:fix": "turbo run lint:fix",
+    "prettier": "prettier .",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck"
+  },
+  "prettier": "prettier-config",
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "prettier-config": "github:boyum/prettier-config",
+    "turbo": "^1.11.0"
+  }
 }
