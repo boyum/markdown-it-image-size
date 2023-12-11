@@ -7,8 +7,5 @@ export default defineConfig({
       name: "markdown-it-image-size",
       fileName: format => `markdown-it-image-size.${format}.js`,
     },
-    rollupOptions: {
-      external: ["markdown-it"],
-    },
   },
 });
