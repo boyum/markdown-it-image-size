@@ -1,5 +1,33 @@
 # Changelog
 
+## [14.1.0](https://github.com/boyum/markdown-it-image-size/compare/v14.0.1...v14.1.0) (2023-12-29)
+
+
+### Features
+
+* update image-size, add support for HEIF, HEIC and AVIF ([7f2d463](https://github.com/boyum/markdown-it-image-size/commit/7f2d463004e2d1363d7120382ef7e9a295d6cd59))
+
+
+### Documentation
+
+* link to markdown-it ([6c43ba5](https://github.com/boyum/markdown-it-image-size/commit/6c43ba5744ce84a1182aebf392f7f8b38afd4600))
+
+
+### Tests
+
+* use vitest ([#426](https://github.com/boyum/markdown-it-image-size/issues/426)) ([61025e8](https://github.com/boyum/markdown-it-image-size/commit/61025e8f6f8952b644158b0c90b01c4c669c6bb6))
+
+
+### Build System
+
+* move `@vitest/coverage-v8` to correct package ([4b1a934](https://github.com/boyum/markdown-it-image-size/commit/4b1a934b6bfef78e4eaacdc85797e97f9363358e))
+
+
+### Continuous Integration
+
+* automatically create pr if there are changes to dist ([#427](https://github.com/boyum/markdown-it-image-size/issues/427)) ([fcdfa0e](https://github.com/boyum/markdown-it-image-size/commit/fcdfa0ebbbdb2f11f83eb93f630799a87c368dcb))
+* update test coverage after push to main ([#425](https://github.com/boyum/markdown-it-image-size/issues/425)) ([3c8fb7a](https://github.com/boyum/markdown-it-image-size/commit/3c8fb7a3a35e2d418e032ac9882cb15bd7908886))
+
 ## [14.0.1](https://github.com/boyum/markdown-it-image-size/compare/v14.0.0...v14.0.1) (2023-12-11)
 
 
