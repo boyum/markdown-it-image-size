@@ -37,7 +37,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "image-size": "^1.1.0",
+    "image-size": "^1.1.1",
     "sync-fetch": "^0.5.2"
   },
   "devDependencies": {
