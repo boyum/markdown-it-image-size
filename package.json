@@ -23,7 +23,7 @@
   },
   "prettier": "prettier-config",
   "devDependencies": {
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.2",
     "prettier-config": "github:boyum/prettier-config",
     "turbo": "^1.11.3"
   }
