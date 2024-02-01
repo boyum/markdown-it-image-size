@@ -25,6 +25,6 @@ jobs:
         run: npm run test:ci
 
       - name: Codecov
-        uses: codecov/codecov-action@v3 # https://github.com/codecov/codecov-action
+        uses: codecov/codecov-action@v4 # https://github.com/codecov/codecov-action
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
