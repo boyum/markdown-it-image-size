@@ -8,7 +8,7 @@
     "prerender": "tsx ./prerender.ts"
   },
   "devDependencies": {
-    "markdown-it": "^14.0.0",
+    "markdown-it": "^14.1.0",
     "markdown-it-image-size": "*",
     "tsx": "^4.7.1",
     "vite": "^5.1.6"
