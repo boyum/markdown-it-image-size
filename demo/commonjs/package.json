@@ -11,6 +11,6 @@
     "markdown-it": "^14.1.0",
     "markdown-it-image-size": "*",
     "tsx": "^4.7.1",
-    "vite": "^5.1.6"
+    "vite": "^5.2.2"
   }
 }
