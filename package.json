@@ -6,25 +6,17 @@
     "name": "Sindre Bøyum",
     "url": "https://sinre.dev"
   },
-  "workspaces": [
-    "packages/*",
-    "demo/*"
-  ],
+  "workspaces": ["packages/*", "demo/*"],
   "scripts": {
     "build": "turbo run build",
-    "format:check": "npm run prettier -- --check",
-    "format:fix": "npm run prettier -- --write",
-    "lint:check": "turbo run lint:check",
-    "lint:fix": "turbo run lint:fix",
-    "prettier": "prettier .",
+    "lint:check": "biome check",
+    "lint:fix": "biome check --write",
     "test": "turbo run test",
     "test:ci": "turbo run test:ci",
     "typecheck": "turbo run typecheck"
   },
-  "prettier": "prettier-config",
   "devDependencies": {
-    "prettier": "^3.3.2",
-    "prettier-config": "github:boyum/prettier-config",
+    "@biomejs/biome": "^1.8.1",
     "turbo": "^2.0.4"
   },
   "packageManager": "npm@10.5.2"

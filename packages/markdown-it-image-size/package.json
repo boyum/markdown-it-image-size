@@ -2,10 +2,7 @@
   "name": "markdown-it-image-size",
   "version": "14.1.0",
   "description": "Adds width and height to image tags rendered by markdown-it",
-  "keywords": [
-    "markdown-it",
-    "markdown-it-plugin"
-  ],
+  "keywords": ["markdown-it", "markdown-it-plugin"],
   "homepage": "https://github.com/boyum/markdown-it-image-size#readme",
   "bugs": {
     "url": "https://github.com/boyum/markdown-it-image-size/issues"
@@ -22,15 +19,11 @@
   "type": "commonjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rimraf dist",
     "compile": "tsup ./src/index.ts --format cjs --dts --minify --legacy-output dist/markdown-it-image-size",
-    "lint:check": "eslint . --config .eslintrc.json",
-    "lint:fix": "npm run lint -- --fix",
     "publish-to-npm": "release-it",
     "test": "vitest run",
     "test:ci": "vitest run --coverage",
@@ -48,11 +41,7 @@
     "@swc/core": "^1.5.28",
     "@types/markdown-it": "^13.0.7",
     "@types/sync-fetch": "^0.4.3",
-    "@typescript-eslint/eslint-plugin": "^7.11.0",
-    "@typescript-eslint/parser": "^7.13.0",
     "@vitest/coverage-v8": "^1.6.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
     "markdown-it": "^14.1.0",
     "release-it": "^17.3.0",
     "rimraf": "^5.0.7",
