@@ -2,11 +2,10 @@ import imageSize from "image-size";
 import markdownIt from "markdown-it";
 import Token from "markdown-it/lib/token";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fetch = require("sync-fetch");
 
 export function markdownItImageSize(md: markdownIt): void {
-  md.renderer.rules.image = (tokens, index, options, env) => {
+  md.renderer.rules.image = (tokens, index, _options, env) => {
     const token = tokens[index];
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs[srcIndex][1];
@@ -59,7 +58,7 @@ function generateAttributes(
 }
 
 const customPluginDefaults = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: Env is unknown and based on the environment
   getAbsPathFromEnv: (env: any): string | undefined => {
     const markdownPath: string = env?.page?.inputPath; // 11ty
 
