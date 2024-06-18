@@ -1,6 +1,6 @@
 import imageSize from "image-size";
+import type { Token } from "markdown-it";
 import markdownIt from "markdown-it";
-import Token from "markdown-it/lib/token";
 
 const fetch = require("sync-fetch");
 
