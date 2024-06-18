@@ -1,5 +1,17 @@
 # Changelog
 
+## [14.1.1](https://github.com/boyum/markdown-it-image-size/compare/v14.1.0...v14.1.1) (2024-06-18)
+
+
+### Styles
+
+* replace prettier and eslint with biome ([#617](https://github.com/boyum/markdown-it-image-size/issues/617)) ([9948c09](https://github.com/boyum/markdown-it-image-size/commit/9948c09c67ef6d805e34d70610bca5c5dadd226d))
+
+
+### Build System
+
+* upgrade turbo to v2 ([#616](https://github.com/boyum/markdown-it-image-size/issues/616)) ([24a2c77](https://github.com/boyum/markdown-it-image-size/commit/24a2c776c99478e80df556317439ae30d96b382c))
+
 ## [14.1.0](https://github.com/boyum/markdown-it-image-size/compare/v14.0.1...v14.1.0) (2023-12-29)
 
 
