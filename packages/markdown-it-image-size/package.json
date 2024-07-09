@@ -43,7 +43,7 @@
     "@types/sync-fetch": "^0.4.3",
     "@vitest/coverage-v8": "^1.6.0",
     "markdown-it": "^14.1.0",
-    "release-it": "^17.4.1",
+    "release-it": "^17.5.0",
     "rimraf": "^5.0.8",
     "tslib": "^2.6.3",
     "tsup": "^8.1.0",
