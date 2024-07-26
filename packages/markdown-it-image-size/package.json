@@ -38,7 +38,7 @@
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@swc/core": "^1.7.1",
+    "@swc/core": "^1.7.2",
     "@types/markdown-it": "^14.1.1",
     "@types/sync-fetch": "^0.4.3",
     "@vitest/coverage-v8": "^1.6.0",
