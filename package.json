@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "turbo": "^2.0.13"
+    "turbo": "^2.0.14"
   },
   "packageManager": "npm@10.5.2"
 }
