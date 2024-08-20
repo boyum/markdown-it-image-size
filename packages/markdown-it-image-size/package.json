@@ -41,7 +41,7 @@
     "@swc/core": "^1.7.14",
     "@types/markdown-it": "^14.1.2",
     "@types/sync-fetch": "^0.4.3",
-    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/coverage-v8": "^2.0.5",
     "markdown-it": "^14.1.0",
     "release-it": "^17.6.0",
     "rimraf": "^6.0.1",
