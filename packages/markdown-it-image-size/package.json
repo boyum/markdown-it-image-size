@@ -37,7 +37,7 @@
     "@release-it/conventional-changelog": "^9.0.0",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
-    "@rollup/plugin-typescript": "^12.1.0",
+    "@rollup/plugin-typescript": "^12.1.1",
     "@swc/core": "^1.7.36",
     "@types/markdown-it": "^14.1.2",
     "@types/sync-fetch": "^0.4.3",
