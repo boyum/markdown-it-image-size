@@ -34,7 +34,7 @@
     "sync-fetch": "^0.5.2"
   },
   "devDependencies": {
-    "@release-it/conventional-changelog": "^9.0.1",
+    "@release-it/conventional-changelog": "^9.0.2",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-typescript": "^12.1.1",
