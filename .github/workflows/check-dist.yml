@@ -45,7 +45,7 @@ jobs:
 
       - name: Create Pull Request
         if: ${{ failure() && steps.diff.conclusion == 'failure' }}
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           title: "chore: rebuild demo"
           body: |
