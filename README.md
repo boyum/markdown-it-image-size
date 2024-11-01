@@ -6,6 +6,18 @@ Automatically adds `width` and `height` attributes to `img` tags rendered by [ma
 
 ## How to use
 
+### ESM
+
+```js
+import MarkdownIt from "markdown-it";
+import { markdownItImageSize } from "markdown-it-image-size";
+
+const mdRenderer = MarkdownIt();
+mdRenderer.use(markdownItImageSize);
+```
+
+### CJS
+
 ```js
 const MarkdownIt = require("markdown-it");
 const { markdownItImageSize } = require("markdown-it-image-size");
