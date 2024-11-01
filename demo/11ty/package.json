@@ -2,6 +2,7 @@
   "name": "11ty",
   "version": "1.0.0",
   "license": "MIT",
+  "type": "commonjs",
   "scripts": {
     "build": "eleventy"
   },
