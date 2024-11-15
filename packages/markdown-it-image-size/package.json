@@ -19,7 +19,7 @@
   "type": "commonjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": ["dist", "README.md", "CHANGELOG.md"],
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rimraf dist",
