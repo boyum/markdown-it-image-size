@@ -1,5 +1,19 @@
 # Changelog
 
+## [14.1.2](https://github.com/boyum/markdown-it-image-size/compare/v14.1.1...v14.1.2) (2024-11-15)
+
+### Documentation
+
+* add readme to npm package ([163a5ba](https://github.com/boyum/markdown-it-image-size/commit/163a5ba575ca445a92eaa941d7b0a498c5784cf1))
+
+### Styles
+
+* Biome ignore generated files ([888c619](https://github.com/boyum/markdown-it-image-size/commit/888c619b09a5784fb974a0722166b78dc8c514cb))
+
+### Continuous Integration
+
+* add rw permissions to create prs ([cc4b629](https://github.com/boyum/markdown-it-image-size/commit/cc4b629e012e856afd9da16c545f83da94ebfa85))
+
 ## [14.1.1](https://github.com/boyum/markdown-it-image-size/compare/v14.1.0...v14.1.1) (2024-06-18)
 
 
