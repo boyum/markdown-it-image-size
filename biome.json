@@ -1,6 +1,9 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
   "organizeImports": { "enabled": true },
+  "files": {
+    "ignore": ["dist/**/*", "coverage/**/*"]
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -75,8 +78,7 @@
         "useGetterReturn": "error",
         "useValidTypeof": "error"
       }
-    },
-    "ignore": ["dist/**/*"]
+    }
   },
   "formatter": {
     "indentStyle": "space"
