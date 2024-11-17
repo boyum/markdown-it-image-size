@@ -5,6 +5,8 @@ import markdownIt from "markdown-it";
 const fetch = require("sync-fetch");
 
 export function markdownItImageSize(md: markdownIt): void {
+  const cache: Map<string, { width: number; height: number }> = new Map();
+
   md.renderer.rules.image = (tokens, index, _options, env) => {
     const token = tokens[index];
     const srcIndex = token.attrIndex("src");
@@ -20,9 +22,29 @@ export function markdownItImageSize(md: markdownIt): void {
 
     const isLocalAbsoluteUrl = imageUrl.startsWith("/");
 
-    const { width, height } = isExternalImage
-      ? getImageDimensionsFromExternalImage(imageUrl)
-      : getImageDimensions(`${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`, env);
+    let width: number;
+    let height: number;
+
+    const isCached = cache.has(imageUrl);
+    if (isCached) {
+      const cacheRecord = cache.get(imageUrl);
+      width = cacheRecord.width;
+      height = cacheRecord.height;
+    }
+
+    if (width == null || height == null) {
+      const dimensions = isExternalImage
+        ? getImageDimensionsFromExternalImage(imageUrl)
+        : getImageDimensions(
+            `${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`,
+            env,
+          );
+
+      width = dimensions.width;
+      height = dimensions.height;
+
+      cache.set(imageUrl, dimensions);
+    }
 
     const dimensionsAttributes =
       width && height ? ` width="${width}" height="${height}"` : "";
