@@ -1,5 +1,11 @@
 # Changelog
 
+## [14.2.0](https://github.com/boyum/markdown-it-image-size/compare/v14.1.2...v14.2.0) (2024-11-17)
+
+### Features
+
+* cache output if the same image is repeated ([#741](https://github.com/boyum/markdown-it-image-size/issues/741)) ([3bee935](https://github.com/boyum/markdown-it-image-size/commit/3bee935591022469f013afce9c92030b91f2b6a2))
+
 ## [14.1.2](https://github.com/boyum/markdown-it-image-size/compare/v14.1.1...v14.1.2) (2024-11-15)
 
 ### Documentation
