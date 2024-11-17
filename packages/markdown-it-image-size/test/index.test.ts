@@ -134,4 +134,19 @@ describe(markdownItImageSize.name, () => {
 
     expect(actual).toBe(expected);
   });
+
+  it("should work with cache", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "/test/test-assets/image1.jpg";
+    const markdown = `![](${imageUrl}) ![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"> <img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+  });
 });
