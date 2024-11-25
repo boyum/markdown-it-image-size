@@ -1,8 +1,7 @@
 import imageSize from "image-size";
 import type { Token } from "markdown-it";
 import markdownIt from "markdown-it";
-
-const fetch = require("sync-fetch");
+import request from "sync-request";
 
 export function markdownItImageSize(md: markdownIt): void {
   const cache: Map<string, { width: number; height: number }> = new Map();
@@ -128,8 +127,11 @@ function getImageDimensionsFromExternalImage(imageUrl: string): {
 } {
   const isMissingProtocol = imageUrl.startsWith("//");
 
-  const response = fetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
-  const buffer = response.buffer();
+  const response = request(
+    "GET",
+    isMissingProtocol ? `https:${imageUrl}` : imageUrl,
+  );
+  const buffer = response.body;
   const { width, height } = imageSize(buffer);
 
   return { width, height };

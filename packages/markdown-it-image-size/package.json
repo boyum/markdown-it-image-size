@@ -20,10 +20,18 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": ["dist", "README.md", "CHANGELOG.md"],
+  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rimraf dist",
-    "compile": "tsup ./src/index.ts --format cjs --dts --minify --legacy-output dist/markdown-it-image-size",
+    "compile": "tsup ./src/index.ts --format esm,cjs --dts --minify --legacy-output dist/markdown-it-image-size",
     "publish-to-npm": "release-it",
     "test": "vitest run",
     "test:ci": "vitest run --coverage",
@@ -31,7 +39,7 @@
   },
   "dependencies": {
     "image-size": "^1.1.1",
-    "sync-fetch": "^0.5.2"
+    "sync-request": "^6.1.0"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^9.0.3",
