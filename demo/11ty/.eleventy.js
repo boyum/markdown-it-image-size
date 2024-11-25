@@ -1,7 +1,7 @@
 const markdownIt = require("markdown-it");
 const { markdownItImageSize } = require("markdown-it-image-size");
 
-module.exports = function (eleventyConfig) {
+module.exports = (eleventyConfig) => {
   eleventyConfig.setLibrary("md", markdownIt().use(markdownItImageSize));
 
   return {

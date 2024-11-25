@@ -88,7 +88,6 @@ describe(markdownItImageSize.name, () => {
 
   it("should return undefined for width and height if image can't be found", () => {
     const consoleError = console.error;
-    // biome-ignore lint/suspicious/noEmptyBlockStatements: This is a test
     console.error = () => {};
 
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);

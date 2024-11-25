@@ -1,6 +1,6 @@
 import imageSize from "image-size";
 import type { Token } from "markdown-it";
-import markdownIt from "markdown-it";
+import type markdownIt from "markdown-it";
 
 const fetch = require("sync-fetch");
 
@@ -50,7 +50,7 @@ export function markdownItImageSize(md: markdownIt): void {
       width && height ? ` width="${width}" height="${height}"` : "";
 
     return `<img src="${imageUrl}" alt="${caption}"${dimensionsAttributes}${
-      otherAttributes ? " " + otherAttributes : ""
+      otherAttributes ? ` ${otherAttributes}` : ""
     }>`;
   };
 }
