@@ -30,6 +30,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "flat-cache": "^6.1.4",
     "image-size": "^1.1.1",
     "sync-fetch": "^0.5.2"
   },

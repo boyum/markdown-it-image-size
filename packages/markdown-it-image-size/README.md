@@ -48,8 +48,8 @@ Type: `boolean`
 Default: `true`
 
 The `cache` option let's you disable caching of image dimensions.
-The cache is located in `node_modules/markdown-it-image-size/cache.json`.
-Remove this file to clear the cache.
+The cache is located in `node_modules/markdown-it-image-size/.cache`.
+Remove this directory to clear the cache.
 
 ```js
 const MarkdownIt = require("markdown-it");
