@@ -11,7 +11,7 @@ type Params = {
 };
 
 export function markdownItImageSize(md: markdownIt, params?: Params): void {
-  const cache: Map<string, Partial<Dimensions>> = new Map();
+  const cache: Map<string, Dimensions> = new Map();
 
   md.renderer.rules.image = (tokens, index, _options, env) => {
     // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
@@ -41,7 +41,7 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
     }
 
     if (width == null || height == null) {
-      let dimensions: Partial<Dimensions>;
+      let dimensions: Dimensions;
 
       if (isExternalImage) {
         dimensions = getImageDimensionsFromExternalImage(imageUrl);
@@ -123,9 +123,7 @@ function getImageDimensions(imageUrl: string): Dimensions {
   }
 }
 
-function getImageDimensionsFromExternalImage(
-  imageUrl: string,
-): Partial<Dimensions> {
+function getImageDimensionsFromExternalImage(imageUrl: string): Dimensions {
   const isMissingProtocol = imageUrl.startsWith("//");
 
   const response = fetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
