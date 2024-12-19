@@ -77,11 +77,9 @@ const { markdownItImageSize } = require("markdown-it-image-size");
 const { imgSize } = require("@mdit/plugin-img-size");
 
 const mdRenderer = MarkdownIt();
-mdRenderer
-  .use(imgSize)
-  .use(markdownItImageSize, {
-    overwriteAttrs: true,
-  });
+mdRenderer.use(imgSize).use(markdownItImageSize, {
+  overwriteAttrs: true,
+});
 
 const html = mdRenderer.render(`![alt text](/path/to/image.jpg =100x200)`);
 console.log(html);
