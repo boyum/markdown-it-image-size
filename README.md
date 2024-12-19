@@ -6,7 +6,7 @@ Automatically adds `width` and `height` attributes to `img` tags rendered by [ma
 
 ## How to use
 
-### Basic use
+### Basic usage
 
 > [!IMPORTANT]  
 > Using Vite? Import `markdown-it-image-size` with `require` and not with `import`.
