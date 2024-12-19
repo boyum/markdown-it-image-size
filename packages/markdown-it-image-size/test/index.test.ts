@@ -1,14 +1,14 @@
 import fs from "node:fs";
 import MarkdownIt from "markdown-it";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { markdownItImageSize } from "../src";
+import { CACHE_DIR, markdownItImageSize } from "../src";
 
 describe(markdownItImageSize.name, () => {
   beforeEach(() => {
     // Clear cache
-    const cachePath = "node_modules/markdown-it-image-size/cache.json";
+    const cachePath = CACHE_DIR;
     if (fs.existsSync(cachePath)) {
-      fs.unlinkSync(cachePath);
+      fs.rmdirSync(CACHE_DIR, { recursive: true });
     }
   });
 
@@ -145,6 +145,23 @@ describe(markdownItImageSize.name, () => {
 
   it("should work with cache", () => {
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "/test/test-assets/image1.jpg";
+    const markdown = `![](${imageUrl}) ![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"> <img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+  });
+
+  it("should work without cache", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
+      cache: false,
+    });
 
     const imageUrl = "/test/test-assets/image1.jpg";
     const markdown = `![](${imageUrl}) ![](${imageUrl})`;
