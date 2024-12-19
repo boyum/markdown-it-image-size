@@ -6,6 +6,11 @@ Automatically adds `width` and `height` attributes to `img` tags rendered by [ma
 
 ## How to use
 
+### Basic use
+
+> [!IMPORTANT]  
+> Using Vite? Import `markdown-it-image-size` with `require` and not with `import`.
+
 ```js
 const MarkdownIt = require("markdown-it");
 const { markdownItImageSize } = require("markdown-it-image-size");
@@ -14,8 +19,20 @@ const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize);
 ```
 
-> [!IMPORTANT]  
-> Using Vite? Import `markdown-it-image-size` with `require` and not with `import`.
+### Option: `publicPath`
+
+The `publicPath` option let's you specify a base URL for images.
+This is useful when you're using a static site generator like [Eleventy](https://www.11ty.dev/).
+
+```js
+const MarkdownIt = require("markdown-it");
+const { markdownItImageSize } = require("markdown-it-image-size");
+
+const mdRenderer = MarkdownIt();
+mdRenderer.use(markdownItImageSize, {
+  publicPath: "/path/to/images",
+});
+```
 
 ## Why
 

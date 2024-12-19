@@ -13,7 +13,7 @@ describe(markdownItImageSize.name, () => {
     const imageHeight = 3024;
 
     const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
-    const actual = markdownRenderer.render(markdown);
+    const actual = markdownRenderer.render(markdown, { abjoisjdf: 321 });
 
     expect(actual).toBe(expected);
   });
@@ -144,6 +144,23 @@ describe(markdownItImageSize.name, () => {
     const imageHeight = 3024;
 
     const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"> <img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+  });
+
+  it("should support a publicPath option", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
+      publicPath: "test",
+    });
+
+    const imageUrl = "/test-assets/image1.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
