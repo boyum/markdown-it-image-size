@@ -19,9 +19,9 @@ const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize);
 ```
 
-### Option: `publicPath`
+### Option: `publicDir`
 
-The `publicPath` option let's you specify a base URL for images.
+The `publicDir` option let's you specify a base URL for images.
 This is useful when you're using a static site generator like [Eleventy](https://www.11ty.dev/).
 
 ```js
@@ -30,7 +30,7 @@ const { markdownItImageSize } = require("markdown-it-image-size");
 
 const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize, {
-  publicPath: "/path/to/images",
+  publicDir: "/path/to/images",
 });
 ```
 

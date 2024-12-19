@@ -7,7 +7,7 @@ import type { Dimensions } from "./types";
 const fetch = require("sync-fetch");
 
 type Params = {
-  publicPath?: string;
+  publicDir?: string;
 };
 
 export function markdownItImageSize(md: markdownIt, params?: Params): void {
@@ -46,12 +46,12 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
       if (isExternalImage) {
         dimensions = getImageDimensionsFromExternalImage(imageUrl);
       } else {
-        const publicPath =
-          params?.publicPath ??
+        const publicDir =
+          params?.publicDir ??
           customPluginDefaults.getAbsPathFromEnv(env) ??
           ".";
 
-        dimensions = getImageDimensions(join(publicPath, imageUrl));
+        dimensions = getImageDimensions(join(publicDir, imageUrl));
       }
 
       width = dimensions.width;

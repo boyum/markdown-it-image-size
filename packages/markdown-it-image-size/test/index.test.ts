@@ -149,9 +149,9 @@ describe(markdownItImageSize.name, () => {
     expect(actual).toBe(expected);
   });
 
-  it("should support a publicPath option", () => {
+  it("should support a publicDir option", () => {
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-      publicPath: "test",
+      publicDir: "test",
     });
 
     const imageUrl = "/test-assets/image1.jpg";
