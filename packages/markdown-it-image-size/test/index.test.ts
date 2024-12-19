@@ -1,8 +1,17 @@
+import fs from "node:fs";
 import MarkdownIt from "markdown-it";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { markdownItImageSize } from "../src";
 
 describe(markdownItImageSize.name, () => {
+  beforeEach(() => {
+    // Clear cache
+    const cachePath = "node_modules/markdown-it-image-size/cache.json";
+    if (fs.existsSync(cachePath)) {
+      fs.unlinkSync(cachePath);
+    }
+  });
+
   it("should render local images with attributes for width and height", () => {
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
@@ -164,5 +173,24 @@ describe(markdownItImageSize.name, () => {
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
+  });
+
+  it("should support using file system caching", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "/test/test-assets/image1.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const fresh = markdownRenderer.render(markdown);
+
+    const markdownRenderer2 = new MarkdownIt().use(markdownItImageSize);
+    const cached = markdownRenderer2.render(markdown);
+
+    expect(cached).toEqual(expected);
+    expect(cached).toEqual(fresh);
   });
 });
