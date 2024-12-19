@@ -1,7 +1,9 @@
+import fs from "node:fs";
 import { join } from "node:path";
 import imageSize from "image-size";
 import type { Token } from "markdown-it";
 import type markdownIt from "markdown-it";
+import packageJson from "../package.json";
 import type { Dimensions } from "./types";
 
 const fetch = require("sync-fetch");
@@ -13,10 +15,70 @@ type Params = {
    * Where to look for local images.
    */
   publicDir?: string;
+
+  /**
+   * @default true
+   *
+   * Whether to cache the image dimensions.
+   * Will only cache if the image dimensions are found.
+   */
+  cache?: boolean;
+};
+
+const getNodeModulesPath = () => {
+  return join(process.cwd(), "node_modules");
+};
+
+const getInstalledPath = () => {
+  return join(getNodeModulesPath(), packageJson.name);
+};
+
+const getCachePath = () => {
+  return join(getInstalledPath(), "cache.json");
+};
+
+const writeCacheToFile = (cache: Map<string, Dimensions>) => {
+  const cachePath = getCachePath();
+  const cacheExists = fs.existsSync(cachePath);
+
+  if (!cacheExists) {
+    fs.mkdirSync(getInstalledPath());
+  }
+
+  const cacheJson = JSON.stringify(Array.from(cache.entries()));
+
+  fs.writeFileSync(cachePath, cacheJson);
+};
+
+const getCacheFromFile = () => {
+  const cachePath = getCachePath();
+
+  try {
+    const cacheExists = fs.existsSync(cachePath);
+    if (!cacheExists) {
+      return new Map();
+    }
+
+    const cacheJson = fs.readFileSync(cachePath, "utf-8");
+    const cacheEntries = JSON.parse(cacheJson);
+
+    return new Map(cacheEntries);
+  } catch (error) {
+    console.error(
+      `markdown-it-image-size: Could not read cache file at ${cachePath}.\n\n`,
+      error,
+    );
+
+    return new Map();
+  }
 };
 
 export function markdownItImageSize(md: markdownIt, params?: Params): void {
-  const cache: Map<string, Dimensions> = new Map();
+  const useCache = params?.cache ?? true;
+
+  const cache: Map<string, Dimensions> = useCache
+    ? getCacheFromFile()
+    : new Map();
 
   md.renderer.rules.image = (tokens, index, _options, env) => {
     // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
@@ -63,6 +125,7 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
       height = dimensions.height;
 
       cache.set(imageUrl, dimensions);
+      writeCacheToFile(cache);
     }
 
     const dimensionsAttributes =
