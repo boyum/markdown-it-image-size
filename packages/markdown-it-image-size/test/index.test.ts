@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import MarkdownIt from "markdown-it";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { markdownItImageSize } from "../src";
+import { CACHE_DIR, markdownItImageSize } from "../src";
 
 describe(markdownItImageSize.name, () => {
   let markdownRenderer: MarkdownIt;
