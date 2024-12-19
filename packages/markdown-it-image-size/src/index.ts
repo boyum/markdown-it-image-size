@@ -1,5 +1,5 @@
 import { join } from "node:path";
-import { FlatCache } from "flat-cache";
+import flatCache from "flat-cache";
 import imageSize from "image-size";
 import type { Token } from "markdown-it";
 import type markdownIt from "markdown-it";
@@ -29,15 +29,17 @@ type Params = {
 export function markdownItImageSize(md: markdownIt, params?: Params): void {
   const useCache = params?.cache ?? true;
 
-  const cache = new FlatCache({
-    cacheDir: CACHE_DIR,
-    cacheId: "markdown-it-image-size__dimensions",
-    ttl: 60 * 60 * 24 * 7, // 1 week
-    lruSize: 10000, // 10,000 items
-  });
+  let cache: flatCache;
+  // new FlatCache({
+  //   cacheDir: CACHE_DIR,
+  //   cacheId: "markdown-it-image-size__dimensions",
+  //   ttl: 60 * 60 * 24 * 7, // 1 week
+  //   lruSize: 10000, // 10,000 items
+  // });
 
   if (useCache) {
-    cache.load();
+    cache = flatCache.load("markdown-it-image-size__dimensions", CACHE_DIR);
+    // cache.load();
   }
 
   const getFromCache = (key: string): Dimensions | undefined => {
@@ -45,7 +47,7 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
   };
 
   const saveToCache = (key: string, value: Dimensions): void => {
-    cache.set(key, value);
+    cache.setKey(key, value);
     cache.save();
   };
 
