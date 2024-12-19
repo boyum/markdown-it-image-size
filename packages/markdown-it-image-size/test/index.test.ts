@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import MarkdownIt from "markdown-it";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { markdownItImageSize } from "../src";
