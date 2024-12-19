@@ -148,4 +148,21 @@ describe(markdownItImageSize.name, () => {
 
     expect(actual).toBe(expected);
   });
+
+  it("should support a publicDir option", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
+      publicDir: "test",
+    });
+
+    const imageUrl = "/test-assets/image1.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+  });
 });

@@ -1,16 +1,29 @@
+import { join } from "node:path";
 import imageSize from "image-size";
 import type { Token } from "markdown-it";
 import type markdownIt from "markdown-it";
+import type { Dimensions } from "./types";
 
 const fetch = require("sync-fetch");
 
-export function markdownItImageSize(md: markdownIt): void {
-  const cache: Map<string, { width: number; height: number }> = new Map();
+type Params = {
+  /**
+   * @default "."
+   *
+   * Where to look for local images.
+   */
+  publicDir?: string;
+};
+
+export function markdownItImageSize(md: markdownIt, params?: Params): void {
+  const cache: Map<string, Dimensions> = new Map();
 
   md.renderer.rules.image = (tokens, index, _options, env) => {
-    const token = tokens[index];
+    // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
+    const token = tokens[index]!;
+
     const srcIndex = token.attrIndex("src");
-    const imageUrl = token.attrs[srcIndex][1];
+    const imageUrl = token.attrs?.[srcIndex]?.[1] ?? "";
     const caption = md.utils.escapeHtml(token.content);
 
     const otherAttributes = generateAttributes(md, token);
@@ -20,25 +33,31 @@ export function markdownItImageSize(md: markdownIt): void {
       imageUrl.startsWith("https://") ||
       imageUrl.startsWith("//");
 
-    const isLocalAbsoluteUrl = imageUrl.startsWith("/");
-
-    let width: number;
-    let height: number;
+    let width: number | undefined = undefined;
+    let height: number | undefined = undefined;
 
     const isCached = cache.has(imageUrl);
     if (isCached) {
       const cacheRecord = cache.get(imageUrl);
+      // @ts-expect-error We checked if the cache has the key
       width = cacheRecord.width;
+      // @ts-expect-error We checked if the cache has the key
       height = cacheRecord.height;
     }
 
     if (width == null || height == null) {
-      const dimensions = isExternalImage
-        ? getImageDimensionsFromExternalImage(imageUrl)
-        : getImageDimensions(
-            `${isLocalAbsoluteUrl ? "." : ""}${imageUrl}`,
-            env,
-          );
+      let dimensions: Dimensions;
+
+      if (isExternalImage) {
+        dimensions = getImageDimensionsFromExternalImage(imageUrl);
+      } else {
+        const publicDir =
+          params?.publicDir ??
+          customPluginDefaults.getAbsPathFromEnv(env) ??
+          ".";
+
+        dimensions = getImageDimensions(join(publicDir, imageUrl));
+      }
 
       width = dimensions.width;
       height = dimensions.height;
@@ -69,7 +88,7 @@ function generateAttributes(
   const ignore = ["src", "alt"];
 
   return token.attrs
-    .filter(([key]) => !ignore.includes(key))
+    ?.filter(([key]) => !ignore.includes(key))
     .map(([key, value]) => {
       // Escape title attributes
       const escapedValue = md.utils.escapeHtml(value);
@@ -94,25 +113,12 @@ const customPluginDefaults = {
   },
 };
 
-function getImageDimensions(
-  imageUrl: string,
-  env?: unknown | undefined,
-): {
-  width: number;
-  height: number;
-} {
+function getImageDimensions(imageUrl: string): Dimensions {
   try {
     const { width, height } = imageSize(imageUrl);
 
     return { width, height };
   } catch (error) {
-    const isRelativePath = !imageUrl.startsWith("/");
-    const inputPath = customPluginDefaults.getAbsPathFromEnv(env);
-
-    if (isRelativePath && inputPath) {
-      return getImageDimensions(`${inputPath}/${imageUrl}`);
-    }
-
     console.error(
       `markdown-it-image-size: Could not get dimensions of image with url ${imageUrl}.\n\n`,
       error,
@@ -122,10 +128,7 @@ function getImageDimensions(
   }
 }
 
-function getImageDimensionsFromExternalImage(imageUrl: string): {
-  width: number;
-  height: number;
-} {
+function getImageDimensionsFromExternalImage(imageUrl: string): Dimensions {
   const isMissingProtocol = imageUrl.startsWith("//");
 
   const response = fetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
