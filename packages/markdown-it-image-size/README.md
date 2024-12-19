@@ -11,10 +11,10 @@ Browsers use the `width` and `height` attributes to [determine aspect ratios of 
 
 ## How to use
 
-### Basic usage
-
 > [!IMPORTANT]  
 > Using Vite? Import `markdown-it-image-size` with `require` and not with `import`.
+
+### Basic usage
 
 ```js
 const MarkdownIt = require("markdown-it");
