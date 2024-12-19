@@ -13,7 +13,7 @@ describe(markdownItImageSize.name, () => {
     const imageHeight = 3024;
 
     const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
-    const actual = markdownRenderer.render(markdown);
+    const actual = markdownRenderer.render(markdown, { abjoisjdf: 321 });
 
     expect(actual).toBe(expected);
   });
