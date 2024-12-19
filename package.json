@@ -6,10 +6,7 @@
     "name": "Sindre Bøyum",
     "url": "https://sinre.dev"
   },
-  "workspaces": [
-    "packages/*",
-    "demo/*"
-  ],
+  "workspaces": ["packages/*", "demo/*"],
   "scripts": {
     "build": "turbo run build",
     "lint:check": "biome check",
