@@ -7,6 +7,11 @@ import type { Dimensions } from "./types";
 const fetch = require("sync-fetch");
 
 type Params = {
+  /**
+   * @default "."
+   *
+   * Where to look for local images.
+   */
   publicDir?: string;
 };
 
