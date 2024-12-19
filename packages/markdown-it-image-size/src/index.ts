@@ -42,7 +42,7 @@ const writeCacheToFile = (cache: Map<string, Dimensions>) => {
   const cacheExists = fs.existsSync(cachePath);
 
   if (!cacheExists) {
-    fs.mkdirSync(getInstalledPath());
+    fs.mkdirSync(getInstalledPath(), { recursive: true });
   }
 
   const cacheJson = JSON.stringify(Array.from(cache.entries()));
