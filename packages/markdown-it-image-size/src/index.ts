@@ -30,6 +30,7 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
   const useCache = params?.cache ?? true;
 
   let cache: flatCache;
+  // Commented out code is for flat-cache@6
   // new FlatCache({
   //   cacheDir: CACHE_DIR,
   //   cacheId: "markdown-it-image-size__dimensions",
