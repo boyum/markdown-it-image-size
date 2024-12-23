@@ -9,5 +9,6 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
-  "include": ["src/index.cts", "prerender.ts"]
+  "include": ["src/index.cts", "prerender.ts"],
+  "extends": "../../tsconfig.json"
 }

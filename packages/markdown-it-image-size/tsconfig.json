@@ -4,13 +4,13 @@
     "noImplicitAny": false,
     "module": "ES2020",
     "target": "es5",
-    "allowJs": false,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "strict": true,
     "lib": [
       "DOM",
       "ES6",
@@ -23,5 +23,6 @@
       "ES2020"
     ]
   },
-  "include": ["src/**/*", "test/**/*"]
+  "include": ["src/**/*", "test/**/*"],
+  "extends": "../../tsconfig.json"
 }
