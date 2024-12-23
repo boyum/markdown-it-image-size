@@ -1,5 +1,11 @@
 # Changelog
 
+## [14.4.0](https://github.com/boyum/markdown-it-image-size/compare/v14.3.0...v14.4.0) (2024-12-23)
+
+### Features
+
+* cache to file between runs ([#758](https://github.com/boyum/markdown-it-image-size/issues/758)) ([44eef2e](https://github.com/boyum/markdown-it-image-size/commit/44eef2e45e619ecb080cc41c9efc36c3c415753a))
+
 ## [14.3.0](https://github.com/boyum/markdown-it-image-size/compare/v14.2.0...v14.3.0) (2024-12-23)
 
 ### Features

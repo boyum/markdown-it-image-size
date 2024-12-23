@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-image-size",
-  "version": "14.3.0",
+  "version": "14.4.0",
   "description": "Adds width and height to image tags rendered by markdown-it",
   "keywords": ["markdown-it", "markdown-it-plugin"],
   "homepage": "https://github.com/boyum/markdown-it-image-size#readme",
