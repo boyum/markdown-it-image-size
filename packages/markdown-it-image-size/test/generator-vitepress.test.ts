@@ -12,7 +12,7 @@ describe("11ty", () => {
     clearCache(cacheFile);
 
     markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-      _cacheFile: cacheFile,
+      cacheFile,
     });
   });
 

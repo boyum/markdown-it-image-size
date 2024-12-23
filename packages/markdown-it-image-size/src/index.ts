@@ -8,7 +8,7 @@ import {
   getImageDimensionsFromLocalImage,
 } from "./image-dimensions.utils";
 
-export const CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
+export const DEFAULT_CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
 
 type Options = {
   /**
@@ -31,14 +31,31 @@ type Options = {
   cache?: boolean;
 
   /**
+   * @deprecated Use `cacheFile` instead.
+   * 
    * @description
    * Custom cache file name.
-   *
-   * **Note:** This is experimental and may not work as expected.
    *
    * @default "dimensions.json"
    */
   _cacheFile?: string;
+
+  /**
+   * @description
+   * Custom cache file name.
+   *
+   * @default "dimensions.json"
+   */
+  cacheFile?: string;
+
+  /**
+   * Where to store the cache.
+   * Only works if `cache` is true.
+   * Can be used to specify a custom cache directory, in order to version control the cache.
+   * 
+   * @default "node_modules/markdown-it-image-size/.cache"
+   */
+  cacheDir?: string;
 
   /**
    * @description
@@ -78,14 +95,15 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
   pluginOptions?,
 ) => {
   const useCache = pluginOptions?.cache ?? true;
-  const cacheFile = pluginOptions?._cacheFile ?? "dimensions.json";
+  const cacheFile = pluginOptions?.cacheFile ?? pluginOptions?._cacheFile ?? "dimensions.json";
+  const cacheDir = pluginOptions?.cacheDir ?? DEFAULT_CACHE_DIR;
   const overwriteAttrs = pluginOptions?.overwriteAttrs ?? false;
 
   let cache: FlatCache;
 
   if (useCache) {
     cache = create({
-      cacheDir: CACHE_DIR,
+      cacheDir: cacheDir,
       cacheId: cacheFile,
       ttl: 60 * 60 * 24 * 7, // 1 week
       lruSize: 10_000, // 10,000 items
