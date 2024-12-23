@@ -7,7 +7,7 @@ import type { Dimensions } from "./types";
 
 const fetch = require("sync-fetch");
 
-export const CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
+export const DEFAULT_CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
 
 type Params = {
   /**
@@ -24,10 +24,20 @@ type Params = {
    * Will only cache if the image dimensions are found.
    */
   cache?: boolean;
+
+  /**
+   * @default "node_modules/markdown-it-image-size/.cache"
+   *
+   * Where to store the cache.
+   * Only works if `cache` is true.
+   * Can be used to specify a custom cache directory, in order to version control the cache.
+   */
+  cacheDir?: string;
 };
 
 export function markdownItImageSize(md: markdownIt, params?: Params): void {
   const useCache = params?.cache ?? true;
+  const cacheDir = params?.cacheDir ?? DEFAULT_CACHE_DIR;
 
   let cache: flatCache;
   // Commented out code is for flat-cache@6
@@ -39,7 +49,8 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
   // });
 
   if (useCache) {
-    cache = flatCache.load("markdown-it-image-size__dimensions", CACHE_DIR);
+    cache = flatCache.load("markdown-it-image-size__dimensions", cacheDir);
+
     // cache.load();
   }
 
@@ -53,6 +64,9 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
   };
 
   md.renderer.rules.image = (tokens, index, _options, env) => {
+    const publicDir =
+      params?.publicDir ?? customPluginDefaults.getAbsPathFromEnv(env) ?? ".";
+
     // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
     const token = tokens[index]!;
 
@@ -82,11 +96,6 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
       if (isExternalImage) {
         dimensions = getImageDimensionsFromExternalImage(imageUrl);
       } else {
-        const publicDir =
-          params?.publicDir ??
-          customPluginDefaults.getAbsPathFromEnv(env) ??
-          ".";
-
         dimensions = getImageDimensions(join(publicDir, imageUrl));
       }
 

@@ -1,14 +1,14 @@
 import fs from "node:fs";
 import MarkdownIt from "markdown-it";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { CACHE_DIR, markdownItImageSize } from "../src";
+import { DEFAULT_CACHE_DIR, markdownItImageSize } from "../src";
 
 describe(markdownItImageSize.name, () => {
   beforeEach(() => {
     // Clear cache
-    const cachePath = CACHE_DIR;
+    const cachePath = DEFAULT_CACHE_DIR;
     if (fs.existsSync(cachePath)) {
-      fs.rmdirSync(CACHE_DIR, { recursive: true });
+      fs.rmdirSync(DEFAULT_CACHE_DIR, { recursive: true });
     }
   });
 
