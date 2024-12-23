@@ -3,8 +3,8 @@ import flatCache from "flat-cache";
 import imageSize from "image-size";
 import type { Token } from "markdown-it";
 import type markdownIt from "markdown-it";
-import type { Dimensions } from "./types";
 import { getImageDimensions } from "./get-image-dimensions";
+import type { Dimensions } from "./types";
 
 const fetch = require("sync-fetch");
 
