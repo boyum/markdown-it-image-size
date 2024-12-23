@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import MarkdownIt from "markdown-it";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CACHE_DIR, markdownItImageSize } from "../src";
+import * as getImageDimensionsModule from "../src/get-image-dimensions";
 
 describe(markdownItImageSize.name, () => {
   beforeEach(() => {
@@ -10,6 +11,10 @@ describe(markdownItImageSize.name, () => {
     if (fs.existsSync(cachePath)) {
       fs.rmdirSync(CACHE_DIR, { recursive: true });
     }
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it("should render local images with attributes for width and height", () => {
@@ -193,6 +198,8 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should support using file system caching", () => {
+    const spy = vi.spyOn(getImageDimensionsModule, "getImageDimensions");
+
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
     const imageUrl = "/test/test-assets/image1.jpg";
@@ -209,5 +216,6 @@ describe(markdownItImageSize.name, () => {
 
     expect(cached).toEqual(expected);
     expect(cached).toEqual(fresh);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 });

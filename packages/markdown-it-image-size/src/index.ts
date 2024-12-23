@@ -4,6 +4,7 @@ import imageSize from "image-size";
 import type { Token } from "markdown-it";
 import type markdownIt from "markdown-it";
 import type { Dimensions } from "./types";
+import { getImageDimensions } from "./get-image-dimensions";
 
 const fetch = require("sync-fetch");
 
@@ -145,21 +146,6 @@ const customPluginDefaults = {
     return undefined;
   },
 };
-
-function getImageDimensions(imageUrl: string): Dimensions {
-  try {
-    const { width, height } = imageSize(imageUrl);
-
-    return { width, height };
-  } catch (error) {
-    console.error(
-      `markdown-it-image-size: Could not get dimensions of image with url ${imageUrl}.\n\n`,
-      error,
-    );
-
-    return { width: undefined, height: undefined };
-  }
-}
 
 function getImageDimensionsFromExternalImage(imageUrl: string): Dimensions {
   const isMissingProtocol = imageUrl.startsWith("//");
