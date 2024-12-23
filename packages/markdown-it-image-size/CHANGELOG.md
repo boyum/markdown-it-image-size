@@ -1,5 +1,19 @@
 # Changelog
 
+## [14.3.0](https://github.com/boyum/markdown-it-image-size/compare/v14.2.0...v14.3.0) (2024-12-23)
+
+### Features
+
+* add publicDir option ([#757](https://github.com/boyum/markdown-it-image-size/issues/757)) ([1ac30c5](https://github.com/boyum/markdown-it-image-size/commit/1ac30c5ddc014652df22a47142b0c6e290b84a84))
+
+### Styles
+
+* use recommended settings for biome lint ([#747](https://github.com/boyum/markdown-it-image-size/issues/747)) ([d90e5ba](https://github.com/boyum/markdown-it-image-size/commit/d90e5baec91cde75971187731d8c921962882a99))
+
+### Continuous Integration
+
+* update workflow name ([bc703e3](https://github.com/boyum/markdown-it-image-size/commit/bc703e3788f4f0865b93d8029aa880fbd66f4474))
+
 ## [14.2.0](https://github.com/boyum/markdown-it-image-size/compare/v14.1.2...v14.2.0) (2024-11-17)
 
 ### Features
