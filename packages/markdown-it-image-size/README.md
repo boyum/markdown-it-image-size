@@ -26,7 +26,10 @@ mdRenderer.use(markdownItImageSize);
 
 ### Option: `publicDir`
 
-The `publicDir` option let's you specify a base URL for local images.
+Type: `string`
+Default: `.`
+
+The `publicDir` option lets you specify a base URL for local images.
 This is useful when you're using a static site generator like [Eleventy](https://www.11ty.dev/).
 
 ```js
@@ -36,5 +39,24 @@ const { markdownItImageSize } = require("markdown-it-image-size");
 const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize, {
   publicDir: "/path/to/images",
+});
+```
+
+### Option: `cache`
+
+Type: `boolean`
+Default: `true`
+
+The `cache` option lets you disable caching of image dimensions.
+The cache is located in `node_modules/markdown-it-image-size/.cache`.
+Remove this directory to clear the cache.
+
+```js
+const MarkdownIt = require("markdown-it");
+const { markdownItImageSize } = require("markdown-it-image-size");
+
+const mdRenderer = MarkdownIt();
+mdRenderer.use(markdownItImageSize, {
+  cache: false,
 });
 ```
