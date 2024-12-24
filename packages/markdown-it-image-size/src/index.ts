@@ -59,19 +59,24 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
 
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs?.[srcIndex]?.[1] ?? "";
-    const caption = md.utils.escapeHtml(token.content);
-
-    const otherAttributes = generateAttributes(md, token);
 
     const isExternalImage =
       imageUrl.startsWith("http://") ||
       imageUrl.startsWith("https://") ||
       imageUrl.startsWith("//");
 
+    const normalizedImageUrl = isExternalImage
+      ? imageUrl
+      : imageUrl.startsWith("/") || imageUrl.startsWith(".")
+        ? imageUrl
+        : `./${imageUrl}`;
+
+    const caption = md.utils.escapeHtml(token.content);
+
     let width: number | undefined = undefined;
     let height: number | undefined = undefined;
 
-    const cacheRecord = useCache ? getFromCache(imageUrl) : undefined;
+    const cacheRecord = useCache ? getFromCache(normalizedImageUrl) : undefined;
     if (cacheRecord != null) {
       width = cacheRecord.width;
       height = cacheRecord.height;
@@ -81,28 +86,29 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
       let dimensions: Dimensions;
 
       if (isExternalImage) {
-        dimensions = getImageDimensionsFromExternalImage(imageUrl);
+        dimensions = getImageDimensionsFromExternalImage(normalizedImageUrl);
       } else {
         const publicDir =
           params?.publicDir ??
           customPluginDefaults.getAbsPathFromEnv(env) ??
           ".";
 
-        dimensions = getImageDimensions(join(publicDir, imageUrl));
+        dimensions = getImageDimensions(join(publicDir, normalizedImageUrl));
       }
 
       width = dimensions.width;
       height = dimensions.height;
 
       if (useCache) {
-        saveToCache(imageUrl, dimensions);
+        saveToCache(normalizedImageUrl, dimensions);
       }
     }
 
+    const otherAttributes = generateAttributes(md, token);
     const dimensionsAttributes =
       width && height ? ` width="${width}" height="${height}"` : "";
 
-    return `<img src="${imageUrl}" alt="${caption}"${dimensionsAttributes}${
+    return `<img src="${normalizedImageUrl}" alt="${caption}"${dimensionsAttributes}${
       otherAttributes ? ` ${otherAttributes}` : ""
     }>`;
   };
@@ -124,10 +130,12 @@ function generateAttributes(
   return token.attrs
     ?.filter(([key]) => !ignore.includes(key))
     .map(([key, value]) => {
-      // Escape title attributes
-      const escapedValue = md.utils.escapeHtml(value);
+      if (key === "title") {
+        // Escape title attributes
+        value = md.utils.escapeHtml(value);
+      }
 
-      return `${key}="${escapedValue}"`;
+      return `${key}="${value}"`;
     })
     .join(" ") as "" | `title=${string}`;
 }

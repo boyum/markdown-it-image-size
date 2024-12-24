@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**/*"]
+      "outputs": ["dist/**/*", "_site/**/*", ".vitepress/dist/**/*"]
     },
     "test": {
       "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
