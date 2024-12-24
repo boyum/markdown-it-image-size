@@ -63,7 +63,7 @@ mdRenderer.use(markdownItImageSize, {
 
 ## Examples
 
-See the [demo](./demo) directory for usage with Eleventy and Vitepress.
+See the [demo](./demo) directory for usage with [Eleventy](https://www.11ty.dev/) and [VitePress](https://vitepress.dev/).
 
 ## Development
 
