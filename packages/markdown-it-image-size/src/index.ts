@@ -1,11 +1,12 @@
 import { join } from "node:path";
 import flatCache from "flat-cache";
-import imageSize from "image-size";
 import type { PluginWithOptions } from "markdown-it";
-import { getImageDimensions } from "./get-image-dimensions";
-import type { Dimensions } from "./types";
-
-const fetch = require("sync-fetch");
+import { type GeneratorEnv, getAbsPathFromEnv } from "./env.utils";
+import {
+  type Dimensions,
+  getImageDimensionsFromExternalImage,
+  getImageDimensionsFromLocalImage,
+} from "./image-dimensions.utils";
 
 export const CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
 
@@ -104,7 +105,13 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
   // biome-ignore lint/style/noNonNullAssertion: The original renderer should always be defined
   const originalRenderer = md.renderer.rules.image!;
 
-  md.renderer.rules.image = (tokens, index, options, env, self): string => {
+  md.renderer.rules.image = (
+    tokens,
+    index,
+    options,
+    env: GeneratorEnv | undefined,
+    self,
+  ): string => {
     // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
     const token = tokens[index]!;
     const srcIndex = token.attrIndex("src");
@@ -144,12 +151,10 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
         dimensions = getImageDimensionsFromExternalImage(normalizedImageUrl);
       } else {
         const publicDir =
-          pluginOptions?.publicDir ??
-          customPluginDefaults.getAbsPathFromEnv(env) ??
-          ".";
-
+          pluginOptions?.publicDir ?? getAbsPathFromEnv(env) ?? ".";
         const imagePath = join(publicDir, normalizedImageUrl);
-        dimensions = getImageDimensions(imagePath);
+
+        dimensions = getImageDimensionsFromLocalImage(imagePath);
       }
 
       width = dimensions.width;
@@ -173,28 +178,3 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
     return originalRenderer(tokens, index, options, env, self);
   };
 };
-
-const customPluginDefaults = {
-  // biome-ignore lint/suspicious/noExplicitAny: Env is unknown and based on the environment
-  getAbsPathFromEnv: (env: any): string | undefined => {
-    const get11tyPath = (env: { page?: { inputPath?: string } | undefined }) =>
-      env?.page?.inputPath;
-
-    const getVitePressPath = (env: { path?: string } | undefined) => env?.path;
-
-    const markdownPath = get11tyPath(env) ?? getVitePressPath(env);
-    return markdownPath
-      ?.substring(0, markdownPath.lastIndexOf("/"))
-      .replace(/\/\.\//g, "/");
-  },
-};
-
-function getImageDimensionsFromExternalImage(imageUrl: string): Dimensions {
-  const isMissingProtocol = imageUrl.startsWith("//");
-
-  const response = fetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
-  const buffer = response.buffer();
-  const { width, height } = imageSize(buffer);
-
-  return { width, height };
-}
