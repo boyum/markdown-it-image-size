@@ -107,10 +107,29 @@ describe(markdownItImageSize.name, () => {
     const consoleError = console.error;
     console.error = () => {};
 
-    const imageUrl = "unknown.jpg";
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "./unknown.jpg";
     const markdown = `![](${imageUrl})`;
 
     const expected = `<p><img src="${imageUrl}" alt=""></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+
+    console.error = consoleError;
+  });
+
+  it("should normalize image URIs", () => {
+    const consoleError = console.error;
+    console.error = vi.fn();
+
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "uri.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const expected = `<p><img src="./${imageUrl}" alt=""></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
@@ -122,7 +141,9 @@ describe(markdownItImageSize.name, () => {
     const consoleError = console.error;
     console.error = vi.fn();
 
-    const imageUrl = "unknown.jpg";
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "./unknown.jpg";
     const markdown = `![](${imageUrl})`;
 
     markdownRenderer.render(markdown);
