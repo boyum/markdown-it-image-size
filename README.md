@@ -61,6 +61,10 @@ mdRenderer.use(markdownItImageSize, {
 });
 ```
 
+## Examples
+
+See the [demo](./demo) directory for usage with Eleventy and Vitepress.
+
 ## Development
 
 This project uses tsup for bundling and Vitest for testing.

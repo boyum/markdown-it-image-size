@@ -60,3 +60,26 @@ mdRenderer.use(markdownItImageSize, {
   cache: false,
 });
 ```
+
+## Development
+
+This project uses tsup for bundling and Vitest for testing.
+It currently supports Node.js 16 and up.
+To get started, fork the repository and run the following commands:
+
+```bash
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Run tests
+npm test
+
+# Lint and format
+npm run lint:fix
+```
+
+> [!NOTE]
+> The unit tests run on the build output, so make sure to run `npm run build` before running the tests if you have made changes to the source code.
