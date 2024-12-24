@@ -68,6 +68,25 @@ describe(markdownItImageSize.name, () => {
     expect(actual).toBe(expected);
   });
 
+  it("should use VitePress path to resolve relative paths if available", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const path = "./test/test-assets/posts/1/1.md";
+
+    const imageUrl = "./post-image.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown, {
+      path,
+    });
+
+    expect(actual).toBe(expected);
+  });
+
   it("should render external images with attributes for width and height", () => {
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
