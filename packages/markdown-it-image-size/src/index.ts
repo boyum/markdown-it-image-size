@@ -122,10 +122,16 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
       imageUrl.startsWith("https://") ||
       imageUrl.startsWith("//");
 
+    const normalizedImageUrl = isExternalImage
+      ? imageUrl
+      : imageUrl.startsWith("/") || imageUrl.startsWith(".")
+        ? imageUrl
+        : `./${imageUrl}`;
+
     let width: number | undefined = undefined;
     let height: number | undefined = undefined;
 
-    const cacheRecord = useCache ? getFromCache(imageUrl) : undefined;
+    const cacheRecord = useCache ? getFromCache(normalizedImageUrl) : undefined;
     if (cacheRecord != null) {
       width = cacheRecord.width;
       height = cacheRecord.height;
@@ -135,14 +141,14 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
       let dimensions: Dimensions;
 
       if (isExternalImage) {
-        dimensions = getImageDimensionsFromExternalImage(imageUrl);
+        dimensions = getImageDimensionsFromExternalImage(normalizedImageUrl);
       } else {
         const publicDir =
           pluginOptions?.publicDir ??
           customPluginDefaults.getAbsPathFromEnv(env) ??
           ".";
 
-        const imagePath = join(publicDir, imageUrl);
+        const imagePath = join(publicDir, normalizedImageUrl);
         dimensions = getImageDimensions(imagePath);
       }
 
@@ -150,7 +156,7 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
       height = dimensions.height;
 
       if (useCache) {
-        saveToCache(imageUrl, dimensions);
+        saveToCache(normalizedImageUrl, dimensions);
       }
     }
 
