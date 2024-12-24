@@ -1,12 +1,13 @@
 import { join } from "node:path";
 import flatCache from "flat-cache";
-import imageSize from "image-size";
 import type { Token } from "markdown-it";
 import type markdownIt from "markdown-it";
-import { getImageDimensions } from "./get-image-dimensions";
-import type { Dimensions } from "./types";
-
-const fetch = require("sync-fetch");
+import { type GeneratorEnv, getAbsPathFromEnv } from "./env.utils";
+import {
+  type Dimensions,
+  getImageDimensionsFromExternalImage,
+  getImageDimensionsFromLocalImage,
+} from "./image-dimensions.utils";
 
 export const CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
 
@@ -53,7 +54,12 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
     cache.save();
   };
 
-  md.renderer.rules.image = (tokens, index, _options, env) => {
+  md.renderer.rules.image = (
+    tokens,
+    index,
+    _options,
+    env: GeneratorEnv | undefined,
+  ) => {
     // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
     const token = tokens[index]!;
 
@@ -88,12 +94,11 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
       if (isExternalImage) {
         dimensions = getImageDimensionsFromExternalImage(normalizedImageUrl);
       } else {
-        const publicDir =
-          params?.publicDir ??
-          customPluginDefaults.getAbsPathFromEnv(env) ??
-          ".";
+        const publicDir = params?.publicDir ?? getAbsPathFromEnv(env) ?? ".";
 
-        dimensions = getImageDimensions(join(publicDir, normalizedImageUrl));
+        dimensions = getImageDimensionsFromLocalImage(
+          join(publicDir, normalizedImageUrl),
+        );
       }
 
       width = dimensions.width;
@@ -138,29 +143,4 @@ function generateAttributes(
       return `${key}="${value}"`;
     })
     .join(" ") as "" | `title=${string}`;
-}
-
-const customPluginDefaults = {
-  // biome-ignore lint/suspicious/noExplicitAny: Env is unknown and based on the environment
-  getAbsPathFromEnv: (env: any): string | undefined => {
-    const get11tyPath = (env: { page?: { inputPath?: string } | undefined }) =>
-      env?.page?.inputPath;
-
-    const getVitePressPath = (env: { path?: string } | undefined) => env?.path;
-
-    const markdownPath = get11tyPath(env) ?? getVitePressPath(env);
-    return markdownPath
-      ?.substring(0, markdownPath.lastIndexOf("/"))
-      .replace(/\/\.\//g, "/");
-  },
-};
-
-function getImageDimensionsFromExternalImage(imageUrl: string): Dimensions {
-  const isMissingProtocol = imageUrl.startsWith("//");
-
-  const response = fetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
-  const buffer = response.buffer();
-  const { width, height } = imageSize(buffer);
-
-  return { width, height };
 }

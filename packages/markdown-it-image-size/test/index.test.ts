@@ -2,7 +2,7 @@ import fs from "node:fs";
 import MarkdownIt from "markdown-it";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CACHE_DIR, markdownItImageSize } from "../src";
-import * as getImageDimensionsModule from "../src/get-image-dimensions";
+import * as getImageDimensionsModule from "../src/image-dimensions.utils";
 
 describe(markdownItImageSize.name, () => {
   beforeEach(() => {
@@ -234,7 +234,11 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should support using file system caching", () => {
-    const spy = vi.spyOn(getImageDimensionsModule, "getImageDimensions");
+    const spy = vi.spyOn(
+      getImageDimensionsModule,
+      // biome-ignore lint/suspicious/noExplicitAny: The name of the function will alwayys be the name of the function
+      getImageDimensionsModule.getImageDimensionsFromLocalImage.name as any,
+    );
 
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 

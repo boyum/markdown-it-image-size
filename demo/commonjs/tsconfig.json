@@ -10,5 +10,6 @@
     "esModuleInterop": true
   },
   "include": ["src/index.cts", "prerender.ts"],
+  "exclude": ["node_modules", "dist/**/*"],
   "extends": "../../tsconfig.json"
 }
