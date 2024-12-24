@@ -1,7 +1,7 @@
 {
   "name": "commonjs",
   "version": "1.0.0",
-  "license": "Apache-2.0" ,
+  "license": "Apache-2.0",
   "type": "commonjs",
   "scripts": {
     "build": "vite build --ssr ./src/index.ts && npm run prerender",
