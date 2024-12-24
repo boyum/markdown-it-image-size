@@ -1,8 +1,14 @@
 {
-  "name": "vitepress",
+  "name": "vitepress-demo",
   "version": "1.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "markdown-it-image-size": "*",
+    "vitepress": "^1.5.0"
   }
 }
