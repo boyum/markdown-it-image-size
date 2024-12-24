@@ -171,15 +171,15 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
 const customPluginDefaults = {
   // biome-ignore lint/suspicious/noExplicitAny: Env is unknown and based on the environment
   getAbsPathFromEnv: (env: any): string | undefined => {
-    const markdownPath: string = env?.page?.inputPath; // 11ty
+    const get11tyPath = (env: { page?: { inputPath?: string } | undefined }) =>
+      env?.page?.inputPath;
 
-    if (markdownPath) {
-      return markdownPath
-        .substring(0, markdownPath.lastIndexOf("/"))
-        .replace(/\/\.\//g, "/");
-    }
+    const getVitePressPath = (env: { path?: string } | undefined) => env?.path;
 
-    return undefined;
+    const markdownPath = get11tyPath(env) ?? getVitePressPath(env);
+    return markdownPath
+      ?.substring(0, markdownPath.lastIndexOf("/"))
+      .replace(/\/\.\//g, "/");
   },
 };
 
