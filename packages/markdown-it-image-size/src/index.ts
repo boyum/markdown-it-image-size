@@ -1,12 +1,13 @@
 import { join } from "node:path";
 import flatCache from "flat-cache";
-import imageSize from "image-size";
 import type { Token } from "markdown-it";
 import type markdownIt from "markdown-it";
-import { getImageDimensions } from "./get-image-dimensions";
-import type { Dimensions } from "./types";
-
-const fetch = require("sync-fetch");
+import { type GeneratorEnv, getAbsPathFromEnv } from "./env.utils";
+import {
+  type Dimensions,
+  getImageDimensionsFromExternalImage,
+  getImageDimensionsFromLocalImage,
+} from "./image-dimensions.utils";
 
 export const CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
 
@@ -53,25 +54,35 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
     cache.save();
   };
 
-  md.renderer.rules.image = (tokens, index, _options, env) => {
+  md.renderer.rules.image = (
+    tokens,
+    index,
+    _options,
+    env: GeneratorEnv | undefined,
+  ) => {
     // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
     const token = tokens[index]!;
 
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs?.[srcIndex]?.[1] ?? "";
-    const caption = md.utils.escapeHtml(token.content);
-
-    const otherAttributes = generateAttributes(md, token);
 
     const isExternalImage =
       imageUrl.startsWith("http://") ||
       imageUrl.startsWith("https://") ||
       imageUrl.startsWith("//");
 
+    const normalizedImageUrl = isExternalImage
+      ? imageUrl
+      : imageUrl.startsWith("/") || imageUrl.startsWith(".")
+        ? imageUrl
+        : `./${imageUrl}`;
+
+    const caption = md.utils.escapeHtml(token.content);
+
     let width: number | undefined = undefined;
     let height: number | undefined = undefined;
 
-    const cacheRecord = useCache ? getFromCache(imageUrl) : undefined;
+    const cacheRecord = useCache ? getFromCache(normalizedImageUrl) : undefined;
     if (cacheRecord != null) {
       width = cacheRecord.width;
       height = cacheRecord.height;
@@ -81,28 +92,28 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
       let dimensions: Dimensions;
 
       if (isExternalImage) {
-        dimensions = getImageDimensionsFromExternalImage(imageUrl);
+        dimensions = getImageDimensionsFromExternalImage(normalizedImageUrl);
       } else {
-        const publicDir =
-          params?.publicDir ??
-          customPluginDefaults.getAbsPathFromEnv(env) ??
-          ".";
+        const publicDir = params?.publicDir ?? getAbsPathFromEnv(env) ?? ".";
 
-        dimensions = getImageDimensions(join(publicDir, imageUrl));
+        dimensions = getImageDimensionsFromLocalImage(
+          join(publicDir, normalizedImageUrl),
+        );
       }
 
       width = dimensions.width;
       height = dimensions.height;
 
       if (useCache) {
-        saveToCache(imageUrl, dimensions);
+        saveToCache(normalizedImageUrl, dimensions);
       }
     }
 
+    const otherAttributes = generateAttributes(md, token);
     const dimensionsAttributes =
       width && height ? ` width="${width}" height="${height}"` : "";
 
-    return `<img src="${imageUrl}" alt="${caption}"${dimensionsAttributes}${
+    return `<img src="${normalizedImageUrl}" alt="${caption}"${dimensionsAttributes}${
       otherAttributes ? ` ${otherAttributes}` : ""
     }>`;
   };
@@ -124,35 +135,12 @@ function generateAttributes(
   return token.attrs
     ?.filter(([key]) => !ignore.includes(key))
     .map(([key, value]) => {
-      // Escape title attributes
-      const escapedValue = md.utils.escapeHtml(value);
+      if (key === "title") {
+        // Escape title attributes
+        value = md.utils.escapeHtml(value);
+      }
 
-      return `${key}="${escapedValue}"`;
+      return `${key}="${value}"`;
     })
     .join(" ") as "" | `title=${string}`;
-}
-
-const customPluginDefaults = {
-  // biome-ignore lint/suspicious/noExplicitAny: Env is unknown and based on the environment
-  getAbsPathFromEnv: (env: any): string | undefined => {
-    const markdownPath: string = env?.page?.inputPath; // 11ty
-
-    if (markdownPath) {
-      return markdownPath
-        .substring(0, markdownPath.lastIndexOf("/"))
-        .replace(/\/\.\//g, "/");
-    }
-
-    return undefined;
-  },
-};
-
-function getImageDimensionsFromExternalImage(imageUrl: string): Dimensions {
-  const isMissingProtocol = imageUrl.startsWith("//");
-
-  const response = fetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
-  const buffer = response.buffer();
-  const { width, height } = imageSize(buffer);
-
-  return { width, height };
 }

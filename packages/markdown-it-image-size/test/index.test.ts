@@ -2,7 +2,7 @@ import fs from "node:fs";
 import MarkdownIt from "markdown-it";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CACHE_DIR, markdownItImageSize } from "../src";
-import * as getImageDimensionsModule from "../src/get-image-dimensions";
+import * as getImageDimensionsModule from "../src/image-dimensions.utils";
 
 describe(markdownItImageSize.name, () => {
   beforeEach(() => {
@@ -68,6 +68,25 @@ describe(markdownItImageSize.name, () => {
     expect(actual).toBe(expected);
   });
 
+  it("should use VitePress path to resolve relative paths if available", () => {
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const path = "./test/test-assets/posts/1/1.md";
+
+    const imageUrl = "./post-image.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const imageWidth = 4032;
+    const imageHeight = 3024;
+
+    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const actual = markdownRenderer.render(markdown, {
+      path,
+    });
+
+    expect(actual).toBe(expected);
+  });
+
   it("should render external images with attributes for width and height", () => {
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
@@ -106,10 +125,27 @@ describe(markdownItImageSize.name, () => {
 
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
-    const imageUrl = "unknown.jpg";
+    const imageUrl = "./unknown.jpg";
     const markdown = `![](${imageUrl})`;
 
     const expected = `<p><img src="${imageUrl}" alt=""></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+
+    console.error = consoleError;
+  });
+
+  it("should normalize image URIs", () => {
+    const consoleError = console.error;
+    console.error = vi.fn();
+
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "uri.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const expected = `<p><img src="./${imageUrl}" alt=""></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
@@ -123,7 +159,7 @@ describe(markdownItImageSize.name, () => {
 
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
-    const imageUrl = "unknown.jpg";
+    const imageUrl = "./unknown.jpg";
     const markdown = `![](${imageUrl})`;
 
     markdownRenderer.render(markdown);
@@ -198,7 +234,11 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should support using file system caching", () => {
-    const spy = vi.spyOn(getImageDimensionsModule, "getImageDimensions");
+    const spy = vi.spyOn(
+      getImageDimensionsModule,
+      // biome-ignore lint/suspicious/noExplicitAny: The name of the function will alwayys be the name of the function
+      getImageDimensionsModule.getImageDimensionsFromLocalImage.name as any,
+    );
 
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
 
