@@ -1,5 +1,5 @@
 import MarkdownIt from "markdown-it";
-import { describe, it, expect, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { markdownItImageSize } from "../src";
 import { clearCache } from "./test-utils";
 
