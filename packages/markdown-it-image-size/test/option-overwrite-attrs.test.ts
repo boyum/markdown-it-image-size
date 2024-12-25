@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { markdownItImageSize } from "../src";
 import { clearCache } from "./test-utils";
 
-const cacheFile = "cache-4.json";
+const cacheFile = "option-overwrite-attrs-test.json";
 
 describe("option overwriteAttrs", () => {
   beforeEach(() => {
