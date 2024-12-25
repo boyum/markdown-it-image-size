@@ -13,15 +13,14 @@ export type GeneratorEnv = VitePressEnv | EleventyEnv;
 const isEleventyEnv = (env: GeneratorEnv | undefined): env is EleventyEnv =>
   (env as EleventyEnv)?.page?.inputPath !== undefined;
 
-const getEleventyPath = (env: { page?: { inputPath?: string } | undefined }) =>
-  env?.page?.inputPath;
+const getEleventyPath = (env: EleventyEnv | undefined) => env?.page?.inputPath;
 
 const isVitePressEnv = (env: GeneratorEnv | undefined): env is VitePressEnv =>
   (env as VitePressEnv)?.path !== undefined;
 
-const getVitePressPath = (env: { path?: string } | undefined) => env?.path;
+const getVitePressPath = (env: VitePressEnv | undefined) => env?.path;
 
-export const getAbsPathFromEnv = (
+export const getAbsPathFromGeneratorEnv = (
   env: GeneratorEnv | undefined,
 ): string | undefined => {
   let markdownPath: string | undefined = undefined;

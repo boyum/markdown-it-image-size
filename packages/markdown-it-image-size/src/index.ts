@@ -1,7 +1,7 @@
 import { join } from "node:path";
 import flatCache from "flat-cache";
 import type { PluginWithOptions } from "markdown-it";
-import { type GeneratorEnv, getAbsPathFromEnv } from "./env.utils";
+import { type GeneratorEnv, getAbsPathFromGeneratorEnv } from "./env.utils";
 import {
   type Dimensions,
   getImageDimensionsFromExternalImage,
@@ -14,6 +14,8 @@ type Options = {
   /**
    * @description
    * Where to look for local images.
+   * This is used to resolve relative paths.
+   * Certain generators like Eleventy and VitePress provide the path to the Markdown file.
    *
    * @default "."
    */
@@ -151,7 +153,7 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
         dimensions = getImageDimensionsFromExternalImage(normalizedImageUrl);
       } else {
         const publicDir =
-          pluginOptions?.publicDir ?? getAbsPathFromEnv(env) ?? ".";
+          pluginOptions?.publicDir ?? getAbsPathFromGeneratorEnv(env) ?? ".";
         const imagePath = join(publicDir, normalizedImageUrl);
 
         dimensions = getImageDimensionsFromLocalImage(imagePath);
