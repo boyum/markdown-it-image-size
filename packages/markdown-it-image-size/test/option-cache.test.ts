@@ -39,6 +39,8 @@ describe("option cache", () => {
     const spy = vi.spyOn(getImageDimensionsModule, "getImageDimensions");
 
     const cacheFile = "file-system-cache-test.json";
+    clearCache(cacheFile);
+
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
       _cacheFile: cacheFile,
     });
