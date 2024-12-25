@@ -1,5 +1,15 @@
 # Changelog
 
+## [14.5.0](https://github.com/boyum/markdown-it-image-size/compare/v14.4.0...v14.5.0) (2024-12-25)
+
+### Features
+
+* option `overwriteAttrs` ([#767](https://github.com/boyum/markdown-it-image-size/issues/767)) ([0430fb4](https://github.com/boyum/markdown-it-image-size/commit/0430fb4984258ba21cb60886d7a8fb0cbd149968))
+
+### Documentation
+
+* add development instructions ([151ce39](https://github.com/boyum/markdown-it-image-size/commit/151ce39f5fa2eecea64451eece310ea067a00beb))
+
 ## [14.4.0](https://github.com/boyum/markdown-it-image-size/compare/v14.3.0...v14.4.0) (2024-12-23)
 
 ### Features
