@@ -38,7 +38,7 @@ describe("option cache", () => {
   it("should support using file system caching", () => {
     const spy = vi.spyOn(getImageDimensionsModule, "getImageDimensions");
 
-    const cacheFile = `${crypto.randomUUID()}.json`;
+    const cacheFile = "file-system-cache-test.json";
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
       _cacheFile: cacheFile,
     });
