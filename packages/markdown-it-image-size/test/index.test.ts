@@ -1,25 +1,22 @@
-import fs from "node:fs";
 import MarkdownIt from "markdown-it";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { CACHE_DIR, markdownItImageSize } from "../src";
-import * as getImageDimensionsModule from "../src/get-image-dimensions";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { markdownItImageSize } from "../src";
+import { clearCache } from "./test-utils";
+
+const cacheFile = "cache-1.json";
 
 describe(markdownItImageSize.name, () => {
-  beforeEach(() => {
-    // Clear cache
-    const cachePath = CACHE_DIR;
-    if (fs.existsSync(cachePath)) {
-      fs.rmdirSync(CACHE_DIR, { recursive: true });
-    }
-  });
+  let markdownRenderer: MarkdownIt;
 
-  afterEach(() => {
-    vi.restoreAllMocks();
+  beforeEach(() => {
+    clearCache(cacheFile);
+
+    markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
+      _cacheFile: cacheFile,
+    });
   });
 
   it("should render local images with attributes for width and height", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl = "/test/test-assets/image1.jpg";
     const markdown = `![](${imageUrl})`;
 
@@ -33,8 +30,6 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should render local images with attributes for width and height, and title", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl = "/test/test-assets/image1.jpg";
     const markdown = `![](${imageUrl} "title")`;
 
@@ -48,8 +43,6 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should use 11ty inputPath to resolve relative paths if available", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const inputPath = "./test/test-assets/posts/1/1.md";
 
     const imageUrl = "./post-image.jpg";
@@ -69,8 +62,6 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should render external images with attributes for width and height", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl =
       "https://images.unsplash.com/photo-1577811037855-935237616bac?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80";
     const markdown = `![](${imageUrl})`;
@@ -85,8 +76,6 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should render external images with no explicit protocol with attributes for width and height", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl =
       "//images.unsplash.com/photo-1577811037855-935237616bac?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80";
     const markdown = `![](${imageUrl})`;
@@ -104,8 +93,6 @@ describe(markdownItImageSize.name, () => {
     const consoleError = console.error;
     console.error = () => {};
 
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl = "unknown.jpg";
     const markdown = `![](${imageUrl})`;
 
@@ -121,8 +108,6 @@ describe(markdownItImageSize.name, () => {
     const consoleError = console.error;
     console.error = vi.fn();
 
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl = "unknown.jpg";
     const markdown = `![](${imageUrl})`;
 
@@ -134,8 +119,6 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should escape title attributes", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl = "/test/test-assets/image1.jpg";
     const markdown = `![](${imageUrl} "<title>")`;
 
@@ -146,76 +129,5 @@ describe(markdownItImageSize.name, () => {
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
-  });
-
-  it("should work with cache", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
-    const imageUrl = "/test/test-assets/image1.jpg";
-    const markdown = `![](${imageUrl}) ![](${imageUrl})`;
-
-    const imageWidth = 4032;
-    const imageHeight = 3024;
-
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"> <img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
-    const actual = markdownRenderer.render(markdown);
-
-    expect(actual).toBe(expected);
-  });
-
-  it("should work without cache", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-      cache: false,
-    });
-
-    const imageUrl = "/test/test-assets/image1.jpg";
-    const markdown = `![](${imageUrl}) ![](${imageUrl})`;
-
-    const imageWidth = 4032;
-    const imageHeight = 3024;
-
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"> <img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
-    const actual = markdownRenderer.render(markdown);
-
-    expect(actual).toBe(expected);
-  });
-
-  it("should support a publicDir option", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-      publicDir: "test",
-    });
-
-    const imageUrl = "/test-assets/image1.jpg";
-    const markdown = `![](${imageUrl})`;
-
-    const imageWidth = 4032;
-    const imageHeight = 3024;
-
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
-    const actual = markdownRenderer.render(markdown);
-
-    expect(actual).toBe(expected);
-  });
-
-  it("should support using file system caching", () => {
-    const spy = vi.spyOn(getImageDimensionsModule, "getImageDimensions");
-
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
-    const imageUrl = "/test/test-assets/image1.jpg";
-    const markdown = `![](${imageUrl})`;
-
-    const imageWidth = 4032;
-    const imageHeight = 3024;
-
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
-    const fresh = markdownRenderer.render(markdown);
-
-    const markdownRenderer2 = new MarkdownIt().use(markdownItImageSize);
-    const cached = markdownRenderer2.render(markdown);
-
-    expect(cached).toEqual(expected);
-    expect(cached).toEqual(fresh);
-    expect(spy).toHaveBeenCalledTimes(1);
   });
 });
