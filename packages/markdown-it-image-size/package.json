@@ -21,8 +21,10 @@
   "types": "dist/index.d.ts",
   "files": ["dist", "README.md", "CHANGELOG.md"],
   "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "rimraf dist",
+    "build": "npm run clean:output && npm run compile",
+    "clean": "npm run clean:cache && npm run clean:output",
+    "clean:cache": "rimraf node_modules/markdown-it-image-size/.cache",
+    "clean:output": "rimraf dist",
     "compile": "tsup ./src/index.ts --format cjs --dts --minify --legacy-output dist/markdown-it-image-size",
     "publish-to-npm": "release-it",
     "test": "vitest run",
@@ -35,6 +37,7 @@
     "sync-fetch": "^0.5.2"
   },
   "devDependencies": {
+    "@mdit/plugin-img-size": "^0.14.0",
     "@release-it/conventional-changelog": "^9.0.3",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",

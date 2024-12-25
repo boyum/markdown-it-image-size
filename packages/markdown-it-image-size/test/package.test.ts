@@ -1,11 +1,22 @@
 import MarkdownIt from "markdown-it";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { markdownItImageSize } from "..";
+import { clearCache } from "./test-utils";
+
+const cacheFile = "cache-6.json";
 
 describe(markdownItImageSize.name, () => {
-  it("should render local images with attributes for width and height", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+  let markdownRenderer: MarkdownIt;
 
+  beforeEach(() => {
+    clearCache(cacheFile);
+
+    markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
+      _cacheFile: cacheFile,
+    });
+  });
+
+  it("should render local images with attributes for width and height", () => {
     const imageUrl = "/test/test-assets/image1.jpg";
     const markdown = `![](${imageUrl})`;
 
@@ -19,8 +30,6 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should render local images with attributes for width and height, and title", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl = "/test/test-assets/image1.jpg";
     const markdown = `![](${imageUrl} "title")`;
 
@@ -34,8 +43,6 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should render external images with attributes for width and height", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
     const imageUrl =
       "https://images.unsplash.com/photo-1577811037855-935237616bac?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80";
     const markdown = `![](${imageUrl})`;

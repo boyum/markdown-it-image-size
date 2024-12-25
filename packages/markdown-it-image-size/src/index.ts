@@ -12,23 +12,70 @@ export const CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
 
 type Params = {
   /**
-   * @default "."
-   *
+   * @description
    * Where to look for local images.
+   *
+   * @default "."
    */
   publicDir?: string;
 
   /**
-   * @default true
-   *
+   * @description
    * Whether to cache the image dimensions.
    * Will only cache if the image dimensions are found.
+   *
+   * @default true
    */
   cache?: boolean;
+
+  /**
+   * @description
+   * Custom cache file name.
+   *
+   * **Note:** This is experimental and may not work as expected.
+   *
+   * @default "markdown-it-image-size__dimensions.json"
+   */
+  _cacheFile?: string;
+
+  /**
+   * @description
+   * If true, the width and height attributes will be overwritten if
+   * they are already present. For instance, if the image is defined
+   * with `![alt text](image.png =100x200)` and a plugin like
+   * `@mdit/plugin-img-size` is used, the width and height attributes
+   * will be overwritten with the actual dimensions of the image.
+   *
+   * @example
+   * ```js
+   *   const MarkdownIt = require("markdown-it");
+   *   const { markdownItImageSize } = require("markdown-it-image-size");
+   *   const { imgSize } = require("@mdit/plugin-img-size");
+   *
+   *   const mdRenderer = MarkdownIt();
+   *   mdRenderer
+   *     .use(imgSize)
+   *     .use(markdownItImageSize, {
+   *       overwriteAttrs: true,
+   *     });
+   *
+   *   const html = mdRenderer.render(`![alt text](/path/to/image.jpg =100x200)`);
+   *   console.log(html);
+   *
+   *   // The attributes are overwritten with the correct dimensions (350x700).
+   *   // <p><img src="/path/to/image.jpg" alt="alt text" width="350" height="700"></p>
+   * ```
+   *
+   * @default false
+   */
+  overwriteAttrs?: boolean;
 };
 
 export function markdownItImageSize(md: markdownIt, params?: Params): void {
   const useCache = params?.cache ?? true;
+  const _cacheFile =
+    params?._cacheFile ?? "markdown-it-image-size__dimensions.json";
+  const overwriteAttrs = params?.overwriteAttrs ?? false;
 
   let cache: flatCache;
   // Commented out code is for flat-cache@6
@@ -40,7 +87,7 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
   // });
 
   if (useCache) {
-    cache = flatCache.load("markdown-it-image-size__dimensions", CACHE_DIR);
+    cache = flatCache.load(_cacheFile, CACHE_DIR);
     // cache.load();
   }
 
@@ -61,7 +108,14 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
     const imageUrl = token.attrs?.[srcIndex]?.[1] ?? "";
     const caption = md.utils.escapeHtml(token.content);
 
-    const otherAttributes = generateAttributes(md, token);
+    const otherAttributes = generateAttributes(md, token, overwriteAttrs);
+
+    const hasWidth = token.attrIndex("width") !== -1;
+    const hasHeight = token.attrIndex("height") !== -1;
+
+    if (!overwriteAttrs && hasWidth && hasHeight) {
+      return `<img src="${imageUrl}" alt="${caption}"${otherAttributes ? ` ${otherAttributes}` : ""}>`;
+    }
 
     const isExternalImage =
       imageUrl.startsWith("http://") ||
@@ -118,8 +172,13 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
 function generateAttributes(
   md: markdownIt,
   token: Token,
-): "" | `title=${string}` {
+  overwriteAttrs: boolean,
+): string | undefined {
   const ignore = ["src", "alt"];
+
+  if (overwriteAttrs) {
+    ignore.push("width", "height");
+  }
 
   return token.attrs
     ?.filter(([key]) => !ignore.includes(key))
@@ -129,7 +188,7 @@ function generateAttributes(
 
       return `${key}="${escapedValue}"`;
     })
-    .join(" ") as "" | `title=${string}`;
+    .join(" ");
 }
 
 const customPluginDefaults = {
