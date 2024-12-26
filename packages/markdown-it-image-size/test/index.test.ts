@@ -37,25 +37,6 @@ describe(markdownItImageSize.name, () => {
     expect(actual).toBe(expected);
   });
 
-  it("should use 11ty inputPath to resolve relative paths if available", () => {
-    const inputPath = "./test/test-assets/posts/1/1.md";
-
-    const imageUrl = "./post-image.jpg";
-    const markdown = `![](${imageUrl})`;
-
-    const imageWidth = 4032;
-    const imageHeight = 3024;
-
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
-    const actual = markdownRenderer.render(markdown, {
-      page: {
-        inputPath,
-      },
-    });
-
-    expect(actual).toBe(expected);
-  });
-
   it("should render external images with attributes for width and height", () => {
     const imageUrl =
       "https://images.unsplash.com/photo-1577811037855-935237616bac?auto=format&fit=crop&w=2167&q=80";
@@ -88,7 +69,26 @@ describe(markdownItImageSize.name, () => {
     const consoleError = console.error;
     console.error = () => {};
 
-    const imageUrl = "unknown.jpg";
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "./unknown.jpg";
+    const markdown = `![](${imageUrl})`;
+
+    const expected = `<p><img src="${imageUrl}" alt=""></p>\n`;
+    const actual = markdownRenderer.render(markdown);
+
+    expect(actual).toBe(expected);
+
+    console.error = consoleError;
+  });
+
+  it("should work with relative local uris not starting with `./`", () => {
+    const consoleError = console.error;
+    console.error = vi.fn();
+
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "uri.jpg";
     const markdown = `![](${imageUrl})`;
 
     const expected = `<p><img src="${imageUrl}" alt=""></p>\n`;
@@ -103,7 +103,9 @@ describe(markdownItImageSize.name, () => {
     const consoleError = console.error;
     console.error = vi.fn();
 
-    const imageUrl = "unknown.jpg";
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
+
+    const imageUrl = "./unknown.jpg";
     const markdown = `![](${imageUrl})`;
 
     markdownRenderer.render(markdown);

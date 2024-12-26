@@ -3,27 +3,32 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { markdownItImageSize } from "../src";
 import { clearCache } from "./test-utils";
 
-const cacheFile = "option-public-dir-test.json";
+const cacheFile = "11ty-test.json";
 
-describe("option publicDir", () => {
+describe("11ty", () => {
+  let markdownRenderer: MarkdownIt;
+
   beforeEach(() => {
     clearCache(cacheFile);
-  });
 
-  it("should support a publicDir option", () => {
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-      publicDir: "test",
+    markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
       _cacheFile: cacheFile,
     });
+  });
 
-    const imageUrl = "/test-assets/image1.jpg";
+  it("should use VitePress path to resolve relative paths if available", () => {
+    const path = "./test/test-assets/posts/1/1.md";
+
+    const imageUrl = "./post-image.jpg";
     const markdown = `![](${imageUrl})`;
 
     const imageWidth = 4032;
     const imageHeight = 3024;
 
     const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
-    const actual = markdownRenderer.render(markdown);
+    const actual = markdownRenderer.render(markdown, {
+      path,
+    });
 
     expect(actual).toBe(expected);
   });

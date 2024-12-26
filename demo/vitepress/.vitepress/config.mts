@@ -1,0 +1,29 @@
+import { markdownItImageSize } from "markdown-it-image-size";
+import { defineConfig } from "vitepress";
+
+// https://vitepress.dev/reference/site-config
+export default defineConfig({
+  title: "VitePress Demo",
+  markdown: {
+    config: (md) => {
+      md.use(markdownItImageSize);
+    },
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          entryFileNames: "[name].js",
+          chunkFileNames: "assets/[name].js",
+          assetFileNames: "assets/[name].[ext]",
+        },
+      },
+    },
+  },
+  vue: {
+    isProduction: true,
+    features: {
+      componentIdGenerator: () => "",
+    },
+  },
+});

@@ -1,10 +1,10 @@
 import MarkdownIt from "markdown-it";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { markdownItImageSize } from "../src";
-import * as getImageDimensionsModule from "../src/get-image-dimensions";
+import * as getImageDimensionsModule from "../src/image-dimensions.utils";
 import { clearCache } from "./test-utils";
 
-const cacheFile = "cache-3.json";
+const cacheFile = "option-cache-test.json";
 
 describe("option cache", () => {
   let markdownRenderer: MarkdownIt;
@@ -36,7 +36,11 @@ describe("option cache", () => {
   });
 
   it("should support using file system caching", () => {
-    const spy = vi.spyOn(getImageDimensionsModule, "getImageDimensions");
+    const spy = vi.spyOn(
+      getImageDimensionsModule,
+      // biome-ignore lint/suspicious/noExplicitAny: The name of a function will always be the name of that function
+      getImageDimensionsModule.getImageDimensionsFromLocalImage.name as any,
+    );
 
     const cacheFile = "file-system-cache-test.json";
     clearCache(cacheFile);
@@ -65,7 +69,11 @@ describe("option cache", () => {
   });
 
   it("should support disabling caching", () => {
-    const spy = vi.spyOn(getImageDimensionsModule, "getImageDimensions");
+    const spy = vi.spyOn(
+      getImageDimensionsModule,
+      // biome-ignore lint/suspicious/noExplicitAny: The name of a function will always be the name of that function
+      getImageDimensionsModule.getImageDimensionsFromLocalImage.name as any,
+    );
 
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
       cache: false,

@@ -106,3 +106,13 @@ dist
 .DS_Store
 
 .turbo
+
+# Version control VitePress output
+!demo/vitepress/.vitepress/dist
+demo/vitepress/.vitepress/dist/assets
+demo/vitepress/.vitepress/dist/404.html
+demo/vitepress/.vitepress/dist/app.js
+demo/vitepress/.vitepress/dist/hashmap.json
+demo/vitepress/.vitepress/dist/index.md.js
+demo/vitepress/.vitepress/dist/index.md.lean.js
+demo/vitepress/.vitepress/dist/vp-icons.css

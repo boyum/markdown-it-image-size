@@ -90,6 +90,10 @@ console.log(html);
 // <p><img src="/path/to/image.jpg" alt="alt text" width="350" height="700"></p>
 ```
 
+## Examples
+
+See the [demo](./demo) directory for usage with [Eleventy](https://www.11ty.dev/) and [VitePress](https://vitepress.dev/).
+
 ## Development
 
 This project uses tsup for bundling and Vitest for testing.
