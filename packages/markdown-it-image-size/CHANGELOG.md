@@ -1,5 +1,19 @@
 # Changelog
 
+## [14.5.1](https://github.com/boyum/markdown-it-image-size/compare/v14.5.0...v14.5.1) (2024-12-26)
+
+### Code Refactoring
+
+* use original renderer to render img tags ([#768](https://github.com/boyum/markdown-it-image-size/issues/768)) ([0b556eb](https://github.com/boyum/markdown-it-image-size/commit/0b556ebe9b8e745d408499063019bd9b3dabc1bb)). Notable differences: `&` in `src` attribute will now be escaped as `&amp;` instead of `&`.
+
+### Tests
+
+* delete cache before we're using it again ([b843f1b](https://github.com/boyum/markdown-it-image-size/commit/b843f1b7c0cf480b28a9b70452cf039674278dba))
+
+### Build System
+
+* add run-script for publishing to npm ([be20f57](https://github.com/boyum/markdown-it-image-size/commit/be20f57de4bf6342817d42dd2cb40934c3746ff4))
+
 ## [14.5.0](https://github.com/boyum/markdown-it-image-size/compare/v14.4.0...v14.5.0) (2024-12-25)
 
 ### Features
