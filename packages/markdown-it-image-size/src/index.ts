@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import flatCache from "flat-cache";
-import type { PluginWithOptions } from "markdown-it";
+import type { PluginWithOptions, Token } from "markdown-it";
 import { type GeneratorEnv, getAbsPathFromGeneratorEnv } from "./env.utils";
 import {
   type Dimensions,
@@ -104,18 +104,7 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
     cache.save();
   };
 
-  // biome-ignore lint/style/noNonNullAssertion: The original renderer should always be defined
-  const originalRenderer = md.renderer.rules.image!;
-
-  md.renderer.rules.image = (
-    tokens,
-    index,
-    options,
-    env: GeneratorEnv | undefined,
-    self,
-  ): string => {
-    // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
-    const token = tokens[index]!;
+  const rule = (token: Token, env: GeneratorEnv | undefined): boolean => {
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs?.[srcIndex]?.[1] ?? "";
 
@@ -123,7 +112,7 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
     const hasHeight = token.attrIndex("height") !== -1;
 
     if (!overwriteAttrs && hasWidth && hasHeight) {
-      return originalRenderer(tokens, index, options, env, self);
+      return false;
     }
 
     const isExternalImage =
@@ -177,6 +166,18 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
       }
     }
 
-    return originalRenderer(tokens, index, options, env, self);
+    return true;
   };
+
+  md.core.ruler.push("markdown-it-image-size", (state) => {
+    for (const token of state.tokens) {
+      if (token.type === "inline") {
+        for (const inlineToken of token.children ?? []) {
+          if (inlineToken.type === "image") {
+            rule(inlineToken, state.env);
+          }
+        }
+      }
+    }
+  });
 };
