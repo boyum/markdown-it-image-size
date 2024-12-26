@@ -9,13 +9,4 @@ export default defineConfig({
       md.use(markdownItImageSize);
     },
   },
-  vite: {
-    resolve: {
-      alias: {
-        "vue/server-renderer": import.meta.resolve(
-          "vue/server-renderer/index.mjs",
-        ),
-      },
-    },
-  },
 });
