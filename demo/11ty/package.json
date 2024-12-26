@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "eleventy"
+    "build": "eleventy",
+    "serve": "eleventy --serve"
   },
-  "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
+  "dependencies": {
     "markdown-it": "^14.1.0",
     "markdown-it-image-size": "*"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
   }
 }

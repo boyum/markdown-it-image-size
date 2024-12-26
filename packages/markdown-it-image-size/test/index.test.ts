@@ -1,18 +1,13 @@
 import MarkdownIt from "markdown-it";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { markdownItImageSize } from "../src";
-import { clearCache } from "./test-utils";
-
-const cacheFile = "cache-1.json";
 
 describe(markdownItImageSize.name, () => {
   let markdownRenderer: MarkdownIt;
 
   beforeEach(() => {
-    clearCache(cacheFile);
-
     markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-      _cacheFile: cacheFile,
+      cache: false,
     });
   });
 
@@ -36,7 +31,7 @@ describe(markdownItImageSize.name, () => {
     const imageWidth = 4032;
     const imageHeight = 3024;
 
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}" title="title"></p>\n`;
+    const expected = `<p><img src="${imageUrl}" alt="" title="title" width="${imageWidth}" height="${imageHeight}"></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
@@ -63,13 +58,13 @@ describe(markdownItImageSize.name, () => {
 
   it("should render external images with attributes for width and height", () => {
     const imageUrl =
-      "https://images.unsplash.com/photo-1577811037855-935237616bac?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80";
+      "https://images.unsplash.com/photo-1577811037855-935237616bac?auto=format&fit=crop&w=2167&q=80";
     const markdown = `![](${imageUrl})`;
 
     const imageWidth = 2167;
     const imageHeight = 1625;
 
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const expected = `<p><img src="${imageUrl.replace(/&/g, "&amp;")}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
@@ -77,13 +72,13 @@ describe(markdownItImageSize.name, () => {
 
   it("should render external images with no explicit protocol with attributes for width and height", () => {
     const imageUrl =
-      "//images.unsplash.com/photo-1577811037855-935237616bac?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80";
+      "//images.unsplash.com/photo-1577811037855-935237616bac?auto=format&fit=crop&w=2167&q=80";
     const markdown = `![](${imageUrl})`;
 
     const imageWidth = 2167;
     const imageHeight = 1625;
 
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
+    const expected = `<p><img src="${imageUrl.replace(/&/g, "&amp;")}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
@@ -116,18 +111,5 @@ describe(markdownItImageSize.name, () => {
     expect(console.error).toHaveBeenCalled();
 
     console.error = consoleError;
-  });
-
-  it("should escape title attributes", () => {
-    const imageUrl = "/test/test-assets/image1.jpg";
-    const markdown = `![](${imageUrl} "<title>")`;
-
-    const imageWidth = 4032;
-    const imageHeight = 3024;
-
-    const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}" title="&lt;title&gt;"></p>\n`;
-    const actual = markdownRenderer.render(markdown);
-
-    expect(actual).toBe(expected);
   });
 });

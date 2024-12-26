@@ -3,6 +3,7 @@ const { markdownItImageSize } = require("markdown-it-image-size");
 
 module.exports = (eleventyConfig) => {
   eleventyConfig.setLibrary("md", markdownIt().use(markdownItImageSize));
+  eleventyConfig.addPassthroughCopy("posts/**/*.jpg");
 
   return {
     templateFormats: ["md", "njk", "html", "liquid"],

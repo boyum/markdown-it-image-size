@@ -8,9 +8,11 @@
     "prerender": "tsx ./prerender.ts"
   },
   "devDependencies": {
-    "markdown-it": "^14.1.0",
-    "markdown-it-image-size": "*",
     "tsx": "^4.16.5",
     "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-it-image-size": "*"
   }
 }
