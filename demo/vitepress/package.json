@@ -13,6 +13,9 @@
     "vitepress": "1.5.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/node": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "@shikijs/transformers": "^1.24.4",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/shared": "^3.5.13",
