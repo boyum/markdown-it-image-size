@@ -71,7 +71,8 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should render external images with no explicit protocol with attributes for width and height", () => {
-    const imageUrl = "//images.unsplash.com/photo-1577811037855-935237616bac?auto=format&fit=crop&w=2167&q=80";
+    const imageUrl =
+      "//images.unsplash.com/photo-1577811037855-935237616bac?auto=format&fit=crop&w=2167&q=80";
     const markdown = `![](${imageUrl})`;
 
     const imageWidth = 2167;
