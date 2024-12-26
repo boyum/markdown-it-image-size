@@ -1,8 +1,7 @@
 import { join } from "node:path";
 import flatCache from "flat-cache";
 import imageSize from "image-size";
-import type { Token } from "markdown-it";
-import type markdownIt from "markdown-it";
+import type { PluginWithOptions } from "markdown-it";
 import { getImageDimensions } from "./get-image-dimensions";
 import type { Dimensions } from "./types";
 
@@ -10,7 +9,7 @@ const fetch = require("sync-fetch");
 
 export const CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
 
-type Params = {
+type Options = {
   /**
    * @description
    * Where to look for local images.
@@ -34,7 +33,7 @@ type Params = {
    *
    * **Note:** This is experimental and may not work as expected.
    *
-   * @default "markdown-it-image-size__dimensions.json"
+   * @default "dimensions.json"
    */
   _cacheFile?: string;
 
@@ -71,17 +70,19 @@ type Params = {
   overwriteAttrs?: boolean;
 };
 
-export function markdownItImageSize(md: markdownIt, params?: Params): void {
-  const useCache = params?.cache ?? true;
-  const _cacheFile =
-    params?._cacheFile ?? "markdown-it-image-size__dimensions.json";
-  const overwriteAttrs = params?.overwriteAttrs ?? false;
+export const markdownItImageSize: PluginWithOptions<Options> = (
+  md,
+  pluginOptions?,
+) => {
+  const useCache = pluginOptions?.cache ?? true;
+  const _cacheFile = pluginOptions?._cacheFile ?? "dimensions.json";
+  const overwriteAttrs = pluginOptions?.overwriteAttrs ?? false;
 
   let cache: flatCache;
   // Commented out code is for flat-cache@6
   // new FlatCache({
   //   cacheDir: CACHE_DIR,
-  //   cacheId: "markdown-it-image-size__dimensions",
+  //   cacheId: "dimensions",
   //   ttl: 60 * 60 * 24 * 7, // 1 week
   //   lruSize: 10000, // 10,000 items
   // });
@@ -100,21 +101,20 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
     cache.save();
   };
 
-  md.renderer.rules.image = (tokens, index, _options, env) => {
+  // biome-ignore lint/style/noNonNullAssertion: The original renderer should always be defined
+  const originalRenderer = md.renderer.rules.image!;
+
+  md.renderer.rules.image = (tokens, index, options, env, self): string => {
     // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
     const token = tokens[index]!;
-
     const srcIndex = token.attrIndex("src");
     const imageUrl = token.attrs?.[srcIndex]?.[1] ?? "";
-    const caption = md.utils.escapeHtml(token.content);
-
-    const otherAttributes = generateAttributes(md, token, overwriteAttrs);
 
     const hasWidth = token.attrIndex("width") !== -1;
     const hasHeight = token.attrIndex("height") !== -1;
 
     if (!overwriteAttrs && hasWidth && hasHeight) {
-      return `<img src="${imageUrl}" alt="${caption}"${otherAttributes ? ` ${otherAttributes}` : ""}>`;
+      return originalRenderer(tokens, index, options, env, self);
     }
 
     const isExternalImage =
@@ -138,11 +138,12 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
         dimensions = getImageDimensionsFromExternalImage(imageUrl);
       } else {
         const publicDir =
-          params?.publicDir ??
+          pluginOptions?.publicDir ??
           customPluginDefaults.getAbsPathFromEnv(env) ??
           ".";
 
-        dimensions = getImageDimensions(join(publicDir, imageUrl));
+        const imagePath = join(publicDir, imageUrl);
+        dimensions = getImageDimensions(imagePath);
       }
 
       width = dimensions.width;
@@ -153,43 +154,19 @@ export function markdownItImageSize(md: markdownIt, params?: Params): void {
       }
     }
 
-    const dimensionsAttributes =
-      width && height ? ` width="${width}" height="${height}"` : "";
+    if (width != null && height != null) {
+      if (overwriteAttrs) {
+        token.attrSet("width", width.toString());
+        token.attrSet("height", height.toString());
+      } else {
+        token.attrJoin("width", width.toString());
+        token.attrJoin("height", height.toString());
+      }
+    }
 
-    return `<img src="${imageUrl}" alt="${caption}"${dimensionsAttributes}${
-      otherAttributes ? ` ${otherAttributes}` : ""
-    }>`;
+    return originalRenderer(tokens, index, options, env, self);
   };
-}
-
-/**
- * Generate attributes for the image tag.
- * This will exclude the `src` and `alt` attributes and only include `title`, if available.
- * The attribute values will be escaped.
- *
- * @returns An empty string if no `title` is available, or `title="..."` if available.
- */
-function generateAttributes(
-  md: markdownIt,
-  token: Token,
-  overwriteAttrs: boolean,
-): string | undefined {
-  const ignore = ["src", "alt"];
-
-  if (overwriteAttrs) {
-    ignore.push("width", "height");
-  }
-
-  return token.attrs
-    ?.filter(([key]) => !ignore.includes(key))
-    .map(([key, value]) => {
-      // Escape title attributes
-      const escapedValue = md.utils.escapeHtml(value);
-
-      return `${key}="${escapedValue}"`;
-    })
-    .join(" ");
-}
+};
 
 const customPluginDefaults = {
   // biome-ignore lint/suspicious/noExplicitAny: Env is unknown and based on the environment
