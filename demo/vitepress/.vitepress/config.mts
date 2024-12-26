@@ -9,4 +9,21 @@ export default defineConfig({
       md.use(markdownItImageSize);
     },
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          entryFileNames: "[name].js",
+          chunkFileNames: "assets/[name].js",
+          assetFileNames: "assets/[name].[ext]",
+        },
+      },
+    },
+  },
+  vue: {
+    isProduction: true,
+    features: {
+      componentIdGenerator: () => "",
+    },
+  },
 });
