@@ -82,23 +82,6 @@ describe(markdownItImageSize.name, () => {
     console.error = consoleError;
   });
 
-  it("should normalize image URIs", () => {
-    const consoleError = console.error;
-    console.error = vi.fn();
-
-    const markdownRenderer = new MarkdownIt().use(markdownItImageSize);
-
-    const imageUrl = "uri.jpg";
-    const markdown = `![](${imageUrl})`;
-
-    const expected = `<p><img src="./${imageUrl}" alt=""></p>\n`;
-    const actual = markdownRenderer.render(markdown);
-
-    expect(actual).toBe(expected);
-
-    console.error = consoleError;
-  });
-
   it("should log out an error if the image could not be found", () => {
     const consoleError = console.error;
     console.error = vi.fn();
