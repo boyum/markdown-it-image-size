@@ -1,5 +1,11 @@
 # Changelog
 
+## [14.6.0](https://github.com/boyum/markdown-it-image-size/compare/v14.5.1...v14.6.0) (2024-12-26)
+
+### Features
+
+* VitePress support ([#762](https://github.com/boyum/markdown-it-image-size/issues/762)) ([483f324](https://github.com/boyum/markdown-it-image-size/commit/483f324156d53711e9a6d97bcf6fbaf9ef701709))
+
 ## [14.5.1](https://github.com/boyum/markdown-it-image-size/compare/v14.5.0...v14.5.1) (2024-12-26)
 
 ### Code Refactoring
