@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "markdown-it": "^14.1.0",
-    "markdown-it-image-size": "*"
+    "markdown-it-image-size": "*",
+    "vitepress": "^1.5.0"
   },
   "devDependencies": {
     "@shikijs/transformers": "^1.24.4",
@@ -20,7 +21,6 @@
     "flatted": "^3.3.2",
     "json-buffer": "^3.0.1",
     "minisearch": "^7.1.1",
-    "vitepress": "^1.5.0",
     "vue": "^3.5.13"
   }
 }
