@@ -152,9 +152,11 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
       if (isExternalImage) {
         dimensions = getImageDimensionsFromExternalImage(normalizedImageUrl);
       } else {
-        const publicDir =
-          pluginOptions?.publicDir ?? getAbsPathFromGeneratorEnv(env) ?? ".";
-        const imagePath = join(publicDir, normalizedImageUrl);
+        const isRelativeImage = normalizedImageUrl.startsWith(".")
+        const resolvedDir = isRelativeImage
+          ? getAbsPathFromGeneratorEnv(env)
+          : pluginOptions?.publicDir;
+        const imagePath = join(resolvedDir ?? ".", normalizedImageUrl);
 
         dimensions = getImageDimensionsFromLocalImage(imagePath);
       }
