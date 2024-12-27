@@ -1,5 +1,11 @@
 # Changelog
 
+## [14.6.2](https://github.com/boyum/markdown-it-image-size/compare/v14.6.1...v14.6.2) (2024-12-27)
+
+### Bug Fixes
+
+* cache.save() removes other keys ([#774](https://github.com/boyum/markdown-it-image-size/issues/774)) ([68ab081](https://github.com/boyum/markdown-it-image-size/commit/68ab081c938c7f2dc2f191b59b4ce0bfa76ef732))
+
 ## [14.6.1](https://github.com/boyum/markdown-it-image-size/compare/v14.6.0...v14.6.1) (2024-12-27)
 
 ### Bug Fixes
