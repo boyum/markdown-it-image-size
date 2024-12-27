@@ -101,7 +101,7 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
 
   const saveToCache = (key: string, value: Dimensions): void => {
     cache.setKey(key, value);
-    cache.save();
+    cache.save(true);
   };
 
   // biome-ignore lint/style/noNonNullAssertion: The original renderer should always be defined
