@@ -1,6 +1,7 @@
+import flatCache from "flat-cache";
 import MarkdownIt from "markdown-it";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { markdownItImageSize } from "../src";
+import { CACHE_DIR, markdownItImageSize } from "../src";
 import * as getImageDimensionsModule from "../src/image-dimensions.utils";
 import { clearCache } from "./test-utils";
 
@@ -108,5 +109,27 @@ describe("option cache", () => {
     const actual = markdownRenderer.render(markdown);
 
     expect(actual).toBe(expected);
+  });
+
+  it("should store multiple image dimensions in the cache", () => {
+    const imageUrl1 = "/test/test-assets/image1.jpg";
+    const imageUrl2 = "/test/test-assets/image2.jpg";
+
+    const markdown = `![](${imageUrl1}) ![](${imageUrl2})`;
+
+    markdownRenderer.render(markdown);
+
+    const cache = flatCache.load(cacheFile, CACHE_DIR);
+
+    const actualDimensions1 = { width: 4032, height: 3024 };
+    const actualDimensions2 = { width: 2571, height: 3840 };
+
+    const cachedDimensions1 = cache.getKey(imageUrl1);
+    const cachedDimensions2 = cache.getKey(imageUrl2);
+
+    const expected = [actualDimensions1, actualDimensions2];
+    const actual = [cachedDimensions1, cachedDimensions2];
+
+    expect(actual).toStrictEqual(expected);
   });
 });
