@@ -35,7 +35,7 @@ describe("11ty", () => {
 
   it("should work with both relative and absolute (publicDir) paths", () => {
     markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-      publicDir: process.cwd() + "/test/test-assets",
+      publicDir: `${process.cwd()}/test/test-assets`,
     });
 
     const path = "./test/test-assets/posts/1/1.md";
