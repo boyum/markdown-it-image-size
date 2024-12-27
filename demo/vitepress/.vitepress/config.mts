@@ -6,24 +6,8 @@ export default defineConfig({
   title: "VitePress Demo",
   markdown: {
     config: (md) => {
-      md.use(markdownItImageSize);
+      md.use(markdownItImageSize, { publicDir: `${process.cwd()}/public` });
     },
   },
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          entryFileNames: "[name].js",
-          chunkFileNames: "assets/[name].js",
-          assetFileNames: "assets/[name].[ext]",
-        },
-      },
-    },
-  },
-  vue: {
-    isProduction: true,
-    features: {
-      componentIdGenerator: () => "",
-    },
-  },
+  vite: {},
 });
