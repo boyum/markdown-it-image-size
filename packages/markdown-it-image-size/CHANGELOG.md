@@ -1,5 +1,11 @@
 # Changelog
 
+## [14.6.1](https://github.com/boyum/markdown-it-image-size/compare/v14.6.0...v14.6.1) (2024-12-27)
+
+### Bug Fixes
+
+* Fix for relative image path when publicDir option is used ([#772](https://github.com/boyum/markdown-it-image-size/issues/772)) ([c99c8c7](https://github.com/boyum/markdown-it-image-size/commit/c99c8c77651c089976c3269b1aa69d80d0bff09c))
+
 ## [14.6.0](https://github.com/boyum/markdown-it-image-size/compare/v14.5.1...v14.6.0) (2024-12-26)
 
 ### Features
