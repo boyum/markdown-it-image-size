@@ -1,0 +1,32 @@
+{
+  "name": "multiple-plugins",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "type": "commonjs",
+  "scripts": {
+    "build": "vite build --ssr ./src/index.ts && npm run prerender",
+    "prerender": "tsx ./prerender.ts"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-it-abbr": "^2.0.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-deflist": "^3.0.0",
+    "markdown-it-emoji": "^3.0.0",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-highlightjs": "^4.2.0",
+    "markdown-it-image-size": "*",
+    "markdown-it-ins": "^4.0.0",
+    "markdown-it-mark": "^4.0.0",
+    "markdown-it-math": "^4.1.1",
+    "markdown-it-plantuml": "^1.4.1",
+    "markdown-it-sub": "^2.0.0",
+    "markdown-it-sup": "^2.0.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "markdown-it-toc-done-right": "^4.2.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.16.5",
+    "vite": "^5.4.11"
+  }
+}
