@@ -8,7 +8,7 @@ Supports both local and remote images.
 If you'd rather set image sizes manually, check out [@mdit/plugin-img-size](https://mdit-plugins.github.io/img-size.html).
 
 > [!NOTE]
-> `markdown-it-image-size` only does not support browsers. If you have a use case for using it in the browser, please open an issue.
+> `markdown-it-image-size` does not support browsers. If you have a use case for using it in the browser, please open an issue.
 
 ## Why
 
