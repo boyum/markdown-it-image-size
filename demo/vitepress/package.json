@@ -10,6 +10,6 @@
   "dependencies": {
     "markdown-it": "^14.1.0",
     "markdown-it-image-size": "*",
-    "vitepress": "1.5.0"
+    "vitepress": "1.6.1"
   }
 }
