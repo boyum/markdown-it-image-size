@@ -5,13 +5,6 @@ on:
     paths:
       - ".github/workflows/**"
 
-  workflow_dispatch:
-    inputs:
-      message:
-        type: string
-        description: Input your message
-
-
 jobs:
   zizmor:
     runs-on: ubuntu-latest
@@ -31,7 +24,3 @@ jobs:
 
       - name: Run zizmor
         run: zizmor .github/workflows
-
-      - name: Echo message
-        run: echo "${{ inputs.message }}"
-    
