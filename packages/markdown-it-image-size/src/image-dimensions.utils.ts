@@ -1,6 +1,7 @@
-import imageSize from "image-size";
+import { imageSize } from "image-size";
+import { readFileSync } from "node:fs";
 
-const fetch = require("sync-fetch");
+const syncFetch = require("sync-fetch");
 
 export type Dimensions = {
   width?: number | undefined;
@@ -9,7 +10,8 @@ export type Dimensions = {
 
 export function getImageDimensionsFromLocalImage(imageUrl: string): Dimensions {
   try {
-    const { width, height } = imageSize(imageUrl);
+    const buffer = readFileSync(imageUrl);
+    const { width, height } = imageSize(buffer);
 
     return { width, height };
   } catch (error) {
@@ -27,7 +29,7 @@ export function getImageDimensionsFromExternalImage(
 ): Dimensions {
   const isMissingProtocol = imageUrl.startsWith("//");
 
-  const response = fetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
+  const response = syncFetch(isMissingProtocol ? `https:${imageUrl}` : imageUrl);
   const buffer = response.buffer();
   const { width, height } = imageSize(buffer);
 
