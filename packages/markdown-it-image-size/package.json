@@ -2,7 +2,10 @@
   "name": "markdown-it-image-size",
   "version": "14.6.2",
   "description": "Adds width and height to image tags rendered by markdown-it",
-  "keywords": ["markdown-it", "markdown-it-plugin"],
+  "keywords": [
+    "markdown-it",
+    "markdown-it-plugin"
+  ],
   "homepage": "https://github.com/boyum/markdown-it-image-size#readme",
   "bugs": {
     "url": "https://github.com/boyum/markdown-it-image-size/issues"
@@ -19,7 +22,11 @@
   "type": "commonjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "README.md", "CHANGELOG.md"],
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "build": "npm run clean:output && npm run compile",
     "clean": "npm run clean:cache && npm run clean:output",
@@ -33,7 +40,7 @@
   },
   "dependencies": {
     "flat-cache": "^5.0.0",
-    "image-size": "^1.2.0",
+    "image-size": "^2.0.0",
     "sync-fetch": "^0.5.2"
   },
   "devDependencies": {
