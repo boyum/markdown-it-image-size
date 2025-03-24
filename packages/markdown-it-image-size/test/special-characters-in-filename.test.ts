@@ -12,7 +12,7 @@ describe(markdownItImageSize.name, () => {
   });
 
   it("should support filenames with special characters", () => {
-    const imageUrl = "/test/test-assets/special-characters🥳.jpg";
+    const imageUrl = "/test/test-assets/special-characters🏂☃雪눈барф雪snø.jpg";
 
     /**
      * markdown-it will URI encode any urls, so we should expect the img src to be URI encoded.
