@@ -117,7 +117,8 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
     // biome-ignore lint/style/noNonNullAssertion: There shouldn't be a case where the token is undefined
     const token = tokens[index]!;
     const srcIndex = token.attrIndex("src");
-    const imageUrl = decodeURIComponent(token.attrs?.[srcIndex]?.[1] ?? "");
+
+    const imageUrl = token.attrs?.[srcIndex]?.[1] ?? "";
 
     const hasWidth = token.attrIndex("width") !== -1;
     const hasHeight = token.attrIndex("height") !== -1;
@@ -156,7 +157,14 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
         const resolvedDir = isRelativeImage
           ? getAbsPathFromGeneratorEnv(env)
           : pluginOptions?.publicDir;
-        const imagePath = join(resolvedDir ?? ".", normalizedImageUrl);
+
+        const imagePath = join(
+          resolvedDir ?? ".",
+          // markdown-it will URI encode any URLs, therefore we decode
+          // the characters to get the original URL in order to find
+          // the right image file.
+          decodeURIComponent(normalizedImageUrl),
+        );
 
         dimensions = getImageDimensionsFromLocalImage(imagePath);
       }
