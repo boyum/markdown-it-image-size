@@ -81,7 +81,7 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
   const _cacheFile = pluginOptions?._cacheFile ?? "dimensions.json";
   const overwriteAttrs = pluginOptions?.overwriteAttrs ?? false;
 
-  let cache: flatCache;
+  let cache: flatCache.Cache;
   // Commented out code is for flat-cache@6
   // new FlatCache({
   //   cacheDir: CACHE_DIR,
