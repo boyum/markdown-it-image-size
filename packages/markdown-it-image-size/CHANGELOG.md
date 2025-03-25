@@ -1,5 +1,21 @@
 # Changelog
 
+## [14.7.0](https://github.com/boyum/markdown-it-image-size/compare/v14.6.2...v14.7.0) (2025-03-25)
+
+### Features
+
+* decode image uri from markdown-it to support special characters in file names ([#829](https://github.com/boyum/markdown-it-image-size/issues/829)) ([5ded2c8](https://github.com/boyum/markdown-it-image-size/commit/5ded2c8b070c342e2a22891064808f3df4acedad)), closes [#826](https://github.com/boyum/markdown-it-image-size/issues/826)
+* upgrade image-size to v2.0.0 ([#819](https://github.com/boyum/markdown-it-image-size/issues/819)) ([919d522](https://github.com/boyum/markdown-it-image-size/commit/919d522ec130e074622ae42a51746b113b06af52))
+
+### Reverts
+
+* Revert "chore: update package lock" ([f154a40](https://github.com/boyum/markdown-it-image-size/commit/f154a40a6e7ff46bd395976022287fb1567fa0a3))
+
+### Documentation
+
+* add example with many plugins ([#786](https://github.com/boyum/markdown-it-image-size/issues/786)) ([0bf781f](https://github.com/boyum/markdown-it-image-size/commit/0bf781f2c05d2eaf0618642463dcb063132b833f))
+* add note about browsers ([#788](https://github.com/boyum/markdown-it-image-size/issues/788)) ([1c46355](https://github.com/boyum/markdown-it-image-size/commit/1c46355bb29b113c42bfc03e0d08a584ecc948a0))
+
 ## [14.6.2](https://github.com/boyum/markdown-it-image-size/compare/v14.6.1...v14.6.2) (2024-12-27)
 
 ### Bug Fixes
