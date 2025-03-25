@@ -18,7 +18,7 @@
     "markdown-it-image-size": "*",
     "markdown-it-ins": "^4.0.0",
     "markdown-it-mark": "^4.0.0",
-    "markdown-it-math": "^4.1.1",
+    "markdown-it-math": "^5.1.0",
     "markdown-it-plantuml": "^1.4.1",
     "markdown-it-sub": "^2.0.0",
     "markdown-it-sup": "^2.0.0",
