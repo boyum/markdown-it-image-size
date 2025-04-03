@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "flat-cache": "^5.0.0",
-    "image-size": "^2.0.1",
+    "image-size": "^2.0.2",
     "sync-fetch": "^0.5.2"
   },
   "devDependencies": {
