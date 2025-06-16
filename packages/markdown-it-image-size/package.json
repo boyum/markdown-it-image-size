@@ -37,7 +37,7 @@
     "sync-fetch": "^0.5.2"
   },
   "devDependencies": {
-    "@mdit/plugin-img-size": "^0.16.0",
+    "@mdit/plugin-img-size": "^0.22.0",
     "@release-it/conventional-changelog": "^10.0.0",
     "@rollup/plugin-commonjs": "^28.0.5",
     "@rollup/plugin-node-resolve": "^16.0.1",
