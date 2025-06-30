@@ -17,7 +17,7 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.0.6",
     "turbo": "^2.5.4"
   },
   "packageManager": "npm@10.5.2"
