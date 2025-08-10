@@ -32,6 +32,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/markdown-it": "^14.1.2",
     "flat-cache": "^5.0.0",
     "image-size": "^2.0.1",
     "sync-fetch": "^0.5.2"
