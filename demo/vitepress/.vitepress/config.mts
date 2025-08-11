@@ -6,7 +6,7 @@ export default defineConfig({
   title: "VitePress Demo",
   markdown: {
     config: (md) => {
-      md.use(markdownItImageSize, { publicDir: `${process.cwd()}/public` });
+      markdownItImageSize(md, { publicDir: `${process.cwd()}/public` });
     },
   },
   vite: {},
