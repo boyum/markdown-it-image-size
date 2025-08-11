@@ -59,6 +59,11 @@
   "peerDependencies": {
     "markdown-it": ">= 10 < 15"
   },
+  "peerDependenciesMeta": {
+    "markdown-it": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">= 16"
   }
