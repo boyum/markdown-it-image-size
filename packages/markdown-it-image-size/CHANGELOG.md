@@ -1,5 +1,25 @@
 # Changelog
 
+## [14.8.0](https://github.com/boyum/markdown-it-image-size/compare/v14.7.0...v14.8.0) (2025-08-11)
+
+### Features
+
+* add markdown-it types to type output ([d1a5e87](https://github.com/boyum/markdown-it-image-size/commit/d1a5e87b9ac2580ad23ed37539fcdd86bd5b5903))
+
+### Documentation
+
+* type safe vitepress demo ([0ddf307](https://github.com/boyum/markdown-it-image-size/commit/0ddf3070b5dd2fd4c980cd547d7a453c04c60dbf))
+
+### Build System
+
+* format Vitepress output after build to make it easier to see diff ([401da07](https://github.com/boyum/markdown-it-image-size/commit/401da07e8dbacacfbff3795ee46e317728fceee0))
+* make markdown-it peer dep optional ([032a106](https://github.com/boyum/markdown-it-image-size/commit/032a10658f7add4053c54d2fe46c2338fb1760f9))
+
+### Continuous Integration
+
+* run Node v18-22 ([b97517e](https://github.com/boyum/markdown-it-image-size/commit/b97517eace0233474df9d180871c1db1cd512569))
+* run Node v18-22 ([0a5eade](https://github.com/boyum/markdown-it-image-size/commit/0a5eade138ca7f6dcb938f56eb79f9a2106f37de))
+
 ## [14.7.0](https://github.com/boyum/markdown-it-image-size/compare/v14.6.2...v14.7.0) (2025-03-25)
 
 ### Features
