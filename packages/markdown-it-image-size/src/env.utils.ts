@@ -23,7 +23,7 @@ const getVitePressPath = (env: VitePressEnv | undefined) => env?.path;
 export const getAbsPathFromGeneratorEnv = (
   env: GeneratorEnv | undefined,
 ): string | undefined => {
-  let markdownPath: string | undefined = undefined;
+  let markdownPath: string | undefined;
 
   switch (true) {
     case isEleventyEnv(env):

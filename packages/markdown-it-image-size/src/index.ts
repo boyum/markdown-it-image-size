@@ -138,8 +138,8 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
         ? imageUrl
         : `./${imageUrl}`;
 
-    let width: number | undefined = undefined;
-    let height: number | undefined = undefined;
+    let width: number | undefined;
+    let height: number | undefined;
 
     const cacheRecord = useCache ? getFromCache(normalizedImageUrl) : undefined;
     if (cacheRecord != null) {
