@@ -32,7 +32,7 @@ type Options = {
 
   /**
    * @deprecated Use `cacheFile` instead.
-   * 
+   *
    * @description
    * Custom cache file name.
    *
@@ -52,7 +52,7 @@ type Options = {
    * Where to store the cache.
    * Only works if `cache` is true.
    * Can be used to specify a custom cache directory, in order to version control the cache.
-   * 
+   *
    * @default "node_modules/markdown-it-image-size/.cache"
    */
   cacheDir?: string;
@@ -95,7 +95,8 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
   pluginOptions?,
 ) => {
   const useCache = pluginOptions?.cache ?? true;
-  const cacheFile = pluginOptions?.cacheFile ?? pluginOptions?._cacheFile ?? "dimensions.json";
+  const cacheFile =
+    pluginOptions?.cacheFile ?? pluginOptions?._cacheFile ?? "dimensions.json";
   const cacheDir = pluginOptions?.cacheDir ?? DEFAULT_CACHE_DIR;
   const overwriteAttrs = pluginOptions?.overwriteAttrs ?? false;
 
