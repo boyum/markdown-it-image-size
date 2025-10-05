@@ -20,7 +20,7 @@ describe("option overwriteAttrs", () => {
       });
 
     const imageUrl = "/test/test-assets/image1.jpg";
-    const markdown = `![](${imageUrl} =100x200)`;
+    const markdown = `![=100x200](${imageUrl})`;
 
     const imageWidth = 4032;
     const imageHeight = 3024;
