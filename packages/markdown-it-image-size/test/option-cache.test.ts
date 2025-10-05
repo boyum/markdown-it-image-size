@@ -1,4 +1,4 @@
-import flatCache from "flat-cache";
+import { create } from "flat-cache";
 import MarkdownIt from "markdown-it";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CACHE_DIR, markdownItImageSize } from "../src";
@@ -119,7 +119,12 @@ describe("option cache", () => {
 
     markdownRenderer.render(markdown);
 
-    const cache = flatCache.load(cacheFile, CACHE_DIR);
+    const cache = create({
+      cacheDir: CACHE_DIR,
+      cacheId: cacheFile,
+      ttl: 60 * 60 * 24 * 7, // 1 week
+      lruSize: 10_000, // 10.000 items
+    });
 
     const actualDimensions1 = { width: 4032, height: 3024 };
     const actualDimensions2 = { width: 2571, height: 3840 };

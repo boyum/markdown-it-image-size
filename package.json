@@ -20,8 +20,9 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.4",
-    "turbo": "^2.5.5"
+    "@biomejs/biome": "^2.2.5",
+    "@tsconfig/strictest": "^2.0.6",
+    "turbo": "^2.5.8"
   },
-  "packageManager": "npm@10.5.2"
+  "packageManager": "npm@11.6.1"
 }
