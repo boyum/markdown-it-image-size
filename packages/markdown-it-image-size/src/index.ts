@@ -88,7 +88,7 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
       cacheDir: CACHE_DIR,
       cacheId: cacheFile,
       ttl: 60 * 60 * 24 * 7, // 1 week
-      lruSize: 10_000, // 10.000 items
+      lruSize: 10_000, // 10,000 items
     });
   }
 
