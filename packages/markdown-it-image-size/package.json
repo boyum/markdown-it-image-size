@@ -45,6 +45,7 @@
     "sync-fetch": "^0.5.2"
   },
   "devDependencies": {
+    "@ampproject/remapping": "^2.3.0",
     "@mdit/plugin-img-size": "^0.22.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "@rollup/plugin-commonjs": "^28.0.6",
