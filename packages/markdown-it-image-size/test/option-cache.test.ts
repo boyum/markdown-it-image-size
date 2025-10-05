@@ -186,7 +186,7 @@ describe("option cache", () => {
       const actual = markdownRenderer.render(markdown);
 
       expect(actual).toBe(expected);
-      expect(spy).toHaveBeenCalledTimes(2);
+      expect(spy).toHaveBeenCalledTimes(1);
 
       // Clean up
       clearCache(cacheFile, customCacheDir);
