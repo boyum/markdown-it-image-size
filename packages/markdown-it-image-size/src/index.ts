@@ -103,7 +103,7 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
 
   if (useCache) {
     cache = create({
-      cacheDir: cacheDir,
+      cacheDir,
       cacheId: cacheFile,
       ttl: 60 * 60 * 24 * 7, // 1 week
       lruSize: 10_000, // 10,000 items
