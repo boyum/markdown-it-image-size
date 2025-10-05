@@ -7,6 +7,9 @@ Supports both local and remote images.
 
 If you'd rather set image sizes manually, check out [@mdit/plugin-img-size](https://mdit-plugins.github.io/img-size.html).
 
+> [!NOTE]
+> `markdown-it-image-size` does not support browsers. If you have a use case for using it in the browser, please open an issue.
+
 ## Why
 
 Browsers use the `width` and `height` attributes to [determine aspect ratios of images](https://developer.mozilla.org/en-US/docs/Web/Media/images/aspect_ratio_mapping). If the attributes are set, the browser can reserve space for the image even though it's not finished loading yet, thus preventing [cumulative layout shifts](https://web.dev/cls/) after images load.
@@ -63,6 +66,44 @@ mdRenderer.use(markdownItImageSize, {
 });
 ```
 
+### Option `cacheFile`
+
+Type: `string`
+Default: `dimensions.json`
+
+The `cacheFile` option lets you specify a custom cache file name.
+This is useful when you want to version control the cache.
+
+```js
+const MarkdownIt = require("markdown-it");
+const { markdownItImageSize } = require("markdown-it-image-size");
+const path = require("path");
+const cacheFile = path.resolve(__dirname, "image-dimensions.json");
+const mdRenderer = MarkdownIt();
+mdRenderer.use(markdownItImageSize, {
+  cacheFile,
+});
+```
+
+### Option: `cacheDir`
+
+Type: `string`
+Default: `node_modules/markdown-it-image-size/.cache`
+
+The `cacheDir` option lets you specify a custom cache directory.
+This is useful when you want to version control the cache.
+
+```js
+const MarkdownIt = require("markdown-it");
+const { markdownItImageSize } = require("markdown-it-image-size");
+const path = require("path");
+const cacheDir = path.resolve(__dirname, "my-cache-dir");
+const mdRenderer = MarkdownIt();
+mdRenderer.use(markdownItImageSize, {
+  cacheDir,
+});
+```
+
 ### Option: `overwriteAttrs`
 
 Type: `boolean`
@@ -77,11 +118,9 @@ const { markdownItImageSize } = require("markdown-it-image-size");
 const { imgSize } = require("@mdit/plugin-img-size");
 
 const mdRenderer = MarkdownIt();
-mdRenderer
-  .use(imgSize)
-  .use(markdownItImageSize, {
-    overwriteAttrs: true,
-  });
+mdRenderer.use(imgSize).use(markdownItImageSize, {
+  overwriteAttrs: true,
+});
 
 const html = mdRenderer.render(`![alt text](/path/to/image.jpg =100x200)`);
 console.log(html);
@@ -92,7 +131,7 @@ console.log(html);
 
 ## Examples
 
-See the [demo](./demo) directory for usage with Eleventy and Vitepress.
+See the [demo](./demo) directory for usage with [Eleventy](https://www.11ty.dev/) and [VitePress](https://vitepress.dev/).
 
 ## Development
 

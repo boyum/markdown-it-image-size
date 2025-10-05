@@ -66,6 +66,44 @@ mdRenderer.use(markdownItImageSize, {
 });
 ```
 
+### Option `cacheFile`
+
+Type: `string`
+Default: `dimensions.json`
+
+The `cacheFile` option lets you specify a custom cache file name.
+This is useful when you want to version control the cache.
+
+```js
+const MarkdownIt = require("markdown-it");
+const { markdownItImageSize } = require("markdown-it-image-size");
+const path = require("path");
+const cacheFile = path.resolve(__dirname, "image-dimensions.json");
+const mdRenderer = MarkdownIt();
+mdRenderer.use(markdownItImageSize, {
+  cacheFile,
+});
+```
+
+### Option: `cacheDir`
+
+Type: `string`
+Default: `node_modules/markdown-it-image-size/.cache`
+
+The `cacheDir` option lets you specify a custom cache directory.
+This is useful when you want to version control the cache.
+
+```js
+const MarkdownIt = require("markdown-it");
+const { markdownItImageSize } = require("markdown-it-image-size");
+const path = require("path");
+const cacheDir = path.resolve(__dirname, "my-cache-dir");
+const mdRenderer = MarkdownIt();
+mdRenderer.use(markdownItImageSize, {
+  cacheDir,
+});
+```
+
 ### Option: `overwriteAttrs`
 
 Type: `boolean`
@@ -80,11 +118,9 @@ const { markdownItImageSize } = require("markdown-it-image-size");
 const { imgSize } = require("@mdit/plugin-img-size");
 
 const mdRenderer = MarkdownIt();
-mdRenderer
-  .use(imgSize)
-  .use(markdownItImageSize, {
-    overwriteAttrs: true,
-  });
+mdRenderer.use(imgSize).use(markdownItImageSize, {
+  overwriteAttrs: true,
+});
 
 const html = mdRenderer.render(`![alt text](/path/to/image.jpg =100x200)`);
 console.log(html);

@@ -12,7 +12,7 @@ describe("VitePress", () => {
     clearCache(cacheFile);
 
     markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-      _cacheFile: cacheFile,
+      cacheFile,
     });
   });
 

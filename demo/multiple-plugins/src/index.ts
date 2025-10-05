@@ -110,7 +110,7 @@ Inline math: $$E = mc^2$$
 Block math:
 
 $$
-\int_0^\infty e^{-x} \, dx = 1
+int_0^infty e^{-x} , dx = 1
 $$
 
 ## 11. PlantUML Diagrams
@@ -123,7 +123,7 @@ Alice -> Bob: Hello
 
 ## 12. Abbreviations
 
-Markdown is a lightweight markup language (HTML). \*[HTML]: HyperText Markup Language`);
+Markdown is a lightweight markup language (HTML). *[HTML]: HyperText Markup Language`);
 
   return html;
 }

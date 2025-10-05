@@ -116,3 +116,5 @@ demo/vitepress/.vitepress/dist/hashmap.json
 demo/vitepress/.vitepress/dist/index.md.js
 demo/vitepress/.vitepress/dist/index.md.lean.js
 demo/vitepress/.vitepress/dist/vp-icons.css
+
+custom-cache-dir-test.json

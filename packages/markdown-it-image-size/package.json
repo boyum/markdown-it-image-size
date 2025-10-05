@@ -45,6 +45,7 @@
     "sync-fetch": "^0.5.2"
   },
   "devDependencies": {
+    "@ampproject/remapping": "^2.3.0",
     "@mdit/plugin-img-size": "^0.22.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "@rollup/plugin-commonjs": "^28.0.6",
@@ -55,6 +56,7 @@
     "@types/markdown-it": "^14.1.2",
     "@types/sync-fetch": "^0.4.3",
     "@vitest/coverage-v8": "^3.2.4",
+    "es-module-lexer": "^1.7.0",
     "markdown-it": "^14.1.0",
     "release-it": "^19.0.5",
     "rimraf": "^6.0.1",

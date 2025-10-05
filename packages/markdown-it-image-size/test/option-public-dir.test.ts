@@ -13,7 +13,7 @@ describe("option publicDir", () => {
   it("should support a publicDir option", () => {
     const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
       publicDir: "test",
-      _cacheFile: cacheFile,
+      cacheFile,
     });
 
     const imageUrl = "/test-assets/image1.jpg";
