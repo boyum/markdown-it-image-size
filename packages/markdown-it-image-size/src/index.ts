@@ -1,5 +1,5 @@
 import { join } from "node:path";
-import flatCache from "flat-cache";
+import { create, type FlatCache } from "flat-cache";
 import type { PluginWithOptions } from "markdown-it";
 import { type GeneratorEnv, getAbsPathFromGeneratorEnv } from "./env.utils";
 import {
@@ -78,21 +78,18 @@ export const markdownItImageSize: PluginWithOptions<Options> = (
   pluginOptions?,
 ) => {
   const useCache = pluginOptions?.cache ?? true;
-  const _cacheFile = pluginOptions?._cacheFile ?? "dimensions.json";
+  const cacheFile = pluginOptions?._cacheFile ?? "dimensions.json";
   const overwriteAttrs = pluginOptions?.overwriteAttrs ?? false;
 
-  let cache: flatCache.Cache;
-  // Commented out code is for flat-cache@6
-  // new FlatCache({
-  //   cacheDir: CACHE_DIR,
-  //   cacheId: "dimensions",
-  //   ttl: 60 * 60 * 24 * 7, // 1 week
-  //   lruSize: 10000, // 10,000 items
-  // });
+  let cache: FlatCache;
 
   if (useCache) {
-    cache = flatCache.load(_cacheFile, CACHE_DIR);
-    // cache.load();
+    cache = create({
+      cacheDir: CACHE_DIR,
+      cacheId: cacheFile,
+      ttl: 60 * 60 * 24 * 7, // 1 week
+      lruSize: 10_000, // 10.000 items
+    });
   }
 
   const getFromCache = (key: string): Dimensions | undefined => {
