@@ -1,5 +1,15 @@
 # Changelog
 
+## [15.0.0](https://github.com/boyum/markdown-it-image-size/compare/v14.8.0...v15.0.0) (2025-10-05)
+
+### Features
+
+* v15 Require Node 20 ([#897](https://github.com/boyum/markdown-it-image-size/issues/897)) ([ade24e7](https://github.com/boyum/markdown-it-image-size/commit/ade24e7837bd970eae924a92c459adae71c2aa9d))
+
+### Styles
+
+* biome v2 ([25955fa](https://github.com/boyum/markdown-it-image-size/commit/25955fa017defd3aca61fc48d8dd581acf178432))
+
 ## [14.8.0](https://github.com/boyum/markdown-it-image-size/compare/v14.7.0...v14.8.0) (2025-08-11)
 
 ### Features
