@@ -66,7 +66,7 @@ describe("option cache", () => {
       clearCache(cacheFile);
 
       const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
-        cacheFile: cacheFile,
+        cacheFile,
       });
 
       const imageUrl = "/test/test-assets/image1.jpg";
@@ -79,7 +79,7 @@ describe("option cache", () => {
       const fresh = markdownRenderer.render(markdown);
 
       const markdownRenderer2 = new MarkdownIt().use(markdownItImageSize, {
-        cacheFile: cacheFile,
+        cacheFile,
       });
       const cached = markdownRenderer2.render(markdown);
 
@@ -172,7 +172,7 @@ describe("option cache", () => {
 
       const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
         cache: true,
-        cacheFile: cacheFile,
+        cacheFile,
         cacheDir: customCacheDir,
       });
 
@@ -184,6 +184,15 @@ describe("option cache", () => {
 
       const expected = `<p><img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"> <img src="${imageUrl}" alt="" width="${imageWidth}" height="${imageHeight}"></p>\n`;
       const actual = markdownRenderer.render(markdown);
+
+      const markdownRenderer2 = new MarkdownIt().use(markdownItImageSize, {
+        cache: true,
+        cacheFile,
+        cacheDir: customCacheDir,
+      });
+      const actual2 = markdownRenderer2.render(markdown);
+
+      expect(actual2).toBe(expected);
 
       expect(actual).toBe(expected);
       expect(spy).toHaveBeenCalledTimes(1);

@@ -16,7 +16,7 @@ describe("option overwriteAttrs", () => {
       .use(mditPluginImgSize) // Use @mdit/plugin-img-size first to add width and height attributes
       .use(markdownItImageSize, {
         overwriteAttrs: true,
-        cacheFile: cacheFile,
+        cacheFile,
       });
 
     const imageUrl = "/test/test-assets/image1.jpg";
@@ -35,7 +35,7 @@ describe("option overwriteAttrs", () => {
     const markdownRenderer = new MarkdownIt()
       .use(mditPluginImgSize) // Use @mdit/plugin-img-size first to add width and height attributes
       .use(markdownItImageSize, {
-        cacheFile: cacheFile,
+        cacheFile,
       });
 
     const imageUrl = "/test/test-assets/image1.jpg";
