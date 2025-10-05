@@ -1,0 +1,35 @@
+{
+  "name": "markdown-it-image-size-effect",
+  "version": "1.0.0",
+  "description": "A markdown-it plugin that retrieves image dimensions using Effect.js.",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "effect-test"
+  },
+  "dependencies": {
+    "effect": "^3.18.2",
+    "image-size": "^2.0.1",
+    "sync-fetch": "^0.5.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.0",
+    "ts-node": "^10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/markdown-it-image-size-effect.git"
+  },
+  "keywords": [
+    "markdown",
+    "image",
+    "dimensions",
+    "effect.js"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/markdown-it-image-size-effect/issues"
+  },
+  "homepage": "https://github.com/yourusername/markdown-it-image-size-effect#readme"
+}
