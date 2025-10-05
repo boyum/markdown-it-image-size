@@ -1,5 +1,15 @@
 # Changelog
 
+## [15.0.1](https://github.com/boyum/markdown-it-image-size/compare/v15.0.0...v15.0.1) (2025-10-05)
+
+### Documentation
+
+* latest version is 20 ([b7deb02](https://github.com/boyum/markdown-it-image-size/commit/b7deb021620988683f83b10b9061b1db828cf58f))
+
+### Continuous Integration
+
+* don't check v18 ([61c0cf3](https://github.com/boyum/markdown-it-image-size/commit/61c0cf3108b110485429729b3f5b0cfd98e6ff5c))
+
 ## [15.0.0](https://github.com/boyum/markdown-it-image-size/compare/v14.8.0...v15.0.0) (2025-10-05)
 
 ### Features
