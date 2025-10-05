@@ -39,7 +39,7 @@ describe("option overwriteAttrs", () => {
       });
 
     const imageUrl = "/test/test-assets/image1.jpg";
-    const markdown = `![](${imageUrl} =100x200)`;
+    const markdown = `![=100x200](${imageUrl})`;
 
     const expected = `<p><img src="${imageUrl}" alt="" width="100" height="200"></p>\n`;
     const actual = markdownRenderer.render(markdown);
