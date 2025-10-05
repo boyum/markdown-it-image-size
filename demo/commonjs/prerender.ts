@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { render } from "./dist/index.mjs";
+import { render } from "./src";
 
 const toAbsolute = (p: string) => path.resolve(__dirname, p);
 const template = fs.readFileSync(toAbsolute("./index.html"), "utf-8");

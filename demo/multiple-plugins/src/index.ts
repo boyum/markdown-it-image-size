@@ -1,20 +1,19 @@
+import hljs from "highlight.js";
 import MarkdownIt from "markdown-it";
-
-const { markdownItImageSize } = require("markdown-it-image-size");
-const hljs = require("highlight.js");
-const taskLists = require("markdown-it-task-lists");
-const anchor = require("markdown-it-anchor");
-const tocDoneRight = require("markdown-it-toc-done-right");
-const sub = require("markdown-it-sub");
-const sup = require("markdown-it-sup");
-const footnote = require("markdown-it-footnote");
-const emoji = require("markdown-it-emoji").full;
-const deflist = require("markdown-it-deflist");
-const ins = require("markdown-it-ins");
-const mark = require("markdown-it-mark");
-const math = require("markdown-it-math");
-const plantuml = require("markdown-it-plantuml");
-const abbr = require("markdown-it-abbr");
+import abbr from "markdown-it-abbr";
+import anchor from "markdown-it-anchor";
+import deflist from "markdown-it-deflist";
+import { full as emoji } from "markdown-it-emoji";
+import footnote from "markdown-it-footnote";
+import { markdownItImageSize } from "markdown-it-image-size";
+import ins from "markdown-it-ins";
+import mark from "markdown-it-mark";
+import math from "markdown-it-math";
+import plantuml from "markdown-it-plantuml";
+import sub from "markdown-it-sub";
+import sup from "markdown-it-sup";
+import taskLists from "markdown-it-task-lists";
+import tocDoneRight from "markdown-it-toc-done-right";
 
 export function render() {
   const md = MarkdownIt({
