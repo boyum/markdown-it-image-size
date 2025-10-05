@@ -100,7 +100,7 @@ See the [demo](./demo) directory for usage with [Eleventy](https://www.11ty.dev/
 ## Development
 
 This project uses tsup for bundling and Vitest for testing.
-It currently supports Node.js 16 and up.
+It currently supports Node.js 20 and up.
 To get started, fork the repository and run the following commands:
 
 ```bash
