@@ -48,7 +48,7 @@
     "@ampproject/remapping": "^2.3.0",
     "@mdit/plugin-img-size": "^0.22.3",
     "@release-it/conventional-changelog": "^10.0.1",
-    "@rollup/plugin-commonjs": "^28.0.8",
+    "@rollup/plugin-commonjs": "^28.0.9",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-typescript": "^12.3.0",
     "@swc/core": "^1.13.5",
