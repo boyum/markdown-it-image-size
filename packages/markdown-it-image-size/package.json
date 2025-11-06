@@ -58,7 +58,7 @@
     "@vitest/coverage-v8": "^3.2.4",
     "es-module-lexer": "^1.7.0",
     "markdown-it": "^14.1.0",
-    "release-it": "^19.0.5",
+    "release-it": "^19.0.6",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
     "tsup": "^8.5.0",
