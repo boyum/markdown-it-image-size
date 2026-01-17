@@ -42,7 +42,7 @@
     "@types/markdown-it": "^14.1.2",
     "flat-cache": "^6.1.17",
     "image-size": "^2.0.2",
-    "sync-fetch": "^0.5.2"
+    "sync-fetch": "^0.6.0"
   },
   "devDependencies": {
     "@ampproject/remapping": "^2.3.0",
