@@ -34,7 +34,7 @@ jobs:
       - name: Codecov
         # Only run on one node version
         if: matrix.node-version == '24.x'
-        uses: codecov/codecov-action@v6 # https://github.com/codecov/codecov-action
+        uses: codecov/codecov-action@v7 # https://github.com/codecov/codecov-action
         with:
           require_bundle_changes: true
           token: ${{ secrets.CODECOV_TOKEN }}
