@@ -1,3 +1,5 @@
+import { dirname } from "node:path";
+
 type VitePressEnv = {
   path?: string;
 };
@@ -35,7 +37,9 @@ export const getAbsPathFromGeneratorEnv = (
       break;
   }
 
-  return markdownPath
-    ?.substring(0, markdownPath.lastIndexOf("/"))
-    .replace(/\/\.\//g, "/");
+  if (markdownPath === undefined) {
+    return undefined;
+  }
+
+  return dirname(markdownPath.replace(/\\/g, "/")).replace(/\/\.\//g, "/");
 };
