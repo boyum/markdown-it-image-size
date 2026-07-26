@@ -1,5 +1,25 @@
 # Changelog
 
+## [15.1.0](https://github.com/boyum/markdown-it-image-size/compare/v15.0.1...v15.1.0) (2026-07-26)
+
+### Features
+
+* custom cache dir ([#760](https://github.com/boyum/markdown-it-image-size/issues/760)) ([bf8a3ef](https://github.com/boyum/markdown-it-image-size/commit/bf8a3ef505b49e3ff9d73d0354065e18a1cc5d7d))
+
+### Bug Fixes
+
+* npm audit ([f5d519b](https://github.com/boyum/markdown-it-image-size/commit/f5d519b7f545bdcd5daae50e3e8b3b2e00ecfdfc))
+* resolve generator paths on Windows ([#977](https://github.com/boyum/markdown-it-image-size/issues/977)) ([09f15e5](https://github.com/boyum/markdown-it-image-size/commit/09f15e5a8a23234602e487e98f42aadc28a0129e))
+
+### Tests
+
+* use latest version of plugin-img-size ([#898](https://github.com/boyum/markdown-it-image-size/issues/898)) ([84563ab](https://github.com/boyum/markdown-it-image-size/commit/84563ab9a7f655f5b2a47bb21b9f69b4374c46d5))
+
+### Continuous Integration
+
+* run CI in Node 24 ([#784](https://github.com/boyum/markdown-it-image-size/issues/784)) ([35d8684](https://github.com/boyum/markdown-it-image-size/commit/35d8684c6ad23938e07af9f04a997b5c7f6df2c6))
+* track bundle changes with codecov ([947735d](https://github.com/boyum/markdown-it-image-size/commit/947735d28b489a53d1a7f1a5fef4d1345704576a))
+
 ## [15.0.1](https://github.com/boyum/markdown-it-image-size/compare/v15.0.0...v15.0.1) (2025-10-05)
 
 ### Documentation
