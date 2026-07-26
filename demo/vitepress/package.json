@@ -8,11 +8,11 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^14.3.0",
     "markdown-it-image-size": "*",
     "vitepress": "1.6.4"
   },
   "devDependencies": {
-    "prettier": "^3.8.0"
+    "prettier": "^3.9.6"
   }
 }
