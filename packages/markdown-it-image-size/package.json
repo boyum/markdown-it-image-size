@@ -54,7 +54,7 @@
     "@swc/core": "^1.15.47",
     "@types/flat-cache": "^2.0.2",
     "@types/markdown-it": "^14.1.2",
-    "@types/sync-fetch": "^0.4.3",
+    "@types/sync-fetch": "^0.4.4",
     "@vitest/coverage-v8": "^3.2.4",
     "es-module-lexer": "^2.3.1",
     "markdown-it": "^14.1.0",
