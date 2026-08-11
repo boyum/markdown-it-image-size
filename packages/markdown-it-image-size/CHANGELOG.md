@@ -1,5 +1,39 @@
 # Changelog
 
+## [15.1.1](https://github.com/boyum/markdown-it-image-size/compare/v15.1.0...v15.1.1) (2026-08-11)
+
+* biome v2.5.5 ([16996f1](https://github.com/boyum/markdown-it-image-size/commit/16996f1e0c3e00da6d897033283a2ee0da9a9e9b))
+* **deps-dev:** bump @biomejs/biome from 2.5.5 to 2.5.6 ([138df96](https://github.com/boyum/markdown-it-image-size/commit/138df966fa439b40ba59e5a81bd0c7fa1903c51c))
+* **deps-dev:** bump @mdit/plugin-img-size from 0.22.3 to 0.22.5 ([b1f3b25](https://github.com/boyum/markdown-it-image-size/commit/b1f3b25206b5befa9335ac7e59802e65767d359e))
+* **deps-dev:** bump @release-it/conventional-changelog ([4a55f40](https://github.com/boyum/markdown-it-image-size/commit/4a55f4045d5101484ca0ac33d4f22c902ee6e332))
+* **deps-dev:** bump @rollup/plugin-commonjs from 29.0.0 to 29.0.3 ([235a3e8](https://github.com/boyum/markdown-it-image-size/commit/235a3e853f6f4d09a060cd2a2df88a4a42640239))
+* **deps-dev:** bump @swc/core from 1.15.10 to 1.15.47 ([b5c894e](https://github.com/boyum/markdown-it-image-size/commit/b5c894eb2208db0e47032138b2425e58d8149706))
+* **deps-dev:** bump @types/sync-fetch from 0.4.3 to 0.4.4 ([df16894](https://github.com/boyum/markdown-it-image-size/commit/df16894e235b877a201d10bb6b51ee054b7dff35))
+* **deps-dev:** bump es-module-lexer from 2.0.0 to 2.3.1 ([8458048](https://github.com/boyum/markdown-it-image-size/commit/8458048f7d479f3fa90f4f7a16e097c94691a6e8))
+* **deps-dev:** bump release-it from 19.2.4 to 21.0.0 ([420c620](https://github.com/boyum/markdown-it-image-size/commit/420c6203034e60a3ca51ec1515a224f29b18d312))
+* **deps-dev:** bump release-it from 21.0.0 to 21.0.1 ([9aecf05](https://github.com/boyum/markdown-it-image-size/commit/9aecf0532fc93e17c4e53b6e162331ce8b0ebc33))
+* **deps-dev:** bump rimraf from 6.1.2 to 6.1.3 ([e01cff6](https://github.com/boyum/markdown-it-image-size/commit/e01cff69b63bb540036a75a2dfe400f94e91d10f))
+* **deps:** bump actions/checkout from 5 to 7 ([aa9ac78](https://github.com/boyum/markdown-it-image-size/commit/aa9ac7878e4181ad5e3beff3bf686fd95dc12b40))
+* **deps:** bump markdown-it-anchor from 9.2.0 to 9.2.1 ([cc6ba98](https://github.com/boyum/markdown-it-image-size/commit/cc6ba98717f1e969b1cf782af0104ba90ef6956e))
+* **deps:** bump markdown-it-deflist from 3.0.0 to 4.0.0 ([3954602](https://github.com/boyum/markdown-it-image-size/commit/3954602fead4dd3d2f521142945753dd4cd57f82))
+* **deps:** bump markdown-it-emoji from 3.0.0 to 3.1.0 ([c451bb7](https://github.com/boyum/markdown-it-image-size/commit/c451bb7ed6a0b9a84291584d753ed966c619a508))
+* **deps:** bump markdown-it-highlightjs from 4.2.0 to 4.3.0 ([64929c1](https://github.com/boyum/markdown-it-image-size/commit/64929c1e554812768c1ae32bb3bb5fd749688ddc))
+* fix audit ([9413ea5](https://github.com/boyum/markdown-it-image-size/commit/9413ea5741309ffe10347f78ed8760cbf483fbde))
+* rebuild demo ([ac0bcdd](https://github.com/boyum/markdown-it-image-size/commit/ac0bcdd2394a4c4315df9cc9ec16a9d8e5201970))
+* update lock file ([e013ddb](https://github.com/boyum/markdown-it-image-size/commit/e013ddb4d3d8672a096ed9be3e666bbe064c2806))
+
+### Bug Fixes
+
+* update lock file ([a721c4e](https://github.com/boyum/markdown-it-image-size/commit/a721c4e4c135b6fa6b1ffe2e12de3d224a453389))
+
+### Documentation
+
+* update vite dist ([1f6597a](https://github.com/boyum/markdown-it-image-size/commit/1f6597acb34618a4f18ee588292e617a02d95b05))
+
+### Build System
+
+* update turbo ([2c8faae](https://github.com/boyum/markdown-it-image-size/commit/2c8faae71c4b36e0c06e935adf17771d9c97ae29))
+
 ## [15.1.0](https://github.com/boyum/markdown-it-image-size/compare/v15.0.1...v15.1.0) (2026-07-26)
 
 ### Features
