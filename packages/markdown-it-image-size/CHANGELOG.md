@@ -1,5 +1,19 @@
 # Changelog
 
+## [15.2.0](https://github.com/boyum/markdown-it-image-size/compare/v15.1.1...v15.2.0) (2026-08-11)
+
+* **deps-dev:** bump @vitest/coverage-v8 from 3.2.7 to 4.1.10 ([5d7041b](https://github.com/boyum/markdown-it-image-size/commit/5d7041bd571fa3d2ffa402e7f46949b1451c1301))
+* **deps-dev:** bump prettier from 3.8.0 to 3.9.6 ([9957eed](https://github.com/boyum/markdown-it-image-size/commit/9957eedfff8a4feb510f753600574f7e1efc008d))
+* update lock file ([d3f5422](https://github.com/boyum/markdown-it-image-size/commit/d3f54222c1b9efdc7cda3978bb52c7c179a2a2b0))
+
+### Features
+
+* add support for markdown-it 15 ([065fed5](https://github.com/boyum/markdown-it-image-size/commit/065fed5ced21e9208fab23869f3d779a4d0b4486))
+
+### Build System
+
+* tsup@8.5.1 ([477c9e1](https://github.com/boyum/markdown-it-image-size/commit/477c9e1b4e00f6c52f05d65a0285ff28e9671dd0))
+
 ## [15.1.1](https://github.com/boyum/markdown-it-image-size/compare/v15.1.0...v15.1.1) (2026-08-11)
 
 * biome v2.5.5 ([16996f1](https://github.com/boyum/markdown-it-image-size/commit/16996f1e0c3e00da6d897033283a2ee0da9a9e9b))
