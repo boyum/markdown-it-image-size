@@ -7,7 +7,7 @@
     "build": "tsx ./prerender.ts"
   },
   "dependencies": {
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^15.0.0",
     "markdown-it-abbr": "^2.0.0",
     "markdown-it-anchor": "^9.2.1",
     "markdown-it-deflist": "^4.0.0",
