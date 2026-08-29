@@ -1,0 +1,26 @@
+name: Zizmor validation
+
+on:
+  push:
+    paths:
+      - ".github/workflows/**"
+
+jobs:
+  zizmor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # We'll have to install Python to install Zizmor via pip
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install zizmor
+        run: |
+          python -m pip install zizmor --root-user-action=ignore
+
+      - name: Run zizmor
+        run: zizmor .github/workflows
