@@ -1,12 +1,12 @@
 import { join } from "node:path";
 import { create, type FlatCache } from "flat-cache";
 import type { PluginWithOptions } from "markdown-it";
-import { type GeneratorEnv, getAbsPathFromGeneratorEnv } from "./env.utils";
+import { type GeneratorEnv, getAbsPathFromGeneratorEnv } from "./env.utils.js";
 import {
   type Dimensions,
   getImageDimensionsFromExternalImage,
   getImageDimensionsFromLocalImage,
-} from "./image-dimensions.utils";
+} from "./image-dimensions.utils.js";
 
 export const DEFAULT_CACHE_DIR = "node_modules/markdown-it-image-size/.cache";
 

@@ -1,9 +1,9 @@
 import { create } from "flat-cache";
 import MarkdownIt from "markdown-it";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { DEFAULT_CACHE_DIR, markdownItImageSize } from "../src";
-import * as getImageDimensionsModule from "../src/image-dimensions.utils";
-import { clearCache } from "./test-utils";
+import { DEFAULT_CACHE_DIR, markdownItImageSize } from "../src/index.js";
+import * as getImageDimensionsModule from "../src/image-dimensions.utils.js";
+import { clearCache } from "./test-utils.js";
 
 const cacheFile = "option-cache-test.json";
 
