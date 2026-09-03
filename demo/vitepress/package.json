@@ -8,7 +8,7 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^15.0.1",
     "markdown-it-image-size": "*",
     "vitepress": "1.6.4"
   },
