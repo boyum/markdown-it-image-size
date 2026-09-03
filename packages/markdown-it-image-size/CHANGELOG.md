@@ -1,5 +1,11 @@
 # Changelog
 
+## [16.0.1](https://github.com/boyum/markdown-it-image-size/compare/v16.0.0...v16.0.1) (2026-09-03)
+
+### Build System
+
+* build before publishing to npm ([d8344d7](https://github.com/boyum/markdown-it-image-size/commit/d8344d75c84fd80a6faae76a385e6075a94777a8))
+
 ## [16.0.0](https://github.com/boyum/markdown-it-image-size/compare/v15.3.0...v16.0.0) (2026-09-03)
 
 ### ⚠ BREAKING CHANGES
