@@ -41,8 +41,7 @@
   "dependencies": {
     "@types/markdown-it": "^14.1.2",
     "flat-cache": "^6.1.17",
-    "image-size": "^2.0.2",
-    "sync-fetch": "^0.6.0"
+    "image-size": "^2.0.2"
   },
   "devDependencies": {
     "@ampproject/remapping": "^2.3.0",
@@ -54,7 +53,7 @@
     "@swc/core": "^1.15.47",
     "@types/flat-cache": "^2.0.2",
     "@types/markdown-it": "^14.1.2",
-    "@types/sync-fetch": "^0.4.4",
+    "@types/node": "^22.10.0",
     "@vitest/coverage-v8": "^4.1.10",
     "es-module-lexer": "^2.3.1",
     "markdown-it": "^14.1.0",
