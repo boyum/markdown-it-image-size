@@ -1,5 +1,18 @@
 # Changelog
 
+## [16.0.0](https://github.com/boyum/markdown-it-image-size/compare/v15.3.0...v16.0.0) (2026-09-03)
+
+### ⚠ BREAKING CHANGES
+
+* esm
+
+* **deps-dev:** bump @swc/core from 1.15.47 to 1.16.1 ([3e2a95c](https://github.com/boyum/markdown-it-image-size/commit/3e2a95ccc11f13e78c0797c31a03440502aa56ba))
+* **deps-dev:** bump turbo from 2.10.9 to 2.10.12 ([589a2c7](https://github.com/boyum/markdown-it-image-size/commit/589a2c7e6185502f844fd20670ec5d54aed8e80e))
+
+### Features
+
+* esm ([a59aacc](https://github.com/boyum/markdown-it-image-size/commit/a59aacc6e23f8990e0db089482c455c8429070ce))
+
 ## [15.3.0](https://github.com/boyum/markdown-it-image-size/compare/v15.2.0...v15.3.0) (2026-09-03)
 
 ### Features
