@@ -46,6 +46,7 @@
     "clean:cache": "rimraf node_modules/markdown-it-image-size/.cache",
     "clean:output": "rimraf dist",
     "compile": "tsup",
+    "prepublishOnly": "npm run build",
     "publish-to-npm": "release-it",
     "test": "vitest run",
     "test:ci": "vitest run --coverage",
