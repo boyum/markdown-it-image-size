@@ -1,5 +1,15 @@
 # Changelog
 
+## [15.3.0](https://github.com/boyum/markdown-it-image-size/compare/v15.2.0...v15.3.0) (2026-09-03)
+
+### Features
+
+* build synchronous fetch into package ([e40fd16](https://github.com/boyum/markdown-it-image-size/commit/e40fd164ac3abf345516c1955e5f7b0f4fb9f32d))
+
+### Tests
+
+* update vitest to v4 ([01fad79](https://github.com/boyum/markdown-it-image-size/commit/01fad798e63e77564cd3411cedc420ec04cdd043))
+
 ## [15.2.0](https://github.com/boyum/markdown-it-image-size/compare/v15.1.1...v15.2.0) (2026-08-11)
 
 * **deps-dev:** bump @vitest/coverage-v8 from 3.2.7 to 4.1.10 ([5d7041b](https://github.com/boyum/markdown-it-image-size/commit/5d7041bd571fa3d2ffa402e7f46949b1451c1301))
