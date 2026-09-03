@@ -1,7 +1,7 @@
 import MarkdownIt from "markdown-it";
 import { beforeEach, describe, expect, it } from "vitest";
-import { markdownItImageSize } from "../src";
-import { clearCache } from "./test-utils";
+import { markdownItImageSize } from "../src/index.js";
+import { clearCache } from "./test-utils.js";
 
 const cacheFile = "option-public-dir-test.json";
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAbsPathFromGeneratorEnv } from "../src/env.utils";
+import { getAbsPathFromGeneratorEnv } from "../src/env.utils.js";
 
 describe(getAbsPathFromGeneratorEnv.name, () => {
   it.each([
