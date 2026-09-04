@@ -1,5 +1,23 @@
 # Changelog
 
+## [16.0.2](https://github.com/boyum/markdown-it-image-size/compare/v16.0.1...v16.0.2) (2026-09-04)
+
+* **deps-dev:** bump @types/node from 22.20.1 to 26.4.0 ([9e7c4c4](https://github.com/boyum/markdown-it-image-size/commit/9e7c4c460d4e21b6a510b9e612cde121bbe7445a))
+* **deps-dev:** bump es-module-lexer from 2.3.1 to 2.3.2 ([fb8ffd4](https://github.com/boyum/markdown-it-image-size/commit/fb8ffd4e1cbd4754e564a1324de7d330be961aa2))
+* fix lint ([47050be](https://github.com/boyum/markdown-it-image-size/commit/47050bea937460526bc3f20bb4a3fb4c416eb4fa))
+
+### Documentation
+
+* update with esm info ([bf73a88](https://github.com/boyum/markdown-it-image-size/commit/bf73a886a0c275e0e3af921467f7bc5fda8ee94c))
+
+### Tests
+
+* improve coverage ([04fc028](https://github.com/boyum/markdown-it-image-size/commit/04fc028b4199eacaff4a1352155c8d7473151613))
+
+### Build System
+
+* TypeScript 7 ([c773061](https://github.com/boyum/markdown-it-image-size/commit/c773061277e7b1db7012431a60a8c09aba144451))
+
 ## [16.0.1](https://github.com/boyum/markdown-it-image-size/compare/v16.0.0...v16.0.1) (2026-09-03)
 
 ### Build System
