@@ -16,14 +16,11 @@ Browsers use the `width` and `height` attributes to [determine aspect ratios of 
 
 ## How to use
 
-> [!IMPORTANT]  
-> Using Vite? Import `markdown-it-image-size` with `require` and not with `import`.
-
 ### Basic usage
 
 ```js
-const MarkdownIt = require("markdown-it");
-const { markdownItImageSize } = require("markdown-it-image-size");
+import MarkdownIt from "markdown-it";
+import { markdownItImageSize } from "markdown-it-image-size";
 
 const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize);
@@ -38,8 +35,8 @@ The `publicDir` option lets you specify a base URL for local images.
 This is useful when you're using a static site generator like [Eleventy](https://www.11ty.dev/).
 
 ```js
-const MarkdownIt = require("markdown-it");
-const { markdownItImageSize } = require("markdown-it-image-size");
+import MarkdownIt from "markdown-it";
+import { markdownItImageSize } from "markdown-it-image-size";
 
 const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize, {
@@ -57,8 +54,8 @@ The cache is located in `node_modules/markdown-it-image-size/.cache`.
 Remove this directory to clear the cache.
 
 ```js
-const MarkdownIt = require("markdown-it");
-const { markdownItImageSize } = require("markdown-it-image-size");
+import MarkdownIt from "markdown-it";
+import { markdownItImageSize } from "markdown-it-image-size";
 
 const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize, {
@@ -72,13 +69,13 @@ Type: `string`
 Default: `dimensions.json`
 
 The `cacheFile` option lets you specify a custom cache file name.
-This is useful when you want to version control the cache.
 
 ```js
-const MarkdownIt = require("markdown-it");
-const { markdownItImageSize } = require("markdown-it-image-size");
-const path = require("path");
-const cacheFile = path.resolve(__dirname, "image-dimensions.json");
+import MarkdownIt from "markdown-it";
+import { markdownItImageSize } from "markdown-it-image-size";
+import path from "node:path";
+
+const cacheFile = path.resolve(import.meta.dirname, "image-dimensions.json");
 const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize, {
   cacheFile,
@@ -94,10 +91,11 @@ The `cacheDir` option lets you specify a custom cache directory.
 This is useful when you want to version control the cache.
 
 ```js
-const MarkdownIt = require("markdown-it");
-const { markdownItImageSize } = require("markdown-it-image-size");
-const path = require("path");
-const cacheDir = path.resolve(__dirname, "my-cache-dir");
+import MarkdownIt from "markdown-it";
+import { markdownItImageSize } from "markdown-it-image-size";
+import path from "node:path";
+
+const cacheDir = path.resolve(import.meta.dirname, "my-cache-dir");
 const mdRenderer = MarkdownIt();
 mdRenderer.use(markdownItImageSize, {
   cacheDir,
@@ -113,9 +111,9 @@ The `overwriteAttrs` option lets you overwrite existing `width` and `height` att
 This is useful when using another plugin which sets the attributes, such as [@mdit/plugin-img-size](https://mdit-plugins.github.io/img-size.html).
 
 ```js
-const MarkdownIt = require("markdown-it");
-const { markdownItImageSize } = require("markdown-it-image-size");
-const { imgSize } = require("@mdit/plugin-img-size");
+import MarkdownIt from "markdown-it";
+import { markdownItImageSize } from "markdown-it-image-size";
+import { imgSize } from "@mdit/plugin-img-size";
 
 const mdRenderer = MarkdownIt();
 mdRenderer.use(imgSize).use(markdownItImageSize, {
@@ -131,7 +129,7 @@ console.log(html);
 
 ## Examples
 
-See the [demo](./demo) directory for usage with [Eleventy](https://www.11ty.dev/) and [VitePress](https://vitepress.dev/).
+See the [demo](../../demo) directory for usage with [Eleventy](https://www.11ty.dev/) and [VitePress](https://vitepress.dev/).
 
 ## Development
 
