@@ -1,6 +1,6 @@
 import MarkdownIt from "markdown-it";
-import { beforeEach, describe, expect, it } from "vitest";
 import { markdownItImageSize } from "markdown-it-image-size";
+import { beforeEach, describe, expect, it } from "vitest";
 
 describe(markdownItImageSize.name, () => {
   let markdownRenderer: MarkdownIt;
