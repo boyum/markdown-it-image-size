@@ -114,4 +114,38 @@ describe(markdownItImageSize.name, () => {
 
     console.error = consoleError;
   });
+
+  it("should not throw when an image token has no src attribute", () => {
+    const consoleError = console.error;
+    console.error = vi.fn();
+
+    const markdownRenderer = new MarkdownIt().use(markdownItImageSize, {
+      cache: false,
+    });
+
+    const rule = markdownRenderer.renderer.rules.image;
+    const parsed = new MarkdownIt().parse("![alt text](image.png)", {});
+    const inlineToken = parsed.find((token) => token.type === "inline");
+    // biome-ignore lint/style/noNonNullAssertion: Test only reaches the image token.
+    const imageToken = inlineToken!.children!.find(
+      (token) => token.type === "image",
+    )!;
+
+    // biome-ignore lint/style/noNonNullAssertion: Test strips the src attribute on purpose.
+    imageToken.attrs = [["alt", "alt text"]!]!;
+
+    // biome-ignore lint/style/noNonNullAssertion: The plugin always overrides the image rule.
+    const output = rule!(
+      [imageToken],
+      0,
+      markdownRenderer.options,
+      undefined,
+      markdownRenderer.renderer,
+    );
+
+    expect(output).toBeTypeOf("string");
+    expect(console.error).toHaveBeenCalled();
+
+    console.error = consoleError;
+  });
 });
