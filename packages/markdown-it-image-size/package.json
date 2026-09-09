@@ -58,7 +58,7 @@
     "image-size": "^2.0.2"
   },
   "devDependencies": {
-    "@mdit/plugin-img-size": "^0.22.5",
+    "@mdit/plugin-img-size": "^1.1.0",
     "@release-it/conventional-changelog": "^12.0.0",
     "@types/flat-cache": "^2.0.2",
     "@types/markdown-it": "^14.1.2",
