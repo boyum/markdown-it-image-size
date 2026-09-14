@@ -20,7 +20,7 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.12",
+    "@biomejs/biome": "^2.5.13",
     "@tsconfig/strictest": "^2.0.8",
     "turbo": "^2.10.12"
   },
