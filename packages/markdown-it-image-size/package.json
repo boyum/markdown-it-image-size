@@ -55,7 +55,7 @@
   "dependencies": {
     "@types/markdown-it": "^14.1.2",
     "flat-cache": "^6.1.17",
-    "image-size": "^2.0.2"
+    "image-size": "^2.0.4"
   },
   "devDependencies": {
     "@mdit/plugin-img-size": "^0.22.5",
