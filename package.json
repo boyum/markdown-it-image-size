@@ -22,7 +22,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
     "@tsconfig/strictest": "^2.0.8",
-    "turbo": "^2.11.6"
+    "turbo": "^2.11.7"
   },
   "packageManager": "npm@11.6.1"
 }
